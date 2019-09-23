@@ -1,10 +1,8 @@
 package com.tetralinkz.tetralinkz.models;
 
-import com.tetralinkz.tetralinkz.models.Token;
-import com.tetralinkz.tetralinkz.models.Avatar;
-import com.tetralinkz.tetralinkz.models.MatchHistory;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -185,4 +183,65 @@ protected void onCreate(){
 protected void onUpdate(){
     this.updatedAt = new Date();
 }
+
+
+public String getEmail() {
+	return email;
+}
+
+
+public void setEmail(String email) {
+	this.email = email;
+}
+
+
+public String getPassword() {
+	return password;
+}
+
+
+public void setPassword(String password) {
+	this.password = password;
+}
+
+
+public String getPasswordConfirm() {
+	return passwordConfirm;
+}
+
+
+public void setPasswordConfirm(String passwordConfirm) {
+	this.passwordConfirm = passwordConfirm;
+}
+
+
+public Boolean getAdmin() {
+	return admin;
+}
+
+
+public void setAdmin(Boolean admin) {
+	this.admin = admin;
+}
+
+
+public List<User> getFriends() {
+	return friends;
+}
+
+
+public void setFriends(List<User> friends) {
+	this.friends = friends;
+}
+
+
+public List<User> getUserFriends() {
+	return userFriends;
+}
+
+
+public void setUserFriends(List<User> userFriends) {
+	this.userFriends = userFriends;
+}
+
 }
