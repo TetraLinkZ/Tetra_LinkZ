@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -22,7 +23,7 @@ import javax.validation.constraints.Size;
 @Table(name = "avatars")
 public class Avatar {
 	@Id
-	@GeneratedValue(startegy GenrationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	@Size(min = 2, message = "name must be present and minimum of 2 characters long")
 	private String name;
