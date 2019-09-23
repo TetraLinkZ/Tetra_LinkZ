@@ -15,8 +15,6 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 
-import com.zhen.javaexam.models.User;
-
 @Entity
 @Table(name = "match_histories")
 public class MatchHistory {
