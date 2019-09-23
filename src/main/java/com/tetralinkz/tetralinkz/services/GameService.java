@@ -2,7 +2,6 @@ package com.tetralinkz.tetralinkz.services;
 
 import org.springframework.stereotype.Service;
 
-import com.tetralinkz.tetralinkz.models.MatchHistory;
 import com.tetralinkz.tetralinkz.repositories.AvatarRepository;
 import com.tetralinkz.tetralinkz.repositories.MatchHistoryRepository;
 import com.tetralinkz.tetralinkz.repositories.TokenRepository;

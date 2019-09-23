@@ -36,5 +36,6 @@ public class MainController {
 	public String adminPage() {
 		return "admin.jsp";
 	}
+
 	
 }
