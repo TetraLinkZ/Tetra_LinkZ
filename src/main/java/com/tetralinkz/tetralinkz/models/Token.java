@@ -23,7 +23,7 @@ import javax.validation.constraints.Size;
 @Table(name = "tokens")
 public class Token {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY);
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Size(min = 2, message = "Name must be present, and minimum of 2")
 	private String name;
