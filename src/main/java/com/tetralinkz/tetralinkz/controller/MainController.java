@@ -12,8 +12,6 @@ import com.tetralinkz.tetralinkz.services.MainService;
 @Controller
 @RequestMapping("/main")
 public class MainController {
-<<<<<<< HEAD
-=======
 	//DEPENDENCY INJECTION
 	@Autowired
 	private MainService mainService;
@@ -38,6 +36,6 @@ public class MainController {
 	public String adminPage() {
 		return "admin.jsp";
 	}
->>>>>>> 216fefe5537c5a13218c8442d4c1a3cf18a09146
+
 	
 }

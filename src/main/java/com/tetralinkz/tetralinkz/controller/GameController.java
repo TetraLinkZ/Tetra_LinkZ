@@ -3,6 +3,7 @@ package com.tetralinkz.tetralinkz.controller;
 import org.springframework.stereotype.Controller;
 
 import com.tetralinkz.tetralinkz.services.GameService;
+import com.tetralinkz.tetralinkz.services.MainService;
 
 @Controller
 public class GameController {
