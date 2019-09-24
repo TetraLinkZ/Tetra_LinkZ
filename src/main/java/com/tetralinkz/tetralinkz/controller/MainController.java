@@ -5,6 +5,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -47,7 +48,10 @@ public class MainController {
 
 	// Show Dashboard
 	@GetMapping("/dashboard")
-	public String dashboard() {
+	public String dashboard(HttpSession session, Model model) {
+		User user = (User) session.getAttribute("user");
+
+    	model.addAttribute("userInfo", user);
 		return "dashboard.jsp";
 	}
 
