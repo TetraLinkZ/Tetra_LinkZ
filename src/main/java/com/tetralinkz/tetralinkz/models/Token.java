@@ -28,7 +28,7 @@ public class Token {
 	@Size(min = 2, message = "Name must be present, and minimum of 2")
 	private String name;
 	@Size(min = 1, message = "Description cannot be empty")
-	private String decription;
+	private String description;
 	@Min(0)
 	private Integer cost;
 	@Size(min = 1, message = "url cannot be empty")
@@ -74,12 +74,12 @@ public class Token {
 		this.name = name;
 	}
 
-	public String getDecription() {
-		return decription;
+	public String getdescription() {
+		return description;
 	}
 
-	public void setDecription(String decription) {
-		this.decription = decription;
+	public void setdescription(String description) {
+		this.description = description;
 	}
 
 	public Integer getCost() {
