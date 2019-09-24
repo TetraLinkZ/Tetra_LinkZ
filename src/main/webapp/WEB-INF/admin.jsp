@@ -9,7 +9,26 @@
 <body>
 	<h1>Admin Control panel</h1>
 	<div>
-		<!-- Make control panel here -->
+		<h2>Avatars</h2>
+		<ul>
+			<li>
+				<a href="/admin/avatars">View All</a>
+			</li>
+			<li>
+				<a href="/admin/newAvatar">Create New</a>
+			</li>
+		</ul>
+	</div>
+		<div>
+		<h2>Tokens</h2>
+		<ul>
+			<li>
+				<a href="/admin/tokens">View All</a>
+			</li>
+			<li>
+				<a href="/admin/newToken">Create New</a>
+			</li>
+		</ul>
 	</div>
 </body>
 </html>

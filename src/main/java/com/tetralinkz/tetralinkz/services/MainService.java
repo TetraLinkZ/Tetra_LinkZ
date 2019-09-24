@@ -1,10 +1,13 @@
 package com.tetralinkz.tetralinkz.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
+import com.tetralinkz.tetralinkz.models.Avatar;
+import com.tetralinkz.tetralinkz.models.Token;
 import com.tetralinkz.tetralinkz.models.User;
 import com.tetralinkz.tetralinkz.repositories.AvatarRepository;
 import com.tetralinkz.tetralinkz.repositories.MatchHistoryRepository;
@@ -65,4 +68,45 @@ public class MainService {
         }
     }
 	
+    // // // // // // // //
+    // ADMIN CRUD SERVICES
+    
+    // INDEXING
+    
+    public List<Avatar> allAvatars(){
+    	return avatarRepo.findAll();
+    }
+    
+    public List<Token> allTokens() {
+    	return tokenRepo.findAll();
+    }
+    
+    //
+    
+    public Avatar getAvatarById(Long id) {
+    	Optional<Avatar> optAvatar = avatarRepo.findById(id);
+    	if(optAvatar.isPresent()) {
+    		return optAvatar.get();
+    	} else {
+    		return null;
+    	}
+    }
+    
+    public Token getTokenById(Long id) {
+    	Optional<Token> optToken = tokenRepo.findById(id);
+    	if(optToken.isPresent()) {
+    		return optToken.get();
+    	} else {
+    		return null;
+    	}
+    }
+    
+    // CREATE && UPDATE
+    public Avatar createOrUpdateAvatar(Avatar avatar) {
+    	return avatarRepo.save(avatar);
+    }
+    
+    public Token createOrUpdateToken(Token token) {
+    	return tokenRepo.save(token);
+    }
 }
