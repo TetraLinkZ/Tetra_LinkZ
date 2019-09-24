@@ -1,5 +1,7 @@
 package com.tetralinkz.tetralinkz.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -9,11 +11,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.tetralinkz.tetralinkz.models.Avatar;
+import com.tetralinkz.tetralinkz.models.Token;
 import com.tetralinkz.tetralinkz.models.User;
 import com.tetralinkz.tetralinkz.services.MainService;
 
@@ -117,15 +123,39 @@ public class MainController {
 		return "ranking.jsp";
 	}
 	
+	// //  // //
+	// ADMIN //
+	// // / //
+	
+	// Index all Avatars
+	@GetMapping("/admin/avatars")
+	public String indexAvatars(Model model) {
+		List<Avatar> avatars = mainService.allAvatars();
+		model.addAttribute("avatars", avatars);
+		return "adminPages/avatars.jsp";
+	}
+	
+	// Index all Tokens
+	@GetMapping("/admin/tokens")
+	public String indexTokens(Model model) {
+		List<Token> tokens = mainService.allTokens();
+		model.addAttribute("tokens", tokens);
+		return "adminPages/tokens.jsp";
+	}
+	
 	// Edit Avatar Admin
 	@GetMapping("/admin/avatars/{id}/edit")
-	public String editAvatar() {
+	public String editAvatar(@PathVariable(value="id")Long id, Model model) {
+		Avatar avatar = mainService.getAvatarById(id);
+		model.addAttribute("avatar", avatar);
 		return "/adminPages/editAvatar.jsp";
 	}
 	
 	//Edit Token Admin
 	@GetMapping("/admin/tokens/{id}/edit")
-	public String editToken() {
+	public String editToken(@PathVariable(value="id")Long id, Model model) {
+		Token token = mainService.getTokenById(id);
+		model.addAttribute("token", token);
 		return "/adminPages/editToken.jsp";
 	}
 	
@@ -137,7 +167,7 @@ public class MainController {
 	
 	//New Avatar Admin
 	@GetMapping("/admin/newAvatar")
-	public String newAvatar(){
+	public String newAvatar(@ModelAttribute("avatar")Avatar avatar){
 		return "/adminPages/newAvatar.jsp";
 	}
 	
@@ -146,5 +176,62 @@ public class MainController {
 	public String newToken() {
 		return "/adminPages/newToken.jsp";
 	}
+	
+	// ADMIN - POST && PUT CONTROLS //
+	
+	@PostMapping("/admin/tokens")
+	public String createToken(
+			@Valid @ModelAttribute("token") Token token,
+			BindingResult result
+			) {
+		if(result.hasErrors()) {
+			return "/adminPages/newToken.jsp";
+		} else {
+			mainService.createOrUpdateToken(token);
+			return "redirect:/admin/tokens";
+		}
+	}
+	
+	@PostMapping("/admin/avatars")
+	public String createAvatar(
+			@Valid @ModelAttribute("avatar") Avatar avatar,
+			BindingResult result
+			) {
+		if(result.hasErrors()) {
+			return "/adminPages/newAvatar.jsp";
+		} else {
+			mainService.createOrUpdateAvatar(avatar);
+			return "redirect:/admin/avatars";
+		}
+	}
+	// UPDATE AVATAR
+	@PutMapping("/admin/avatars/{id}/update")
+	public String updateAvatar(
+			@Valid @ModelAttribute("avatar") Avatar avatar,
+			@PathVariable(value="id")Long id,
+			BindingResult result
+			) {
+		if(result.hasErrors()) {
+			return "/adminPages/editAvatar.jsp";
+		} else {
+			mainService.createOrUpdateAvatar(avatar);
+			return "redirect:/admin/avatars";
+		}
+	}
+	// UPDATE TOKEN
+	@PutMapping("/admin/tokens/{id}/update")
+	public String updateToken(
+			@Valid @ModelAttribute("token") Token token,
+			@PathVariable(value="id")Long id,
+			BindingResult result
+			) {
+		if(result.hasErrors()) {
+			return "/adminPages/editToken.jsp";
+		} else {
+			mainService.createOrUpdateToken(token);
+			return "redirect:/admin/tokens";
+		}
+	}
+	// // // // // // //
 	// END CONTROLLER
 }

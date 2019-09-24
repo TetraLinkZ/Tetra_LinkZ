@@ -28,7 +28,7 @@ public class Avatar {
 	@Size(min = 2, message = "name must be present and minimum of 2 characters long")
 	private String name;
 	@Size(min = 1, message = "description cannot be empty")
-	private String descrition;
+	private String description;
 	@Min(0)
 	private Integer cost;
 	@Size(min = 1, message = "url cannot be empty")
@@ -74,12 +74,12 @@ public class Avatar {
 		this.name = name;
 	}
 
-	public String getDescrition() {
-		return descrition;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDescrition(String descrition) {
-		this.descrition = descrition;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Integer getCost() {
