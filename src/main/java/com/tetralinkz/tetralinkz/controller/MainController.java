@@ -50,7 +50,6 @@ public class MainController {
 	@GetMapping("/dashboard")
 	public String dashboard(HttpSession session, Model model) {
 		User user = (User) session.getAttribute("user");
-
     	model.addAttribute("userInfo", user);
 		return "dashboard.jsp";
 	}
