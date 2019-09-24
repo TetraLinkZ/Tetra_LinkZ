@@ -13,11 +13,11 @@
 		<h1>Tetra LinkZ</h1>
 		<form:form modelAttribute="login">
 			<form:label path="name" />
-			<form:input path="name" />
+			<form:input name="name" path="name" />
 			<form:errors path='name' />
 
 			<form:label path="password" />
-			<form:input type="password" path="password" />
+			<form:input name="password" type="password" path="password" />
 			<form:errors path='password' />
 			<input type="submit" value="Login" />
 		</form:form>
