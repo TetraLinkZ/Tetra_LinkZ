@@ -178,7 +178,7 @@ public class MainController {
 	
 	//New Token Admin
 	@GetMapping("/admin/newToken")
-	public String newToken() {
+	public String newToken(@ModelAttribute("token")Token token) {
 		return "/adminPages/newToken.jsp";
 	}
 	

@@ -33,7 +33,7 @@ public class GameController {
 		System.out.println(message.getContent());
         return  HtmlUtils.htmlEscape(message.getContent());
 
-
+        
 		//return message;
 	}
 }
