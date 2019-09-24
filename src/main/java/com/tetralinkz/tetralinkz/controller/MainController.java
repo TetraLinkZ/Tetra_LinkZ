@@ -56,8 +56,8 @@ public class MainController {
 	@GetMapping("/dashboard")
 	public String dashboard(HttpSession session, Model model) {
 		User user = (User) session.getAttribute("user");
-		
-    	model.addAttribute("userInfo", user);
+
+		model.addAttribute("userInfo", user);
 		return "dashboard.jsp";
 	}
 
@@ -70,7 +70,7 @@ public class MainController {
 			String pw1 = user.getPassword();
 			String pw2 = user.getPasswordConfirm();
 			boolean checkPw = (pw1.equals(pw2));
-			System.out.println("p1:"+ pw1 +"p2:"+ pw2);
+			System.out.println("p1:" + pw1 + "p2:" + pw2);
 			if (checkPw == false) {
 				System.out.println("pw false");
 
@@ -94,7 +94,8 @@ public class MainController {
 
 	// LOGIN -- Existing User
 	@PostMapping("/users/login")
-	public String login(@RequestParam("email") String email, @RequestParam("password") String password, HttpSession session) {
+	public String login(@RequestParam("email") String email, @RequestParam("password") String password,
+			HttpSession session) {
 		if (mainService.authenticateUser(email, password)) {
 			User user = mainService.findByEmail(email);
 			session.setAttribute("user", user);
@@ -110,6 +111,7 @@ public class MainController {
 		redirectAttributes.addFlashAttribute("errorLogin", "Username and/or Password are invalid");
 		return "redirect:/";
 	}
+
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
@@ -118,20 +120,24 @@ public class MainController {
 
 	// The Items Page
 	@GetMapping("/items")
-	public String showItems() {
+	public String showItems(Model model, HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		model.addAttribute("userInfo", user);
 		return "items.jsp";
 	}
-	
+
 	// The Ranking page
 	@GetMapping("/ranking")
-	public String showRanking() {
+	public String showRanking(Model model, HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		model.addAttribute("userInfo", user);
 		return "ranking.jsp";
 	}
-	
-	// //  // //
+
+	// // // //
 	// ADMIN //
 	// // / //
-	
+
 	// Index all Avatars
 	@GetMapping("/admin/avatars")
 	public String indexAvatars(Model model) {
@@ -139,7 +145,7 @@ public class MainController {
 		model.addAttribute("avatars", avatars);
 		return "adminPages/avatars.jsp";
 	}
-	
+
 	// Index all Tokens
 	@GetMapping("/admin/tokens")
 	public String indexTokens(Model model) {
@@ -147,90 +153,80 @@ public class MainController {
 		model.addAttribute("tokens", tokens);
 		return "adminPages/tokens.jsp";
 	}
-	
+
 	// Edit Avatar Admin
 	@GetMapping("/admin/avatars/{id}/edit")
-	public String editAvatar(@PathVariable(value="id")Long id, Model model) {
+	public String editAvatar(@PathVariable(value = "id") Long id, Model model) {
 		Avatar avatar = mainService.getAvatarById(id);
 		model.addAttribute("avatar", avatar);
 		return "/adminPages/editAvatar.jsp";
 	}
-	
-	//Edit Token Admin
+
+	// Edit Token Admin
 	@GetMapping("/admin/tokens/{id}/edit")
-	public String editToken(@PathVariable(value="id")Long id, Model model) {
+	public String editToken(@PathVariable(value = "id") Long id, Model model) {
 		Token token = mainService.getTokenById(id);
 		model.addAttribute("token", token);
 		return "/adminPages/editToken.jsp";
 	}
-	
-	//Edit User Admin
+
+	// Edit User Admin
 	@GetMapping("/admin/user/{id}/edit")
 	public String editUser() {
 		return "/adminPages/editUser.jsp";
 	}
-	
-	//New Avatar Admin
+
+	// New Avatar Admin
 	@GetMapping("/admin/newAvatar")
-	public String newAvatar(@ModelAttribute("avatar")Avatar avatar){
+	public String newAvatar(@ModelAttribute("avatar") Avatar avatar) {
 		return "/adminPages/newAvatar.jsp";
 	}
-	
-	//New Token Admin
+
+	// New Token Admin
 	@GetMapping("/admin/newToken")
-	public String newToken(@ModelAttribute("token")Token token) {
+	public String newToken(@ModelAttribute("token") Token token) {
 		return "/adminPages/newToken.jsp";
 	}
-	
+
 	// ADMIN - POST && PUT CONTROLS //
-	
+
 	@PostMapping("/admin/tokens")
-	public String createToken(
-			@Valid @ModelAttribute("token") Token token,
-			BindingResult result
-			) {
-		if(result.hasErrors()) {
+	public String createToken(@Valid @ModelAttribute("token") Token token, BindingResult result) {
+		if (result.hasErrors()) {
 			return "/adminPages/newToken.jsp";
 		} else {
 			mainService.createOrUpdateToken(token);
 			return "redirect:/admin/tokens";
 		}
 	}
-	
+
 	@PostMapping("/admin/avatars")
-	public String createAvatar(
-			@Valid @ModelAttribute("avatar") Avatar avatar,
-			BindingResult result
-			) {
-		if(result.hasErrors()) {
+	public String createAvatar(@Valid @ModelAttribute("avatar") Avatar avatar, BindingResult result) {
+		if (result.hasErrors()) {
 			return "/adminPages/newAvatar.jsp";
 		} else {
 			mainService.createOrUpdateAvatar(avatar);
 			return "redirect:/admin/avatars";
 		}
 	}
+
 	// UPDATE AVATAR
 	@PutMapping("/admin/avatars/{id}/update")
-	public String updateAvatar(
-			@Valid @ModelAttribute("avatar") Avatar avatar,
-			@PathVariable(value="id")Long id,
-			BindingResult result
-			) {
-		if(result.hasErrors()) {
+	public String updateAvatar(@Valid @ModelAttribute("avatar") Avatar avatar, @PathVariable(value = "id") Long id,
+			BindingResult result) {
+		if (result.hasErrors()) {
 			return "/adminPages/editAvatar.jsp";
 		} else {
 			mainService.createOrUpdateAvatar(avatar);
 			return "redirect:/admin/avatars";
 		}
 	}
+
 	// UPDATE TOKEN
 	@PutMapping("/admin/tokens/{id}/update")
-	public String updateToken(
-			@Valid @ModelAttribute("token") Token token,
-			@PathVariable(value="id")Long id,
-			BindingResult result
-			) {
-		if(result.hasErrors()) {
+	public String updateToken(@Valid @ModelAttribute("token") Token token, @PathVariable(value = "id") Long id,
+			BindingResult result) {
+		if (result.hasErrors()) {
 			return "/adminPages/editToken.jsp";
 		} else {
 			mainService.createOrUpdateToken(token);

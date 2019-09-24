@@ -15,9 +15,7 @@
 			Welcome,
 			<c:out value="${userInfo.name}" />
 		</h1>
-		<form action="">
-			<input type="submit" value="Profile" />
-		</form>
+		<a href="/logout">Logout?</a>
 	</header>
 	<main>
 	<div id="gacha">
