@@ -7,6 +7,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<header>
+<h1>Tetra Linkz</h1>
+</header>
+<main>
+<h2>Top Players</h2>
+<ol>
+<!-- top players go here -->
+</ol>
+</main>
 </body>
 </html>
