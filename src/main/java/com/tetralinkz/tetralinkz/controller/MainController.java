@@ -56,7 +56,7 @@ public class MainController {
 	@GetMapping("/dashboard")
 	public String dashboard(HttpSession session, Model model) {
 		User user = (User) session.getAttribute("user");
-
+		
     	model.addAttribute("userInfo", user);
 		return "dashboard.jsp";
 	}
@@ -109,6 +109,11 @@ public class MainController {
 	public String flashMessageLogin(RedirectAttributes redirectAttributes) {
 		redirectAttributes.addFlashAttribute("errorLogin", "Username and/or Password are invalid");
 		return "redirect:/";
+	}
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/landing";
 	}
 
 	// The Items Page
