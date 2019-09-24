@@ -55,14 +55,18 @@ public class MainController {
 	@PostMapping("/users/register")
 	public String registerUser(@Valid @ModelAttribute("newUser") User user, BindingResult result, HttpSession session) {
 		if (result.hasErrors()) {
-			return "index.jsp";
+			return "landing.jsp";
 		} else {
 			String pw1 = user.getPassword();
 			String pw2 = user.getPasswordConfirm();
-			boolean checkPw = (pw1 == pw2);
+			boolean checkPw = (pw1.equals(pw2));
+			System.out.println("p1:"+ pw1 +"p2:"+ pw2);
 			if (checkPw == false) {
+				System.out.println("pw false");
+
 				return "redirect:/users/register/errConfirm";
 			} else {
+				System.out.println("pw true");
 				mainService.registerUser(user);
 				session.setAttribute("user", user);
 				return "redirect:/dashboard";
@@ -80,8 +84,7 @@ public class MainController {
 
 	// LOGIN -- Existing User
 	@PostMapping("/users/login")
-	public String login(@RequestParam("email") String email, @RequestParam("password") String password,
-			@ModelAttribute("login") User u, HttpSession session) {
+	public String login(@RequestParam("email") String email, @RequestParam("password") String password, HttpSession session) {
 		if (mainService.authenticateUser(email, password)) {
 			User user = mainService.findByEmail(email);
 			session.setAttribute("user", user);
