@@ -5,6 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+	<link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
 	<header>
@@ -16,13 +17,13 @@ logout -->
 	<div class="items">
 		<h1>Avatars</h1>
 		<div id="avatars">
-		<!-- obtained avatars -->
+			<!-- obtained avatars -->
 		</div>
 	</div>
 	<div class="items">
 		<h1>Tokens</h1>
 		<div id="tokens">
-		<!-- obtained tokens -->
+			<!-- obtained tokens -->
 		</div>
 	</div>
 	</main>

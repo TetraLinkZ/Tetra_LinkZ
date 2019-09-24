@@ -5,11 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/main.css" rel="stylesheet">
     <script src="/webjars/jquery/jquery.min.js"></script>
     <script src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
     <script src="/script/app.js"></script>
+    <link rel="stylesheet" href="/css/style.css" />
 <title>Insert title here</title>
 </head>
 <body>
