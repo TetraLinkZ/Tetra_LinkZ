@@ -98,5 +98,46 @@ public class MainController {
 		return "redirect:/";
 	}
 
+	// The Items Page
+	@GetMapping("/items")
+	public String showItems() {
+		return "items.jsp";
+	}
+	
+	// The Ranking page
+	@GetMapping("/ranking")
+	public String showRanking() {
+		return "ranking.jsp";
+	}
+	
+	// Edit Avatar Admin
+	@GetMapping("/admin/avatars/{id}/edit")
+	public String editAvatar() {
+		return "/adminPages/editAvatar.jsp";
+	}
+	
+	//Edit Token Admin
+	@GetMapping("/admin/tokens/{id}/edit")
+	public String editToken() {
+		return "/adminPages/editToken.jsp";
+	}
+	
+	//Edit User Admin
+	@GetMapping("/admin/user/{id}/edit")
+	public String editUser() {
+		return "/adminPages/editUser.jsp";
+	}
+	
+	//New Avatar Admin
+	@GetMapping("/admin/newAvatar")
+	public String newAvatar(){
+		return "/adminPages/newAvatar.jsp";
+	}
+	
+	//New Token Admin
+	@GetMapping("/admin/newToken")
+	public String newToken() {
+		return "/adminPages/newToken.jsp";
+	}
 	// END CONTROLLER
 }
