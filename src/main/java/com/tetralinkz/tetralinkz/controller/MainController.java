@@ -19,32 +19,32 @@ import com.tetralinkz.tetralinkz.services.MainService;
 @Controller
 @RequestMapping("/")
 public class MainController {
-	//DEPENDENCY INJECTION
+	// DEPENDENCY INJECTION
 	@Autowired
 	private MainService mainService;
-	
-	public MainController (MainService mainService) {
+
+	public MainController(MainService mainService) {
 		this.mainService = mainService;
 	}
-	
+
 	// RESTFUL ROUTES //
-	
+
 	// // // / //
-	// USERS  //
+	// USERS //
 	// // // //
-	
+
 	// Registration || Login page render
 	@GetMapping("/landing")
-	public String landingRender(@ModelAttribute("user")User user) {
-		return "index.jsp";
+	public String landingRender(@ModelAttribute("newUser") User newUser, @ModelAttribute("login") User user) {
+		return "landing.jsp";
 	}
-	
+
 	// Show admin page
 	@GetMapping("/admin")
 	public String adminPage() {
 		return "admin.jsp";
 	}
-	
+
 	// Show Dashboard
 	@GetMapping("/dashboard")
 	public String dashboard() {
@@ -53,18 +53,14 @@ public class MainController {
 
 	// CREATE NEW USER //
 	@PostMapping("/users/register")
-	public String registerUser(
-			@Valid @ModelAttribute("newUser")User user,
-			BindingResult result,
-			HttpSession session
-			) {
-		if(result.hasErrors()) {
+	public String registerUser(@Valid @ModelAttribute("newUser") User user, BindingResult result, HttpSession session) {
+		if (result.hasErrors()) {
 			return "index.jsp";
 		} else {
 			String pw1 = user.getPassword();
 			String pw2 = user.getPasswordConfirm();
 			boolean checkPw = (pw1 == pw2);
-			if(checkPw == false) {
+			if (checkPw == false) {
 				return "redirect:/users/register/errConfirm";
 			} else {
 				mainService.registerUser(user);
@@ -72,24 +68,21 @@ public class MainController {
 				return "redirect:/dashboard";
 			}
 		}
-		
+
 	}
-	
+
 	// PASSWORD CONFIRMATION ERROR
 	@GetMapping("/users/register/errConfirm")
 	public String flashMessagePW(RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("errorPw", "Passwords do not match!");
-        return "redirect:/landing";
+		redirectAttributes.addFlashAttribute("errorPw", "Passwords do not match!");
+		return "redirect:/landing";
 	}
-	
+
 	// LOGIN -- Existing User
 	@PostMapping("/users/login")
-	public String login(
-			@RequestParam("email")String email,
-			@RequestParam("password")String password,
-			HttpSession session
-			) {
-		if(mainService.authenticateUser(email, password)) {
+	public String login(@RequestParam("email") String email, @RequestParam("password") String password,
+			@ModelAttribute("login") User u, HttpSession session) {
+		if (mainService.authenticateUser(email, password)) {
 			User user = mainService.findByEmail(email);
 			session.setAttribute("user", user);
 			return "redirect:/dashboard";
@@ -97,13 +90,13 @@ public class MainController {
 			return "redirect:/users/loginErr";
 		}
 	}
-	
-	//LOGIN ERROR
+
+	// LOGIN ERROR
 	@GetMapping("/users/loginErr")
 	public String flashMessageLogin(RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("errorLogin", "Username and/or Password are invalid");
-        return "redirect:/";
+		redirectAttributes.addFlashAttribute("errorLogin", "Username and/or Password are invalid");
+		return "redirect:/";
 	}
-	
+
 	// END CONTROLLER
 }
