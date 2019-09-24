@@ -37,5 +37,4 @@ public class MainController {
 		return "admin.jsp";
 	}
 
-	
 }
