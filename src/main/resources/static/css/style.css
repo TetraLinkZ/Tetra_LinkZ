@@ -1,4 +1,101 @@
+@import
+	url('https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap')
+	;
+
+@import
+	url('https://fonts.googleapis.com/css?family=Luckiest+Guy|Righteous&display=swap')
+	;
+
 * {
 	margin: 0;
 	padding: 0;
+}
+
+body {
+	color: #fff;
+	background-color: #564080;
+	font-family: sans-serif;
+}
+
+h1, h2, h3 {
+	font-family: 'Righteous', cursive;
+}
+
+header {
+	padding: 0 2%;
+	width: 96%;
+	background-color: #80B2EF;
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	height: 10vh;
+	justify-content: flex-start;
+}
+/* LANDING.JSP */
+#login-form {
+	margin-left: auto;
+	justify-self: flex-end;
+	display: flex;
+	flex-direction: column;
+	justify-self: flex-end;
+}
+
+#login-form p input {
+	margin: .2em 0;
+	float: right;
+	padding: .3em;
+	border-radius: 4px;
+	border: none;
+}
+
+#login-form input[type=submit] {
+	color: #000; margin : .2em 0 0 auto;
+	font-family: 'Righteous', cursive;
+	width: 60%;
+	border-radius: 2px;
+	border: none;
+	padding: .5em;
+	background-color: #fff;
+	margin: .2em 0 0 auto;
+}
+
+#landing-main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 80vh;
+}
+
+#registration-box {
+	background-color: #ED6146;
+	padding: 3em;
+	border-radius: 5px;
+}
+
+#registration-box h2 {
+	text-align: center;
+}
+
+#registration-form {
+	display: flex;
+	flex-direction: column;
+}
+
+#registration-form input {
+
+	margin: 0 0 1em 0;
+	border-radius: 5px;
+	border: none;
+	padding: .7em;
+}
+
+#registration-form input[type=submit] {
+
+	font-family: 'Righteous', cursive;
+	width: 60%;
+	margin: auto;
+	border-radius: 2px;
+	border: none;
+	padding: .7em 1em;
+	background-color: #fff;
 }

@@ -7,22 +7,29 @@
 <head>
 <link rel="stylesheet" href="/css/style.css" />
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Tetra LinkZ</title>
 </head>
 <body>
 	<header>
 		<h1>Tetra LinkZ</h1>
-		<form action="/users/login" method="POST">
+		<form action="/users/login" method="POST" id="login-form">
+		<p>
 			<label for="email">Email: </label> <input type="email" name="email"
-				id="" /> <label for="password">Password: </label> <input
-				type="password" name="password" id="" /> <input type="submit"
+				id="" /> 
+		</p>
+			<p>
+				<label for="password">Password: </label> <input type="password"
+					name="password" id="" />
+			</p>
+			<input type="submit"
 				value="Login" />
 		</form>
 	</header>
-	<main>
+	<main id="landing-main">
 	<div id="registration-box">
-		<h2>Register</h2>
-		<form:form action="/users/register" modelAttribute="newUser">
+		<h2>Join Now!</h2>
+		<form:form action="/users/register" modelAttribute="newUser"
+			id="registration-form">
 			<form:label path="name">Username: </form:label>
 			<form:input path="name" />
 			<form:errors path='name' />
@@ -31,7 +38,7 @@
 			<form:input path="email" />
 			<form:errors path='email' />
 
-			<form:label path="password">Password </form:label>
+			<form:label path="password">Password: </form:label>
 			<form:input type="password" path="password" />
 			<form:errors path='password' />
 
