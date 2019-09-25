@@ -79,7 +79,9 @@ public class MainController {
 				System.out.println("pw true");
 				mainService.registerUser(user);
 				Avatar defaultAvatar =  mainService.findAvatar(Long.valueOf(1));
+				Token defaultToken = mainService.findToken(Long.valueOf(1));
 				mainService.defaultAvatar(user, defaultAvatar);
+				mainService.defaultToken(user, defaultToken);
 				session.setAttribute("user", user.getId());
 				return "redirect:/dashboard";
 			}

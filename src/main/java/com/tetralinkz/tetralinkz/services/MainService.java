@@ -10,6 +10,7 @@ import com.tetralinkz.tetralinkz.models.Avatar;
 import com.tetralinkz.tetralinkz.models.Token;
 import com.tetralinkz.tetralinkz.models.User;
 import com.tetralinkz.tetralinkz.models.UserAvatar;
+import com.tetralinkz.tetralinkz.models.UserToken;
 import com.tetralinkz.tetralinkz.repositories.AvatarRepository;
 import com.tetralinkz.tetralinkz.repositories.MatchHistoryRepository;
 import com.tetralinkz.tetralinkz.repositories.TokenRepository;
@@ -128,15 +129,39 @@ public class MainService {
     	uaRepo.save(ua);
     }
     
+    // Establish Default Token
+    public void defaultToken(User user, Token token) {
+    	UserToken ut = new UserToken();
+    	ut.setUser(user);
+    	ut.setToken(token);
+    	this.setCurrentToken(user, token);
+    	utRepo.save(ut);
+    }
+    
     // Set the current Avatar
     public void setCurrentAvatar(User user, Avatar avatar) {
     	user.setAvatar(avatar);
     	userRepo.save(user);
     }
     
+    // Set the current Token
+    public void setCurrentToken(User user, Token token) {
+    	user.setToken(token);
+    	userRepo.save(user);
+    }
+    
     // Find Avatar by Id
     public Avatar findAvatar(Long id) {
     	Optional<Avatar> o = avatarRepo.findById(id);
+    	if(o.isPresent()) {
+    		return o.get();
+    	}
+    	return null;
+    }
+    
+    // Find Token by Id
+    public Token findToken(Long id) {
+    	Optional<Token> o = tokenRepo.findById(id);
     	if(o.isPresent()) {
     		return o.get();
     	}
