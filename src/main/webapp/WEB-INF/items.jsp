@@ -38,7 +38,10 @@
 							<td><c:out value = "${oA.avatar.rarity}"/></td>
 							<td><c:out value = "${oA.avatar.cost}"/></td>		
 							<td><c:out value = "${oA.avatar.description}"/></td>	
-							<td><button>Set As Current</button></tr>
+							<td><form action="/setCurrentAvatar" method = "Post">
+									<input type="hidden" name="avatarId" value = "${oA.avatar.id}">
+									<input type="submit" value="Set As Current" />
+							</td></form>
 						<tr>
 					</c:forEach>
 				</tbody>
@@ -65,7 +68,10 @@
 							<td><c:out value = "${oT.token.rarity}"/></td>
 							<td><c:out value = "${oT.token.cost}"/></td>		
 							<td><c:out value = "${oT.token.description}"/></td>	
-							<td><button>Set As Current</button></tr>
+							<td><form action="/setCurrentToken" method = "Post">
+									<input type="hidden" name="tokenId" value = "${oT.token.id}">
+									<input type="submit" value="Set As Current" />
+							</td></form>
 						<tr>
 					</c:forEach>
 				</tbody>
