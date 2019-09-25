@@ -3,7 +3,9 @@ package com.tetralinkz.tetralinkz.models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -38,7 +41,10 @@ public class User {
 	private Integer gamesWon = 0;
 	private Integer boxesBought = 0;
 	private Boolean admin = false;
-
+	@OneToOne(mappedBy = "user", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	private Avatar currentAvatar;
+	@OneToOne(mappedBy = "user", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	private Token currentToken;
 	@Column(updatable = false)
 	private Date createdAt;
 	private Date updatedAt;
@@ -242,7 +248,23 @@ public class User {
 		this.updatedAt = new Date();
 	}
 
+	public Avatar getCurrentAvatar() {
+		return currentAvatar;
+	}
 
 
+	public void setCurrentAvatar(Avatar currentAvatar) {
+		this.currentAvatar = currentAvatar;
+	}
+
+
+	public Token getCurrentToken() {
+		return currentToken;
+	}
+
+
+	public void setCurrentToken(Token currentToken) {
+		this.currentToken = currentToken;
+	}
 
 }

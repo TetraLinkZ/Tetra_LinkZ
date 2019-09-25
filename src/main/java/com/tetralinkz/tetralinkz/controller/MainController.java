@@ -56,8 +56,7 @@ public class MainController {
 	@GetMapping("/dashboard")
 	public String dashboard(HttpSession session, Model model) {
 		User user = (User) session.getAttribute("user");
-
-		model.addAttribute("userInfo", user);
+    	model.addAttribute("userInfo", user);
 		return "dashboard.jsp";
 	}
 
@@ -78,6 +77,8 @@ public class MainController {
 			} else {
 				System.out.println("pw true");
 				mainService.registerUser(user);
+				Avatar defaultAvatar =  mainService.findAvatar(Long.valueOf(1));
+				mainService.defaultAvatar(user, defaultAvatar);
 				session.setAttribute("user", user);
 				return "redirect:/dashboard";
 			}

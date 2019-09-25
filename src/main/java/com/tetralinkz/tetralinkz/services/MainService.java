@@ -9,10 +9,13 @@ import org.springframework.stereotype.Service;
 import com.tetralinkz.tetralinkz.models.Avatar;
 import com.tetralinkz.tetralinkz.models.Token;
 import com.tetralinkz.tetralinkz.models.User;
+import com.tetralinkz.tetralinkz.models.UserAvatar;
 import com.tetralinkz.tetralinkz.repositories.AvatarRepository;
 import com.tetralinkz.tetralinkz.repositories.MatchHistoryRepository;
 import com.tetralinkz.tetralinkz.repositories.TokenRepository;
+import com.tetralinkz.tetralinkz.repositories.UserAvatarRepository;
 import com.tetralinkz.tetralinkz.repositories.UserRepository;
+import com.tetralinkz.tetralinkz.repositories.UserTokenRepository;
 
 @Service
 public class MainService {
@@ -20,15 +23,19 @@ public class MainService {
 	private final TokenRepository tokenRepo;
 	private final AvatarRepository avatarRepo;
 	private final MatchHistoryRepository historyRepo;
-	
+	private final UserAvatarRepository uaRepo;
+	private final UserTokenRepository utRepo;
+		
 	public MainService(UserRepository userRepo, TokenRepository tokenRepo, AvatarRepository avatarRepo,
-			MatchHistoryRepository historyRepo) {
+			MatchHistoryRepository historyRepo, UserAvatarRepository uaRepo, UserTokenRepository utRepo) {
 		this.userRepo = userRepo;
 		this.tokenRepo = tokenRepo;
 		this.avatarRepo = avatarRepo;
 		this.historyRepo = historyRepo;
-	}	
-	
+		this.uaRepo = uaRepo;
+		this.utRepo = utRepo;
+	}
+
 	public User registerUser(User user) {
         String hashed = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
         user.setPassword(hashed);
@@ -108,5 +115,23 @@ public class MainService {
     
     public Token createOrUpdateToken(Token token) {
     	return tokenRepo.save(token);
+    }
+    
+    // Establish Default Avatar
+    public void defaultAvatar(User user, Avatar avatar) {
+    	UserAvatar ua = new UserAvatar();
+    	ua.setUser(user);
+    	ua.setAvatar(avatar);
+    	user.setCurrentAvatar(avatar);
+    	uaRepo.save(ua);
+    }
+    
+    // Find Avatar by Id
+    public Avatar findAvatar(Long id) {
+    	Optional<Avatar> o = avatarRepo.findById(id);
+    	if(o.isPresent()) {
+    		return o.get();
+    	}
+    	return null;
     }
 }
