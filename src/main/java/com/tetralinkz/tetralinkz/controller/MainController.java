@@ -1,6 +1,8 @@
 package com.tetralinkz.tetralinkz.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -156,6 +158,46 @@ public class MainController {
 		mainService.setCurrentToken(user, token);
 		return "redirect:/dashboard";
 	}
+	
+	// The Gacha Function
+	@PostMapping("/gacha")
+	public String gacha(HttpSession session) {
+		Long uid = (Long) session.getAttribute("user");		
+		User user = mainService.findUserById(uid);
+		Random avatarOrToken = new Random();
+		int aot = avatarOrToken.nextInt(1);
+		if(aot == 0) {
+			List<Avatar> al = mainService.allAvatars();
+			int avatarPool = al.size();
+			Random randomAvatar = new Random();
+			int rA = randomAvatar.nextInt(avatarPool);
+			Avatar newAvatar = mainService.findAvatar(Long.valueOf(rA));
+			List<UserAvatar> ownedAvatar = mainService.userOwnedAvatar(user);
+			List<Avatar> oA = new ArrayList<Avatar>();
+			for(UserAvatar i : ownedAvatar) {
+				oA.add(i.getAvatar());
+			}
+			if(!oA.contains(newAvatar)) {
+				mainService.gachaAvatar(user, newAvatar);				
+			}
+		}else if(aot == 1) {			
+			List<Token> tl = mainService.allTokens();
+			int tokenPool = tl.size();		
+			Random randomToken = new Random();		
+			int rT = randomToken.nextInt(tokenPool);
+			Token newToken = mainService.findToken(Long.valueOf(rT));
+			List<UserToken> ownedToken = mainService.userOwnedToken(user);
+			List<Token> oT = new ArrayList<Token>();
+			for(UserToken i : ownedToken) {
+				oT.add(i.getToken());
+			}
+			if(!oT.contains(newToken)) {
+				mainService.gachaToken(user, newToken);
+			}
+		}
+		return "redirect:/items";
+	}
+	
 	// The Ranking page
 	@GetMapping("/ranking")
 	public String showRanking(Model model, HttpSession session) {
