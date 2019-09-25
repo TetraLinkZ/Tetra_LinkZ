@@ -62,6 +62,20 @@ public class User {
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "friends", joinColumns = @JoinColumn(name = "friend_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> userFriends;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="match_id")
+	private Match currentMatch;
+
+	public Match getCurrentMatch() {
+		return currentMatch;
+	}
+
+
+	public void setCurrentMatch(Match currentMatch) {
+		this.currentMatch = currentMatch;
+	}
+
 
 	public User() {
 
