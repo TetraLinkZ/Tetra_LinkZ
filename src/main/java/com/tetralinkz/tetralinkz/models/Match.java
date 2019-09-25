@@ -1,6 +1,7 @@
 package com.tetralinkz.tetralinkz.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,8 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -27,17 +27,9 @@ public class Match {
 	
 	private String board;
 	
-	private User winner;
-	
 	// map to one user - player1
-	@OneToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="player_one")
-    private User playerOne;
-	
-	// map to another user - player2
-	@OneToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="player_two")
-    private User playerTwo;
+	@OneToMany(mappedBy="currentMatch", fetch=FetchType.LAZY)
+    private List<User> players;
 	
 	// CONSTRUCTOR
 	
@@ -63,30 +55,31 @@ public class Match {
 		this.board = board;
 	}
 
-	public User getWinner() {
-		return winner;
+
+	public Date getCreatedAt() {
+		return createdAt;
 	}
 
-	public void setWinner(User winner) {
-		this.winner = winner;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 
-	public User getPlayerOne() {
-		return playerOne;
+	public Date getUpdatedAt() {
+		return updatedAt;
 	}
 
-	public void setPlayerOne(User playerOne) {
-		this.playerOne = playerOne;
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
-	public User getPlayerTwo() {
-		return playerTwo;
+	public List<User> getPlayers() {
+		return players;
 	}
 
-	public void setPlayerTwo(User playerTwo) {
-		this.playerTwo = playerTwo;
+	public void setPlayers(List<User> players) {
+		this.players = players;
 	}
-    
+
 	// // runs the method right before the object is created
     @PrePersist
     protected void onCreate(){

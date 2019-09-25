@@ -3,7 +3,6 @@ package com.tetralinkz.tetralinkz.models;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,7 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -65,8 +63,19 @@ public class User {
 	@JoinTable(name = "friends", joinColumns = @JoinColumn(name = "friend_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> userFriends;
 	
-	@OneToOne(mappedBy="user", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="match_id")
 	private Match currentMatch;
+
+	public Match getCurrentMatch() {
+		return currentMatch;
+	}
+
+
+	public void setCurrentMatch(Match currentMatch) {
+		this.currentMatch = currentMatch;
+	}
+
 
 	public User() {
 
