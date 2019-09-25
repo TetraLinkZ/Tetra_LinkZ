@@ -31,6 +31,14 @@ header {
 	height: 10vh;
 	justify-content: flex-start;
 }
+
+header div {
+	margin-left: auto;
+}
+
+header div a {
+	
+}
 /* LANDING.JSP */
 #login-form {
 	margin-left: auto;
@@ -49,7 +57,8 @@ header {
 }
 
 #login-form input[type=submit] {
-	color: #000; margin : .2em 0 0 auto;
+	color: #000;
+	margin: .2em 0 0 auto;
 	font-family: 'Righteous', cursive;
 	width: 60%;
 	border-radius: 2px;
@@ -82,7 +91,6 @@ header {
 }
 
 #registration-form input {
-
 	margin: 0 0 1em 0;
 	border-radius: 5px;
 	border: none;
@@ -90,7 +98,6 @@ header {
 }
 
 #registration-form input[type=submit] {
-
 	font-family: 'Righteous', cursive;
 	width: 60%;
 	margin: auto;
@@ -98,4 +105,44 @@ header {
 	border: none;
 	padding: .7em 1em;
 	background-color: #fff;
+}
+/*DASHBOARD.JSP*/
+#dash-main{
+	display:flex;
+	flex-direction:row;
+	align-items:flex-start;
+	width:100%;
+	justify-content:space-around;
+}
+#dash-gacha {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+#dash-gacha form {
+	width: auto;
+}
+
+#dash-gacha form input {
+	font-family: 'Righteous', cursive;
+	padding: 1em;
+	margin: 1em;
+	background-color: #fff;
+	border: solid black 2px;
+	border-radius: 5px;
+}
+.bodypart{
+	border-radius:5px;
+	height:20vmax;
+	width:20vmax;
+	padding:2em;
+	background-color:#000;
+}
+#play{
+	display:flex;
+	flex-direction:row;
+	align-items:center;
+	justify-content:center;
+	width:100%;
 }
