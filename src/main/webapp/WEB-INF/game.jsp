@@ -31,6 +31,7 @@
 	</div>
 	<div id="chat">
 	<form action="" id="message-box">
+	<input type="hidden" name="username" id="username" value="${user.name}"/>
 	<label for="message">Enter Message: </label>
 	<input type="text" name ="message" id="message"/>
 	<input type="submit" value="Send" id = "send"/>
