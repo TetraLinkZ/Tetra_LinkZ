@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -37,9 +37,8 @@ public class Token {
 	@Min(1)
 	@Max(4)
 	private Integer rarity;
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
-	private User user;
+	@OneToMany(mappedBy = "token", fetch = FetchType.LAZY)
+	private List<User> currentUsers;
 	@Column(updatable=false)
     private Date createdAt;
     private Date updatedAt;
@@ -133,4 +132,14 @@ public class Token {
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
+
+	public List<User> getCurrentusers() {
+		return currentUsers;
+	}
+
+	public void setCurrentusers(List<User> currentusers) {
+		this.currentUsers = currentusers;
+	}
+	
+	
 }

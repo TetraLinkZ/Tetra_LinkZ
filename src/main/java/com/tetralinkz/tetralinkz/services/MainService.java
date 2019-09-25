@@ -122,8 +122,14 @@ public class MainService {
     	UserAvatar ua = new UserAvatar();
     	ua.setUser(user);
     	ua.setAvatar(avatar);
-    	user.setCurrentAvatar(avatar);
+    	this.setCurrentAvatar(user, avatar);
     	uaRepo.save(ua);
+    }
+    
+    // Set the current Avatar
+    public void setCurrentAvatar(User user, Avatar avatar) {
+    	user.setAvatar(avatar);
+    	userRepo.save(user);
     }
     
     // Find Avatar by Id

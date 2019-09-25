@@ -27,7 +27,7 @@
 		</div>
 		<div id = "body">
 			<div id = "avatar" class = "bodypart">
-				<img src="${user.currentAvatar.url}" alt="" style="width:200px;"/>
+				<img src="${userInfo.avatar.url}" alt="" style="width:200px;"/>
 				<form action = "">
 					<input type = "submit" value = "Change"/>
 				</form>
