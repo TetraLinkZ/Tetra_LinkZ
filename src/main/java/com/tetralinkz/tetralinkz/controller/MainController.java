@@ -55,7 +55,8 @@ public class MainController {
 	// Show Dashboard
 	@GetMapping("/dashboard")
 	public String dashboard(HttpSession session, Model model) {
-		User user = (User) session.getAttribute("user");
+		Long id = (Long) session.getAttribute("user");
+		User user = mainService.findUserById(id);
     	model.addAttribute("userInfo", user);
 		return "dashboard.jsp";
 	}
@@ -79,7 +80,7 @@ public class MainController {
 				mainService.registerUser(user);
 				Avatar defaultAvatar =  mainService.findAvatar(Long.valueOf(1));
 				mainService.defaultAvatar(user, defaultAvatar);
-				session.setAttribute("user", user);
+				session.setAttribute("user", user.getId());
 				return "redirect:/dashboard";
 			}
 		}
@@ -99,7 +100,7 @@ public class MainController {
 			HttpSession session) {
 		if (mainService.authenticateUser(email, password)) {
 			User user = mainService.findByEmail(email);
-			session.setAttribute("user", user);
+			session.setAttribute("user", user.getId());
 			return "redirect:/dashboard";
 		} else {
 			return "redirect:/users/loginErr";
