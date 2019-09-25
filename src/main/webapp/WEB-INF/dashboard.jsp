@@ -31,7 +31,7 @@
 	<h2>Profile</h2>
 		<img src="${userInfo.avatar.url}" alt="" style="width: 200px;" />
 		<img src="${userInfo.token.url}" alt="" style="width: 50px;" />
-		<form action="">
+		<form action="/items">
 			<input type="submit" value="Change" />
 		</form>
 	</div>

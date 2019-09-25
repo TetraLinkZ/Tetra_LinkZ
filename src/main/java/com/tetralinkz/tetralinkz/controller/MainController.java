@@ -136,7 +136,26 @@ public class MainController {
 		model.addAttribute("ownedToken", ownedToken);
 		return "items.jsp";
 	}
-
+	
+	// Change the current Avatar
+	@PostMapping("/setCurrentAvatar")
+	public String setCurrentAvatar(@RequestParam("avatarId") Long aid, HttpSession session) {
+		Long uid = (Long) session.getAttribute("user");		
+		User user = mainService.findUserById(uid);
+		Avatar avatar = mainService.getAvatarById(aid);
+		mainService.setCurrentAvatar(user, avatar);
+		return "redirect:/dashboard";
+	}
+	
+	// Change the current Token
+	@PostMapping("/setCurrentToken")
+	public String setCurrentToken(@RequestParam("tokenId") Long tid, HttpSession session) {
+		Long uid = (Long) session.getAttribute("user");		
+		User user = mainService.findUserById(uid);
+		Token token = mainService.getTokenById(tid);
+		mainService.setCurrentToken(user, token);
+		return "redirect:/dashboard";
+	}
 	// The Ranking page
 	@GetMapping("/ranking")
 	public String showRanking(Model model, HttpSession session) {
