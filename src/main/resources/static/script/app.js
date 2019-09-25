@@ -20,7 +20,14 @@ function disconnect(){
 //
 	}
 function getMessage(){
-	stompClient.send("/app/message", {}, JSON.stringify({'content': $("#message").val()}));
+	stompClient.send("/app/message", {}, JSON.stringify(
+					{
+						'content': $("#message").val(),
+						'username' : $("#username").val()
+					
+					}
+				)
+			);
 }
 function showMessage(message){
 	console.log("test");
