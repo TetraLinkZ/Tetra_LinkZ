@@ -10,4 +10,5 @@ import com.tetralinkz.tetralinkz.models.Match;
 @Repository
 public interface MatchRepository extends CrudRepository<Match, Long>{
 	List<Match> findAll();
+	
 }

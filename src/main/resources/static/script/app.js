@@ -1,48 +1,57 @@
 let StompClient = null;
 
-
-function connect(){
+function connect() {
 	let socket = new SockJS('/tetra');
 	stompClient = Stomp.over(socket);
-	 stompClient.connect({}, function (frame) {
-		 	console.log("connecth")
-		 	// setConnected(true);
-	        console.log('Connected: ' + frame);
-	        stompClient.subscribe('/game/play', function (message) {
-	        	console.log("test");
-	        	console.log(message.body);
-	            showMessage(message.body);
-	        });
-	    });
+	stompClient.connect({}, function(frame) {
+		console.log('Connected: ' + frame);
+		stompClient.subscribe('/game/play', function(message) {
+			showMessage(message.body);
+		});
+	});
 }
 
-function disconnect(){
-//
-	}
-function getMessage(){
-	stompClient.send("/app/message", {}, JSON.stringify(
-					{
-						'content': $("#message").val(),
-						'username' : $("#username").val()
-					
-					}
-				)
-			);
+function disconnect() {
+	//
 }
-function showMessage(message){
+function getMessage() {
+	stompClient.send("/app/message", {}, JSON.stringify({
+		'content' : $("#message").val(),
+		'username' : $("#username").val()
+
+	}));
+}
+function showMessage(message) {
 	console.log("test");
-	$("#chat-box").append("<p>"+ message +"</p>");
+	$("#chat-box").append("<p>" + message + "</p>");
 }
-$(function (){
-	connect();	
+/*function drawBoard() {
+	let board = [];
+	let row = [];
+	for (let i = 0; i < 7; i++) {
+		row[i] = 6;
+		board[i] = [];
+		for (var j = 0; j < 7; j++) {
+			board[i][j] = 0;
+		}
+	}
 
-	$("#message-box").on("submit", function (e){
+	let str = "";
+	for (let i = 0; i <= board.length; i++) {
+		for (let j = 0; j <= board.length - 1; j++) {
+			str += board[i][j];
+			console.log(str);
+		}
+	}
+
+	console.log("string" + str);
+}*/
+$(function() {
+	connect();
+	$("#message-box").on("submit", function(e) {
 		e.preventDefault();
 		getMessage();
-		//connect();			
 	});
-/*	$("#send").click(function(){
-	});*/
-	//$("#send").click(function (){connect();});
-	
+	drawBoard();
+
 });

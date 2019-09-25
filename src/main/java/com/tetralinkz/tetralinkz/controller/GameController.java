@@ -27,8 +27,9 @@ public class GameController {
 	
 	@GetMapping("/game/play")
 	public String showGamePage(HttpSession session, Model model) {
-		User currentUser = (User) session.getAttribute("user");
-		model.addAttribute("user", currentUser);
+		Long currentUserId = (Long) session.getAttribute("user");
+		User user = mainService.findUserById(currentUserId);
+		model.addAttribute("user", user);
 		return "game.jsp";
 	}
 	
@@ -38,8 +39,7 @@ public class GameController {
 		System.out.println(message);
 		System.out.println(message.getContent());
         return  HtmlUtils.htmlEscape(message.messageOut());
-
-        
 		//return message;
 	}
+	
 }
