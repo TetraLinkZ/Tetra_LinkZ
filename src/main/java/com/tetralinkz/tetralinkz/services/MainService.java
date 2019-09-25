@@ -122,6 +122,16 @@ public class MainService {
     	UserAvatar ua = new UserAvatar();
     	ua.setUser(user);
     	ua.setAvatar(avatar);
+    	user.setCurrentAvatar(avatar);
     	uaRepo.save(ua);
+    }
+    
+    // Find Avatar by Id
+    public Avatar findAvatar(Long id) {
+    	Optional<Avatar> o = avatarRepo.findById(id);
+    	if(o.isPresent()) {
+    		return o.get();
+    	}
+    	return null;
     }
 }

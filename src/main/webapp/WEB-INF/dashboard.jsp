@@ -10,18 +10,12 @@
 </head>
 <body>
 	<header>
-<<<<<<< HEAD
-		<h1>Welcome, <c:out value="${userInfo.name}" /></h1>
-		<form action = "">
-			<input type = "submit" value = "Profile"/>
-		</form>
-=======
+		<h1>Tetra LinkZ</h1>
 		<h1>
 			Welcome,
 			<c:out value="${userInfo.name}" />
 		</h1>
 		<a href="/logout">Logout?</a>
->>>>>>> f8bd8b8b89d177867bf6f1133b1c8d85613890bb
 	</header>
 	<main>
 		<div id = "gacha">
@@ -31,6 +25,7 @@
 		</div>
 		<div id = "body">
 			<div id = "avatar" class = "bodypart">
+				<img src="${user.currentAvatar.url}" alt="" style="width:200px;"/>
 				<form action = "">
 					<input type = "submit" value = "Change"/>
 				</form>

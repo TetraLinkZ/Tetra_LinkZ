@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -36,13 +37,16 @@ public class Avatar {
 	@Min(1)
 	@Max(4)
 	private Integer rarity;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
+	private User user;
 	@Column(updatable=false)
     private Date createdAt;
     private Date updatedAt;
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "users_avatars",
-				joinColumns = @JoinColumn(name = "user_id"),
-				inverseJoinColumns = @JoinColumn(name = "avatar_id")
+				joinColumns = @JoinColumn(name = "avatar_id"),
+				inverseJoinColumns = @JoinColumn(name = "user_id")
 	)
 	private List<User> users;
 	
