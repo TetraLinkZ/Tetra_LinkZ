@@ -22,12 +22,54 @@
 		<h1>Avatars</h1>
 		<div id="avatars">
 			<!-- obtained avatars -->
+			<table>
+				<thead>
+					<th>Name</th>
+					<th>Picture</th>
+					<th>Rarity</th>
+					<th>Cost</th>
+					<th>Description</th>
+				</thead>
+				<tbody>
+					<c:forEach items = "${ownedAvatar}" var = "oA">
+						<tr>
+							<td><c:out value = "${oA.avatar.name}"/></td>
+							<td><img src="${oA.avatar.url}" alt="" style="width: 200px;" /></td>
+							<td><c:out value = "${oA.avatar.rarity}"/></td>
+							<td><c:out value = "${oA.avatar.cost}"/></td>		
+							<td><c:out value = "${oA.avatar.description}"/></td>	
+							<td><button>Set As Current</button></tr>
+						<tr>
+					</c:forEach>
+				</tbody>
+			</table>
 		</div>
 	</div>
 	<div class="items">
 		<h1>Tokens</h1>
 		<div id="tokens">
 			<!-- obtained tokens -->
+			<table>
+				<thead>
+					<th>Name</th>
+					<th>Picture</th>
+					<th>Rarity</th>
+					<th>Cost</th>
+					<th>Description</th>
+				</thead>
+				<tbody>
+					<c:forEach items = "${ownedToken}" var = "oT">
+						<tr>
+							<td><c:out value = "${oT.token.name}"/></td>
+							<td><img src="${oT.token.url}" alt="" style="width: 50px;" /></td>
+							<td><c:out value = "${oT.token.rarity}"/></td>
+							<td><c:out value = "${oT.token.cost}"/></td>		
+							<td><c:out value = "${oT.token.description}"/></td>	
+							<td><button>Set As Current</button></tr>
+						<tr>
+					</c:forEach>
+				</tbody>
+			</table>
 		</div>
 	</div>
 	</main>

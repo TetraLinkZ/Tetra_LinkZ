@@ -21,6 +21,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.tetralinkz.tetralinkz.models.Avatar;
 import com.tetralinkz.tetralinkz.models.Token;
 import com.tetralinkz.tetralinkz.models.User;
+import com.tetralinkz.tetralinkz.models.UserAvatar;
+import com.tetralinkz.tetralinkz.models.UserToken;
 import com.tetralinkz.tetralinkz.services.MainService;
 
 @Controller
@@ -125,15 +127,21 @@ public class MainController {
 	// The Items Page
 	@GetMapping("/items")
 	public String showItems(Model model, HttpSession session) {
-		User user = (User) session.getAttribute("user");
+		Long uid = (Long) session.getAttribute("user");
+		User user = mainService.findUserById(uid);
+		List<UserAvatar> ownedAvatar = mainService.userOwnedAvatar(user);
+		List<UserToken> ownedToken = mainService.userOwnedToken(user);
 		model.addAttribute("userInfo", user);
+		model.addAttribute("ownedAvatar", ownedAvatar);
+		model.addAttribute("ownedToken", ownedToken);
 		return "items.jsp";
 	}
 
 	// The Ranking page
 	@GetMapping("/ranking")
 	public String showRanking(Model model, HttpSession session) {
-		User user = (User) session.getAttribute("user");
+		Long uid = (Long) session.getAttribute("user");
+		User user = mainService.findUserById(uid);
 		model.addAttribute("userInfo", user);
 		return "ranking.jsp";
 	}

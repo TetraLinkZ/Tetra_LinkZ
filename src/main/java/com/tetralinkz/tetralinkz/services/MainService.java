@@ -167,5 +167,16 @@ public class MainService {
     	}
     	return null;
     }
-
+    
+    // Find all Avatarthe User owns
+    public List<UserAvatar> userOwnedAvatar(User user){
+    	List<UserAvatar> ua = uaRepo.findByUser(user);
+    	return ua;
+    }
+    
+    //Find all Token the User owns
+    public List<UserToken> userOwnedToken(User user){
+    	List<UserToken> ut = utRepo.findByUser(user);
+    	return ut;
+    }
 }
