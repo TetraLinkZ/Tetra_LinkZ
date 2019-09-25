@@ -42,6 +42,10 @@ public class MainService {
 		user.setPassword(hashed);
 		return userRepo.save(user);
 	}
+	public User updateUser(User user) {
+		return userRepo.save(user);
+	}
+	
 
 	// find user by email
 	public User findByEmail(String email) {
