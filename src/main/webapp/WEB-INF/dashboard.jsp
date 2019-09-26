@@ -20,6 +20,7 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
 <title>Dashboard</title>
 </head>
@@ -84,8 +85,8 @@
 					<c:out value="${userInfo.boxesBought }" />
 				</p>
 				<p>
-				Friend Code:
-				<c:out value="${userInfo.friendCode}"/>
+					Friend Code:
+					<c:out value="${userInfo.friendCode}" />
 				</p>
 				<p>
 					User Since:
@@ -102,34 +103,28 @@
 				<div class="row">
 
 					<form action="/addFriend" class="search-container" method="post">
-						<input type="text" placeholder="Enter Friend Code" name="add"/>
+						<input type="text" placeholder="Enter Friend Code" name="add" />
 						<button type="submit" class="btn">Add</button>
 					</form>
 				</div>
-					<div class="row">
-						<c:forEach items="${friendList}" var="friend">
-						<p>
+				<div class="row">
+					<c:forEach items="${friendList}" var="friend">
+						<p class="friend">
 							<c:out value="${friend.name}" />
-						</p>
-						</c:forEach>
-				
-					</div>
+						<p>
+					</c:forEach>
+				</div>
 
 			</div>
 		</div>
 		<div class="container-fluid">
-
-
-
-
-
 			<div id="play" class="row">
-
+				<%--
 				<form action="/game/play" class="col-sm-3 text-right">
 					<input type="submit" value="Ranked" class="btn" />
-				</form>
-				<form action="/game/play" class="col-sm-3 text-left">
-					<input type="submit" value="Casual" class="btn" />
+				</form> --%>
+				<form action="/game/play" class="col-sm-12 text-center">
+					<input type="submit" value="Chat" class="btn" />
 				</form>
 			</div>
 
@@ -139,7 +134,7 @@
 	</div>
 	<!-- END OF BACKGROUND WRAPPER -->
 	<div id="modal">
-		<button>X</button>
+		<button>x</button>
 		<h2>Whats Inside?</h2>
 		<img
 			src="https://media3.giphy.com/media/8TCWcOcocBO3UuxuDt/source.gif"
