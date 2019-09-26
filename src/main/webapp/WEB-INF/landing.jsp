@@ -14,6 +14,9 @@
 		<h1>Tetra LinkZ</h1>
 		<form action="/users/login" method="POST" id="login-form">
 		<p>
+			<c:out value = "${errorLogin}"/>
+		</p>
+		<p>
 			<label for="email">Email: </label> <input type="email" name="email"
 				id="" /> 
 		</p>
