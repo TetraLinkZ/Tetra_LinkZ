@@ -27,10 +27,9 @@ public class GameController {
 	
 	@GetMapping("/game/play")
 	public String showGamePage(HttpSession session, Model model) {
-		
-		Long userId = (Long) session.getAttribute("user");
-		User currentUser = mainService.findUserById(userId);
-		model.addAttribute("user", currentUser);
+		Long currentUserId = (Long) session.getAttribute("user");
+		User user = mainService.findUserById(currentUserId);
+		model.addAttribute("user", user);
 		return "game.jsp";
 	}
 	
