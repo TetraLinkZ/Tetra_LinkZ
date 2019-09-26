@@ -86,5 +86,11 @@ public class GameApi {
 		gameService.clearBoard(match);
 		return match.getBoard();
 	}
+	
+	@PostMapping("/post/test")
+	public String postTest() {
+		System.out.println("TEST POST");
+		return "POST tEST!";
+	}
 
 }

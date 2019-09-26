@@ -8,6 +8,19 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/css/style.css" />
+<style>
+	table {
+		border-collapse: collapse;
+		width: 100%;
+	}
+	
+	th, td {
+		text-align: center;
+		padding: 0 2.5px;
+		border-left: 2px solid #000;
+		border-right: 2px solid #000;
+	}
+</style>
 </head>
 <body>
 	<header>

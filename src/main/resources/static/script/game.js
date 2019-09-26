@@ -23,7 +23,8 @@
 
           // TEST CONTROLS
 
-          $(".column").click(function() {
+//          $("#test").click(function() {
+    	  $(".column").click(function() {
             // ".column"
             let payload = {
               board_data: "0002000001102000222100012220002111000122100012110",
@@ -60,10 +61,58 @@
                 },
                 dataType: "json"
             });
-            console.log("hello")
+            
+            $.ajax({
+                url: "/game/play/move",
+                method: "POST",
+                headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
+                data: {
+                  match: 2,
+                  row: payload.i,
+                  column: payload.j,
+                  user: 2,
+                  player: payload.player,
+                  // win: payload.win
+                  win: false
+                },
+                success: function(data) {
+                  console.log("current board: " + data);
+                },
+                dataType: "json",
+                success: (data)=>{
+                	console.log("success: ", data)
+                },
+                error: (err)=>{
+                	console.log("error log: ", err);
+                }
+              });
+            console.log("hello from POST ajax")
             return false;
           })
     };
+    
+    $("#test").submit(function() {
+    	console.log("hello from #test ajax")
+    	
+    	var body = $(this).serialize();
+
+        $.ajax({
+			  url: "/post/test",
+			  method: "POST",
+			  data: body,
+			  success: function(data) {
+				  console.log("success", data);
+				  alert("succc")
+			  },
+			  dataType: "json"
+		});
+		
+		return false;
+        
+    })
+    
+    
+//    END SCRIPT
     document.getElementsByTagName("head")[0].appendChild(script);
 })();
 

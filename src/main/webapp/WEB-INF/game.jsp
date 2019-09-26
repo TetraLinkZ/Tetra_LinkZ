@@ -30,6 +30,10 @@
 <button id="give-up">Give Up</button>
 </div>
 </div>
+<!-- TEST -->
+<form method="POST">
+	<input type="submit" value="submit" id="test" />
+</form>
 </header>
 <main>
 	<div id="game-board">
