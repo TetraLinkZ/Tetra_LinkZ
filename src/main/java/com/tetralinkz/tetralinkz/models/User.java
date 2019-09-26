@@ -39,6 +39,7 @@ public class User {
 	private Integer gamesWon = 0;
 	private Integer boxesBought = 0;
 	private Boolean admin = false;
+	private Integer friendCode;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "avatar_id")
 	private Avatar avatar;
@@ -282,4 +283,13 @@ public class User {
 		this.token = token;
 	}
 
+
+	public Integer getFriendCode() {
+		return friendCode;
+	}
+
+
+	public void setFriendCode(Integer friendCode) {
+		this.friendCode = friendCode;
+	}	
 }

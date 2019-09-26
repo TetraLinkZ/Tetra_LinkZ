@@ -93,8 +93,7 @@ public class MainService {
 		return tokenRepo.findAll();
 	}
 
-	//
-
+	// find an avatar by Id
 	public Avatar getAvatarById(Long id) {
 		Optional<Avatar> optAvatar = avatarRepo.findById(id);
 		if (optAvatar.isPresent()) {
@@ -103,7 +102,8 @@ public class MainService {
 			return null;
 		}
 	}
-
+	
+	// find a token by Id
 	public Token getTokenById(Long id) {
 		Optional<Token> optToken = tokenRepo.findById(id);
 		if (optToken.isPresent()) {
@@ -195,7 +195,7 @@ public class MainService {
     	return null;
     }
     
-    // Find all Avatarthe User owns
+    // Find all Avatar the User owns
     public List<UserAvatar> userOwnedAvatar(User user){
     	List<UserAvatar> ua = uaRepo.findByUser(user);
     	return ua;
@@ -205,5 +205,32 @@ public class MainService {
     public List<UserToken> userOwnedToken(User user){
     	List<UserToken> ut = utRepo.findByUser(user);
     	return ut;
+    }
+    
+    // Generate friend code
+    public void generateCode(User user, int code) {
+    	user.setFriendCode(code);
+    	userRepo.save(user);
+    }
+    
+    // find a friend via friend code
+    public User findFriend(int friendCode) {
+    	return userRepo.findByfriendCode(friendCode);
+    }
+    
+    // add friend
+    public void addFriend(User user, int friendCode) {
+    	User friend = this.findFriend(friendCode);
+    	List<User> currentFriends = user.getFriends();
+    	currentFriends.add(friend);
+    	user.setFriends(currentFriends);
+    	userRepo.save(user);
+    }
+    
+    // update boxes bought
+    public void boxBought(User user) {
+    	Integer u = user.getBoxesBought();
+    	user.setBoxesBought(u + 1);
+    	userRepo.save(user);
     }
 }
