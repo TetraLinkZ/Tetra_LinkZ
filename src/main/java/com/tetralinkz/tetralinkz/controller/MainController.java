@@ -86,6 +86,10 @@ public class MainController {
 				Token defaultToken = mainService.findToken(Long.valueOf(1));
 				mainService.defaultAvatar(user, defaultAvatar);
 				mainService.defaultToken(user, defaultToken);
+				mainService.updateCredit(user, 300);
+				Random r = new Random();
+				int randomCode = r.nextInt(1000000);
+				mainService.generateCode(user, randomCode);
 				session.setAttribute("user", user.getId());
 				return "redirect:/dashboard";
 			}
@@ -117,7 +121,7 @@ public class MainController {
 	@GetMapping("/users/loginErr")
 	public String flashMessageLogin(RedirectAttributes redirectAttributes) {
 		redirectAttributes.addFlashAttribute("errorLogin", "Username and/or Password are invalid");
-		return "redirect:/";
+		return "redirect:/landing";
 	}
 
 	@RequestMapping("/logout")
@@ -164,35 +168,40 @@ public class MainController {
 	public String gacha(HttpSession session) {
 		Long uid = (Long) session.getAttribute("user");		
 		User user = mainService.findUserById(uid);
-		Random avatarOrToken = new Random();
-		int aot = avatarOrToken.nextInt(1);
-		if(aot == 0) {
-			List<Avatar> al = mainService.allAvatars();
-			int avatarPool = al.size();
-			Random randomAvatar = new Random();
-			int rA = randomAvatar.nextInt(avatarPool) + 1;
-			Avatar newAvatar = mainService.findAvatar(Long.valueOf(rA));
-			List<UserAvatar> ownedAvatar = mainService.userOwnedAvatar(user);
-			List<Avatar> oA = new ArrayList<Avatar>();
-			for(UserAvatar i : ownedAvatar) {
-				oA.add(i.getAvatar());
-			}
-			if(!oA.contains(newAvatar)) {
-				mainService.gachaAvatar(user, newAvatar);				
-			}
-		}else if(aot == 1) {			
-			List<Token> tl = mainService.allTokens();
-			int tokenPool = tl.size();		
-			Random randomToken = new Random();		
-			int rT = randomToken.nextInt(tokenPool) + 1;
-			Token newToken = mainService.findToken(Long.valueOf(rT));
-			List<UserToken> ownedToken = mainService.userOwnedToken(user);
-			List<Token> oT = new ArrayList<Token>();
-			for(UserToken i : ownedToken) {
-				oT.add(i.getToken());
-			}
-			if(!oT.contains(newToken)) {
-				mainService.gachaToken(user, newToken);
+		if(user.getCredits() >= 100) {
+			mainService.boxBought(user);
+			Random avatarOrToken = new Random();
+			int aot = avatarOrToken.nextInt(2);
+			if(aot == 0) {
+				List<Avatar> al = mainService.allAvatars();
+				int avatarPool = al.size();
+				Random randomAvatar = new Random();
+				int rA = randomAvatar.nextInt(avatarPool) + 1;
+				Avatar newAvatar = mainService.findAvatar(Long.valueOf(rA));
+				List<UserAvatar> ownedAvatar = mainService.userOwnedAvatar(user);
+				List<Avatar> oA = new ArrayList<Avatar>();
+				for(UserAvatar i : ownedAvatar) {
+					oA.add(i.getAvatar());
+				}
+				if(!oA.contains(newAvatar)) {
+					mainService.gachaAvatar(user, newAvatar);
+					mainService.updateCredit(user, -100);
+				}			
+			}else if(aot == 1) {			
+				List<Token> tl = mainService.allTokens();
+				int tokenPool = tl.size();		
+				Random randomToken = new Random();		
+				int rT = randomToken.nextInt(tokenPool) + 1;
+				Token newToken = mainService.findToken(Long.valueOf(rT));
+				List<UserToken> ownedToken = mainService.userOwnedToken(user);
+				List<Token> oT = new ArrayList<Token>();
+				for(UserToken i : ownedToken) {
+					oT.add(i.getToken());
+				}
+				if(!oT.contains(newToken)) {
+					mainService.gachaToken(user, newToken);
+					mainService.updateCredit(user, -100);
+				}
 			}
 		}
 		return "redirect:/items";
@@ -205,6 +214,15 @@ public class MainController {
 		User user = mainService.findUserById(uid);
 		model.addAttribute("userInfo", user);
 		return "ranking.jsp";
+	}
+	
+	// Add Friends
+	@PostMapping("/addFriend")
+	public String addFriend(@RequestParam("add") int code, Model model, HttpSession session) {
+		Long uid = (Long) session.getAttribute("user");
+		User user = mainService.findUserById(uid);
+		mainService.addFriend(user, code);
+		return "redirect:/dashboard";
 	}
 
 	// // // //
