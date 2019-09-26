@@ -46,7 +46,7 @@
                     headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
                     data: {
                       match: 2,
-                      row: payload.i,
+                      row: payload.i, 
                       column: payload.j,
                       user: 2,
                       player: payload.player,

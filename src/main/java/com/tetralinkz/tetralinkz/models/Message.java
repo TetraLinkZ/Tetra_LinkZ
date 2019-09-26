@@ -6,9 +6,10 @@ public class Message {
 	@JsonProperty("content")
 	private String content;
 	private String username;
+	private String avatar;
+
 
 	public Message() {}
-	
 
 	@JsonProperty("content")
 	public String getContent() {
@@ -30,9 +31,24 @@ public class Message {
 		this.username = username;
 	}
 	
+	@JsonProperty("avatar")
+	public String getAvatar() {
+		return avatar;
+	}
+	
+	@JsonProperty("avatar")
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+	
 	@JsonProperty("message")
 	public String messageOut() {
 		return this.getUsername() + " : " + this.getContent();
+	}
+	
+	@JsonProperty("avatarSrc")
+	public String avatarSrc() {
+		return "<div class=\"userAvatar\" style=\"width:150px; height:150px; background-image:url("+this.getAvatar()+")\"></div>";
 	}
 	
 
