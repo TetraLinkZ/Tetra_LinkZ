@@ -6,24 +6,34 @@
 <html>
 <head>
 <link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <title>Tetra LinkZ</title>
 </head>
 <body>
-	<header>
-		<h1>Tetra LinkZ</h1>
-		<form action="/users/login" method="POST" id="login-form">
-		<p>
-			<label for="email">Email: </label> <input type="email" name="email"
-				id="" /> 
-		</p>
-			<p>
-				<label for="password">Password: </label> <input type="password"
-					name="password" id="" />
-			</p>
-			<input type="submit"
-				value="Login" />
-		</form>
+	<header class="container-fluid">
+		<div class="row">
+			<h1 class="col-sm-10">Tetra LinkZ</h1>
+			<form class="col-sm-2" action="/users/login" method="POST"
+				id="login-form">
+				<p>
+					<label for="email">Email: </label> <input type="email" name="email"
+						id="" />
+				</p>
+				<p>
+					<label for="password">Password: </label> <input type="password"
+						name="password" id="" />
+				</p>
+				<input type="submit" value="Login" class="btn" role="button"/>
+			</form>
+		</div>
 	</header>
 	<main id="landing-main">
 	<div id="registration-box">

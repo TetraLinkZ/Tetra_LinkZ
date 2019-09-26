@@ -6,17 +6,33 @@
 <html>
 <head>
 <link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
 <meta charset="utf-8">
 <title>Insert title here</title>
 </head>
-<body>
-	<header>
-		<h1>
-			Welcome,
-			<c:out value="${userInfo.name}" />
-		</h1>
-		<a href="/logout">Logout?</a>
-	</header>
+<<header class="container-fluid auto">
+			<div class="row">
+				<h1 class="align-middle col-sm-8">Tetra LinkZ</h1>
+					<h2 class="col-sm-2">
+						Welcome,
+						<c:out value="${userInfo.name}" />
+					</h2>
+					<div class="col-sm-2">
+				<a href="/dashboard" class="btn" role="button">Profile</a>
+				<a href="/logout" class="btn" role="button">Logout</a>
+					</div>
+				<div>
+				
+				</div>
+			</div>
+		</header>
 	<main>
 	<h2>Top Players</h2>
 	<ol>
