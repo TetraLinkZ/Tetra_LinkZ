@@ -84,6 +84,10 @@
 					<c:out value="${userInfo.boxesBought }" />
 				</p>
 				<p>
+				Friend Code:
+				<c:out value="${userInfo.friendCode}"/>
+				</p>
+				<p>
 					User Since:
 					<fmt:formatDate type="date" value="${userInfo.createdAt}" />
 				</p>
@@ -97,13 +101,20 @@
 				<hr />
 				<div class="row">
 
-					<form action="" class="search-container">
-						<input type="text" placeholder="Search.." name="search">
-						<button type="submit" class="btn">Search</button>
+					<form action="/addFriend" class="search-container" method="post">
+						<input type="text" placeholder="Search.." name="add"/>
+						<button type="submit" class="btn">Add</button>
 					</form>
-
-					<p class="col-sm-12">No Friends! :(</p>
 				</div>
+					<div class="row">
+						<c:forEach items="${friendList}" var="friend">
+						<p>
+							<c:out value="${friend.name}" />
+						</p>
+						</c:forEach>
+				
+					</div>
+
 			</div>
 		</div>
 		<div class="container-fluid">
