@@ -188,6 +188,7 @@ public class MainController {
 					mainService.gachaAvatar(user, newAvatar);
 					mainService.updateCredit(user, -100);
 					mainService.boxBought(user);
+					return "redirect:/items";
 				}			
 			}else if(aot == 1) {			
 				List<Token> tl = mainService.allTokens();
@@ -204,6 +205,7 @@ public class MainController {
 					mainService.gachaToken(user, newToken);
 					mainService.updateCredit(user, -100);
 					mainService.boxBought(user);
+					return "redirect:/items";
 				}
 			}
 		}
