@@ -102,7 +102,7 @@
 				<div class="row">
 
 					<form action="/addFriend" class="search-container" method="post">
-						<input type="text" placeholder="Search.." name="add"/>
+						<input type="text" placeholder="Enter Friend Code" name="add"/>
 						<button type="submit" class="btn">Add</button>
 					</form>
 				</div>
