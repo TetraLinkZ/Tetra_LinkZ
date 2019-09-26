@@ -87,6 +87,9 @@ public class MainController {
 				mainService.defaultAvatar(user, defaultAvatar);
 				mainService.defaultToken(user, defaultToken);
 				mainService.updateCredit(user, 300);
+				Random r = new Random();
+				int randomCode = r.nextInt(1000000);
+				mainService.generateCode(user, randomCode);
 				session.setAttribute("user", user.getId());
 				return "redirect:/dashboard";
 			}
@@ -166,6 +169,7 @@ public class MainController {
 		Long uid = (Long) session.getAttribute("user");		
 		User user = mainService.findUserById(uid);
 		if(user.getCredits() >= 100) {
+			mainService.boxBought(user);
 			Random avatarOrToken = new Random();
 			int aot = avatarOrToken.nextInt(2);
 			if(aot == 0) {
@@ -210,6 +214,15 @@ public class MainController {
 		User user = mainService.findUserById(uid);
 		model.addAttribute("userInfo", user);
 		return "ranking.jsp";
+	}
+	
+	// Add Friends
+	@PostMapping("/addFriend")
+	public String addFriend(@RequestParam("add") int code, Model model, HttpSession session) {
+		Long uid = (Long) session.getAttribute("user");
+		User user = mainService.findUserById(uid);
+		mainService.addFriend(user, code);
+		return "redirect:/dashboard";
 	}
 
 	// // // //
