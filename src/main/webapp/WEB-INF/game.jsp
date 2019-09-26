@@ -7,86 +7,47 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <meta charset="UTF-8">
-<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
     <script src="/webjars/jquery/jquery.min.js"></script>
     <script src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
     <script src="/script/app.js"></script>
+    
     <!-- <script src="/script/game.js"></script> -->
     
     <link rel="stylesheet" href="/css/style.css" />
     <!-- TEMP STYLING -->
-    <style>
-    
-    	header {
-    	/* margin-left: 20px; */
-    		width: 100%;
-    	}
-    	#give-up {
-    		margin-top: -10px;
-    		float: right;
-    	}
-	    #game-board {
-	    	display: none;
-	    }
-    	#chat { 
-    		width: 100%;
-    	}
-    	#message-box {
-    		display: flex;
-    		justify-content: center;
-    	}
-    	.userAvatar {
-    		width: 150px;
-    		height:150px;
-    		border-radius: 10px;
-    		background-size: 500px 500px;
-    		background-position: 50% 40%;
-    	}
-   		.message-box:nth-child(3n+3) {
-   			/* Text box */
-   			background-image: linear-gradient(#c0539b, #c0539b, #9319e5);
-   			box-shadow: 0 16px 10px -17px rgba(0, 0, 0, 0.5);
-   			border-radius: 5px;
-   			padding: 10px;
-   			display: inline-block;
-   			
-		    border-radius: 5px;
-		    box-shadow: 2px 2px 2px #19041f;
-		    margin: 0 20px;
-		    width:  275px;
-		}
-		
-		.message-box:nth-child(3n+3)::after {
-		    content: "\00a0";
-		    display: inline-block;
-
-		}
- 		.message-box:nth-child(3n+2) {
- 			/* Avatar */
-   			display: inline-block;
-		}
-		.message-box:nth-child(3n+1) {
-			/*Seperator div*/
-		}
-    </style>
+   
 <title>TETRACHAT</title>
 </head>
+<header class="container-fluid">
+			<div class="row">
+				<div class="col-sm-8">
+					<h1 class="header-title">Tetra LinkZ</h1>
+				</div>
+				<div class="col-sm-2">
+					<h2>
+						Welcome,
+						<c:out value="${userInfo.name}" />
+					</h2>
+					<a href="/dashboard" class="btn">Profile</a> <a href="/logout"
+						class="btn">Logout</a>
+					<div></div>
+				</div>
+
+			</div>
+		</header>
 <body id="game-jsp">
 <c:set var="userId" value="${user.id}" />  
 
-
-<header>
-	<div id="show-players"></div>
-<div id = "game-info">
-<h1>Tetra LinkZ</h1>
-<div >
-<!-- timer img -->
-<div id="timer"><!-- TIMER --></div>
-<a href="/dashboard"><button id="give-up">Give Up</button></a>
-</div>
-</div>
-</header>
 <main>
 	<div id="game-board">
 	</div>
@@ -98,7 +59,7 @@
 	<input type="hidden" name="username" id="username" value="${user.name}"/>
 	<label for="message">Enter Message: </label>
 	<input type="text" name ="message" id="message"/>
-	<input type="submit" value="Send" id = "send"/>
+	<input type="submit" value="Send" id ="send" class="btn text-left"/>
 	</form>
 	<div id="chat-box"></div>
 	</div>

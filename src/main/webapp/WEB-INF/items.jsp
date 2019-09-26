@@ -15,6 +15,7 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/style.css" />
 <style>
 	table {
@@ -31,21 +32,26 @@
 </style>
 </head>
 <body>
-<header class="container-fluid auto">
+<header class="container-fluid">
 			<div class="row">
-				<h1 class="col-sm-4 ">Tetra LinkZ</h1>
-				<div>
-					<h2 class="col-sm-4">
+				<div class="col-sm-8">
+					<h1 class="header-title">Tetra LinkZ</h1>
+				</div>
+				<div class="col-sm-2">
+					<h2>
 						Welcome,
 						<c:out value="${userInfo.name}" />
 					</h2>
-				<a href="/dashboard" class="btn" role="button">Profile</a>
+					<a href="/dashboard" class="btn">Profile</a> <a href="/logout"
+						class="btn">Logout</a>
+					<div></div>
 				</div>
+
 			</div>
 		</header>
 	<main>
 	<div class="items">
-		<h1>Avatars</h1>
+		<h1 class="text-center">Avatars</h1>
 		<div id="avatars">
 			<!-- obtained avatars -->
 			<table>
@@ -66,7 +72,7 @@
 							<td><c:out value = "${oA.avatar.description}"/></td>	
 							<td><form action="/setCurrentAvatar" method = "Post">
 									<input type="hidden" name="avatarId" value = "${oA.avatar.id}">
-									<input type="submit" value="Set As Current" />
+									<input type="submit" value="Set As Current" class="btn"/>
 							</td></form>
 						<tr>
 					</c:forEach>
@@ -75,7 +81,7 @@
 		</div>
 	</div>
 	<div class="items">
-		<h1>Tokens</h1>
+		<h1 class="text-center">Tokens</h1>
 		<div id="tokens">
 			<!-- obtained tokens -->
 			<table>
