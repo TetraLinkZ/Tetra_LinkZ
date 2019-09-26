@@ -118,7 +118,7 @@ public class MainController {
 	@GetMapping("/users/loginErr")
 	public String flashMessageLogin(RedirectAttributes redirectAttributes) {
 		redirectAttributes.addFlashAttribute("errorLogin", "Username and/or Password are invalid");
-		return "redirect:/";
+		return "redirect:/landing";
 	}
 
 	@RequestMapping("/logout")
