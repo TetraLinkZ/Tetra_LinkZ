@@ -61,7 +61,9 @@ public class MainController {
 	public String dashboard(HttpSession session, Model model) {
 		Long id = (Long) session.getAttribute("user");
 		User user = mainService.findUserById(id);
+		List<User> friendList= mainService.allfriend(user);
     	model.addAttribute("userInfo", user);
+    	model.addAttribute("friendList", friendList);
 		return "dashboard.jsp";
 	}
 
@@ -169,7 +171,6 @@ public class MainController {
 		Long uid = (Long) session.getAttribute("user");		
 		User user = mainService.findUserById(uid);
 		if(user.getCredits() >= 100) {
-			mainService.boxBought(user);
 			Random avatarOrToken = new Random();
 			int aot = avatarOrToken.nextInt(2);
 			if(aot == 0) {
@@ -186,6 +187,7 @@ public class MainController {
 				if(!oA.contains(newAvatar)) {
 					mainService.gachaAvatar(user, newAvatar);
 					mainService.updateCredit(user, -100);
+					mainService.boxBought(user);
 				}			
 			}else if(aot == 1) {			
 				List<Token> tl = mainService.allTokens();
@@ -201,6 +203,7 @@ public class MainController {
 				if(!oT.contains(newToken)) {
 					mainService.gachaToken(user, newToken);
 					mainService.updateCredit(user, -100);
+					mainService.boxBought(user);
 				}
 			}
 		}
