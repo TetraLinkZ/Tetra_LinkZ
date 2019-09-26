@@ -13,6 +13,7 @@
 <title>Dashboard</title>
 </head>
 <body>
+<div id="background-wrapper">
 	<header>
 		<h1>Tetra LinkZ</h1>
 		<div>
@@ -61,15 +62,18 @@
 			<input type="submit" value="Casual" class="play-button"/>
 		</form>
 	</div>
-	<div id="modal">
-	<button>X</button>
-	<h2>Whats Inside?</h2>
-	<img src="https://media3.giphy.com/media/8TCWcOcocBO3UuxuDt/source.gif" alt="treasure" />
-	<p>Credits: ${userInfo.credits}</p>
-	<form action="/gacha" method = "post">
-		<input id="open-box"type="submit" value="OPEN" />
-	</form>
-	</div>
 	<footer> </footer>
+</div>
+	<div id="modal">
+		<button>X</button>
+		<h2>Whats Inside?</h2>
+		<img
+			src="https://media3.giphy.com/media/8TCWcOcocBO3UuxuDt/source.gif"
+			alt="treasure" />
+		<p>Credits: ${userInfo.credits}</p>
+		<form action="/gacha" method="post">
+			<input id="open-box" type="submit" value="OPEN" />
+		</form>
+	</div>
 </body>
 </html>

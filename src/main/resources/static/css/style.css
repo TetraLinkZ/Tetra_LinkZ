@@ -120,6 +120,11 @@ header div a {
 	display: flex;
 	justify-content: center;
 }
+#background-wrapper{
+	height:100%;
+	width:100%;
+	opacity:1;
+}
 
 #open-modal {
 	background-image:
@@ -202,7 +207,7 @@ header div a {
 
 .bodypart {
 	border-radius: 5px;
-	height: 20vmax;
+	height: 40vmax;
 	width: 20vmax;
 	padding: 2em;
 	background-color: #000;
