@@ -27,10 +27,10 @@ public class GameController {
 	
 	@GetMapping("/game/play")
 	public String showGamePage(HttpSession session, Model model) {
-		Long currentUserId = (Long) session.getAttribute("user");
-		User user = mainService.findUserById(currentUserId);
-		model.addAttribute("user", user);
-		if(session)
+		
+		Long userId = (Long) session.getAttribute("user");
+		User currentUser = mainService.findUserById(userId);
+		model.addAttribute("user", currentUser);
 		return "game.jsp";
 	}
 	
@@ -40,7 +40,8 @@ public class GameController {
 		System.out.println(message);
 		System.out.println(message.getContent());
         return  HtmlUtils.htmlEscape(message.messageOut());
+
+        
 		//return message;
 	}
-	
 }

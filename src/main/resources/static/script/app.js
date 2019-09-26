@@ -52,6 +52,6 @@ $(function() {
 		e.preventDefault();
 		getMessage();
 	});
-	drawBoard();
+//	drawBoard();
 
 });

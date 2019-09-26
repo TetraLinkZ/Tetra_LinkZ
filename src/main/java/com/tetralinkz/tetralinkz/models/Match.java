@@ -27,14 +27,18 @@ public class Match {
 	
 	private String board;
 	
+	private Integer currentPlayer;
+	
 	// map to one user - player1
 	@OneToMany(mappedBy="currentMatch", fetch=FetchType.LAZY)
     private List<User> players;
+	
 	
 	// CONSTRUCTOR
 	
 	public Match() {
 		this.board = "0000000000000000000000000000000000000000000000000";
+		this.currentPlayer = 1;
 	}
 	
 	// GETTERS AND SETTERS
@@ -78,6 +82,15 @@ public class Match {
 
 	public void setPlayers(List<User> players) {
 		this.players = players;
+	}
+
+	
+	public Integer getCurrentPlayer() {
+		return currentPlayer;
+	}
+
+	public void setCurrentPlayer(Integer currentPlayer) {
+		this.currentPlayer = currentPlayer;
 	}
 
 	// // runs the method right before the object is created
