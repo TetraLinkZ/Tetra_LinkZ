@@ -217,9 +217,9 @@ hr{
 	border-radius: 5px;
 }
 
+
 .bodypart {
 	background-color: rgba(3,3,3,.5) !important;
-	z-index:-9999;
 	color: #fff;
 	margin: 0 auto;
 	padding: 1em;
@@ -228,9 +228,14 @@ hr{
 
 }
 
-
+.search-container {
+	margin:auto !important;
+}
 .search-container input[type=text] {
-	padding: .5em 0;
+	border-radius:5px;
+	border:none;
+	padding: .3em;
+	margin:0 .3em ;
 }
 
 #play {
@@ -252,38 +257,4 @@ hr{
 	background-color: #fff;
 	padding: 1em;
 }
-
-#game-jsp main{
-	margin-top: 20px;
-	display: flex;
-	justify-content: space-between;
-}
-
-#chat {
-	width: 25%;
-}
-
-#chat input {
-	color: black;
-}
-
-#game-board {
-	display: flex;
-	flex-direction: column;
-	width: 700px;
-	height: 700px;
-}
-
-#game-board .row {
-	display:flex;
-	flex-direction: row;
-	justify-content: center;
-	min-height: 90px;
-	background-color: #999;
-}
-#game-board .column {
-	/* min-height: 12.5%; */
-	min-width: 90px;
-	min-height: 90px;
-	border: 2px solid #333;
-}
+© 2019 GitHub, Inc.
