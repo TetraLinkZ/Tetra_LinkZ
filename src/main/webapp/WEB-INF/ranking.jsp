@@ -17,22 +17,25 @@
 <meta charset="utf-8">
 <title>Insert title here</title>
 </head>
-<<header class="container-fluid auto">
-			<div class="row">
-				<h1 class="align-middle col-sm-8">Tetra LinkZ</h1>
-					<h2 class="col-sm-2">
-						Welcome,
-						<c:out value="${userInfo.name}" />
-					</h2>
-					<div class="col-sm-2">
-				<a href="/dashboard" class="btn" role="button">Profile</a>
-				<a href="/logout" class="btn" role="button">Logout</a>
-					</div>
-				<div>
-				
-				</div>
+<body>
+	<header class="container-fluid auto">
+		<div class="row">
+			<div class="col-sm-8">
+				<h1 class="header-title">Tetra LinkZ</h1>
 			</div>
-		</header>
+			<div class="col-sm-2">
+				<h2>
+					Welcome,
+					<c:out value="${userInfo.name}" />
+				</h2>
+				<a href="/dashboard" class="btn" role="button">Profile</a> <a
+					href="/logout" class="btn" role="button">Logout</a>
+				<div></div>
+			</div>
+
+		</div>
+	</header>
+
 	<main>
 	<h2>Top Players</h2>
 	<ol>

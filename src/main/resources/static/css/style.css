@@ -32,23 +32,32 @@ header div {
 	margin-left: auto;
 }
 
-header div a {
-	
+.header-title {
+	height: 1em !important;
+	margin-top: .5em;
+}
+hr{
+	background-color:#111;
 }
 /* LANDING.JSP */
 #login-form {
+		font-family: 'Righteous', cursive;
+}
 
+#login-form p {
+	margin: 0;
+	height: 2em;
 }
 
 #login-form p input {
-	margin: .2em 0;
+	color: #000;
 	float: right;
-	padding: .3em;
 	border-radius: 4px;
 	border: none;
 }
-
-
+#login{
+	margin-left:40%;
+}
 
 #landing-main {
 	display: flex;
@@ -57,19 +66,23 @@ header div a {
 	height: 80vh;
 }
 
-#registration-box {	color: #000;
-	margin: .2em 0 0 auto;
+#registration-box {
+	color: #000;
 	font-family: 'Righteous', cursive;
-	width: 60%;
 	border-radius: 2px;
 	border: none;
 	padding: .5em;
-	background-color: #fff;
-	margin: .2em 0 0 auto;
-}
-	background-color: #ED6146;
+	background-color: #ED6146 !important;
 	padding: 3em;
+	width: 50%;
+	margin: 5em auto;
 	border-radius: 5px;
+}
+
+#register-btn {
+	background-color: #80B2EF !important;
+	width: 60%;
+	margin: auto !important;
 }
 
 #registration-box h2 {
@@ -79,13 +92,16 @@ header div a {
 #registration-form {
 	display: flex;
 	flex-direction: column;
+	margin: auto !important;
 }
 
 #registration-form input {
+	color: #000;
 	margin: 0 0 1em 0;
 	border-radius: 5px;
 	border: none;
 	padding: .7em;
+	margin: 0 0 1em 0;
 }
 
 .btn {
@@ -113,14 +129,13 @@ header div a {
 	background-color: #ED6146 !important;
 }
 
-#dash-gacha {
-	width: 100%;
-}
-
 #background-wrapper {
 	height: 100%;
 	width: 100%;
 	opacity: 1;
+}
+#dash-gacha {
+	width: 100%;
 }
 
 #open-modal {
@@ -134,8 +149,8 @@ header div a {
 	margin: 1em auto;
 	font-family: 'Righteous', cursive;
 	padding: 1.2em;
-	font-size: 1.2em;
-	box-shadow: 2px 2px 2px grey;
+	font-size: 1.3em;
+	box-shadow: 4px 4px 4px grey;
 }
 
 #stat {
@@ -146,7 +161,7 @@ header div a {
 	width: 50%;
 	height: 50%;
 	margin: auto;
-	background-color: #000;
+	background-color: #80B2EF;
 	position: absolute;
 	top: 20%;
 	left: 25%;
@@ -163,7 +178,7 @@ header div a {
 	top: 1%;
 	left: 95%;
 	position: absolute;
-	font-size: 1.5em;
+	font-size: 1.2em;
 	border-radius: 2px;
 	border: none;
 }
@@ -177,11 +192,15 @@ header div a {
 }
 
 #open-box {
+		background-image:
+		url("https://www.buyerads.com/files/images/main/header-bkg-crop2-mobile3.gif");
+	background-size: cover;
+	background-position: center;
 	font-size: 1.2em;
 	padding: .8em;
 	border-radius: 5px;
+	border:none;
 	font-family: 'Righteous', cursive;
-	border: solid black 2px;
 	padding: .8em;
 }
 
@@ -199,12 +218,16 @@ header div a {
 }
 
 .bodypart {
-	background-color: #000 !important;
-	color: #fff; margin : 0 auto;
+	background-color: rgba(3,3,3,.5) !important;
+	z-index:-9999;
+	color: #fff;
+	margin: 0 auto;
 	padding: 1em;
 	border-radius: 5px;
 	margin: 0 auto;
+
 }
+
 
 .search-container input[type=text] {
 	padding: .5em 0;

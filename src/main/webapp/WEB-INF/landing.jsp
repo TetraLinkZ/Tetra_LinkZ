@@ -18,9 +18,30 @@
 <title>Tetra LinkZ</title>
 </head>
 <body>
-	
-	<main id="landing-main">
-	<div id="registration-box">
+	<header class="container-fluid">
+		<div class="row">
+				<div class="col-sm-10">
+				<h1 class="header-title">Tetra LinkZ</h1>
+			</div>
+			<form class="col-sm-2" action="/users/login" method="POST"
+				id="login-form">
+				<p >
+					<label for="email">Email: </label> <input type="email" name="email"
+						id="" />
+				</p>
+				<p>
+					<label for="password">Password: </label> <input type="password"
+						name="password" id="" />
+				</p>
+				
+				<input type="submit" value="Login" class="btn" id="login" role="button"/>
+				
+			</form>
+		</div>
+	</header>
+	<div id="container">
+
+	<div id="registration-box" class="col-sm-3">
 		<h2>Join Now!</h2>
 		<form:form action="/users/register" modelAttribute="newUser"
 			id="registration-form">
@@ -39,9 +60,10 @@
 			<form:label path="passwordConfirm">Re-enter Password:</form:label>
 			<form:input type="password" path="passwordConfirm" />
 			<form:errors path="passwordConfirm" />
-			<input type="submit" value="Register" />
+			<input type="submit" value="Register" class="btn" id="register-btn"/>
 		</form:form>
 	</div>
-	</main>
+
+	</div>
 </body>
 </html>
