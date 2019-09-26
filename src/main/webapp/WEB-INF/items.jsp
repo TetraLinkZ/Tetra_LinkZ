@@ -16,6 +16,19 @@
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/css/style.css" />
+<style>
+	table {
+		border-collapse: collapse;
+		width: 100%;
+	}
+	
+	th, td {
+		text-align: center;
+		padding: 0 2.5px;
+		border-left: 2px solid #000;
+		border-right: 2px solid #000;
+	}
+</style>
 </head>
 <body>
 <header class="container-fluid auto">
