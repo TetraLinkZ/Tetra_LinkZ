@@ -61,7 +61,9 @@ public class MainController {
 	public String dashboard(HttpSession session, Model model) {
 		Long id = (Long) session.getAttribute("user");
 		User user = mainService.findUserById(id);
+		List<User> friendList= mainService.allfriend(user);
     	model.addAttribute("userInfo", user);
+    	model.addAttribute("friendList", friendList);
 		return "dashboard.jsp";
 	}
 
