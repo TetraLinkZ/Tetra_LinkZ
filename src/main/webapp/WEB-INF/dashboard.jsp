@@ -128,6 +128,7 @@
 		<footer> </footer>
 	</div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	</main>
 	<div id="play">
 		<form action="">
@@ -142,6 +143,8 @@
 =======
 	<!-- END OF BACKGROUND WRAPPER -->
 >>>>>>> 8acd0331906875db42b0445f72883b7624f289cf
+=======
+>>>>>>> c5577108951866b48a9f944e743ecae817d8095f
 	<div id="modal">
 		<button>X</button>
 		<h2>Whats Inside?</h2>
