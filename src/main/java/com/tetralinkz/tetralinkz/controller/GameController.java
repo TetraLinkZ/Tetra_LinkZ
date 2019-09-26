@@ -30,7 +30,6 @@ public class GameController {
 		Long currentUserId = (Long) session.getAttribute("user");
 		User user = mainService.findUserById(currentUserId);
 		model.addAttribute("user", user);
-		if(session)
 		return "game.jsp";
 	}
 	
