@@ -35,16 +35,16 @@
 						Welcome,
 						<c:out value="${userInfo.name}" />
 					</h2>
-					<a href="/dashboard" class="btn" role="button">Profile</a> <a
-						href="/logout" class="btn" role="button">Logout</a>
+					<a href="/dashboard" class="btn">Profile</a> <a href="/logout"
+						class="btn">Logout</a>
 					<div></div>
 				</div>
 
 			</div>
 		</header>
-			<div id="dash-gacha" class="row">
-				<button id="open-modal">Open Box</button>
-			</div>
+		<div id="dash-gacha" class="row">
+			<button id="open-modal">Open Box</button>
+		</div>
 
 		<div id="dash-main" class="row">
 			<div id="avatar" class="bodypart col-sm-3 text-center">
@@ -60,9 +60,7 @@
 					<img class="col-sm-4" id="dash-token" src="${userInfo.token.url}"
 						alt="" />
 				</div>
-				<form action="/items" class="row">
-					<input type="submit" value="Change" class="btn" role="button" />
-				</form>
+				<a href="/items" class="btn">Change</a>
 			</div>
 			<div id="stat" class="bodypart col-sm-3 text-center">
 				<h2>Stats</h2>
@@ -89,7 +87,7 @@
 					User Since:
 					<fmt:formatDate type="date" value="${userInfo.createdAt}" />
 				</p>
-				
+
 				<%-- 	<form action="/ranking">
 						<input type="submit" value="View Rank" class="btn" role="button" />
 					</form>  --%>
@@ -97,29 +95,30 @@
 			<div id="friends" class="bodypart col-sm-3 text-center">
 				<h2>Friends</h2>
 				<hr />
-				<div class="search-container">
-					<form action="">
+				<div class="row">
+
+					<form action="" class="search-container">
 						<input type="text" placeholder="Search.." name="search">
-						<button type="submit" class="btn" role="button">Search</button>
+						<button type="submit" class="btn">Search</button>
 					</form>
-					<div class="row">
-						<p class="col-sm-12">No Friends! :(</p>
-					</div>
+
+					<p class="col-sm-12">No Friends! :(</p>
 				</div>
 			</div>
 		</div>
 		<div class="container-fluid">
 
 
-		
+
 
 
 			<div id="play" class="row">
-				<form action="/game/play" class="col-sm-6 text-right">
-					<input type="submit" value="Ranked" class="btn"  />
+
+				<form action="/game/play" class="col-sm-3 text-right">
+					<input type="submit" value="Ranked" class="btn" />
 				</form>
-				<form action="/game/play" class="col-sm-6 text-left">
-					<input type="submit" value="Casual" class="btn"  />
+				<form action="/game/play" class="col-sm-3 text-left">
+					<input type="submit" value="Casual" class="btn" />
 				</form>
 			</div>
 
