@@ -229,8 +229,8 @@ public class MainService {
     
     // update boxes bought
     public void boxBought(User user) {
-    	Integer u = user.getBoxesBought();
-    	user.setBoxesBought(u + 1);
+    	Integer u = user.getBoxesBought() + 1;
+    	user.setBoxesBought(u);
     	userRepo.save(user);
     }
 }
