@@ -66,9 +66,8 @@
 	<h2>Whats Inside?</h2>
 	<img src="https://media3.giphy.com/media/8TCWcOcocBO3UuxuDt/source.gif" alt="treasure" />
 	<p>Credits: ${userInfo.credits}</p>
-	<form action="">
-	<input type="hidden" value="${userInfo.id}" />
-	<input id="open-box"type="submit" value="OPEN" />
+	<form action="/gacha" method = "post">
+		<input id="open-box"type="submit" value="OPEN" />
 	</form>
 	</div>
 	<footer> </footer>

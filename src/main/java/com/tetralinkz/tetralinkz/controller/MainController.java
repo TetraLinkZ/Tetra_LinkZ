@@ -170,7 +170,7 @@ public class MainController {
 			List<Avatar> al = mainService.allAvatars();
 			int avatarPool = al.size();
 			Random randomAvatar = new Random();
-			int rA = randomAvatar.nextInt(avatarPool);
+			int rA = randomAvatar.nextInt(avatarPool) + 1;
 			Avatar newAvatar = mainService.findAvatar(Long.valueOf(rA));
 			List<UserAvatar> ownedAvatar = mainService.userOwnedAvatar(user);
 			List<Avatar> oA = new ArrayList<Avatar>();
@@ -184,7 +184,7 @@ public class MainController {
 			List<Token> tl = mainService.allTokens();
 			int tokenPool = tl.size();		
 			Random randomToken = new Random();		
-			int rT = randomToken.nextInt(tokenPool);
+			int rT = randomToken.nextInt(tokenPool) + 1;
 			Token newToken = mainService.findToken(Long.valueOf(rT));
 			List<UserToken> ownedToken = mainService.userOwnedToken(user);
 			List<Token> oT = new ArrayList<Token>();
