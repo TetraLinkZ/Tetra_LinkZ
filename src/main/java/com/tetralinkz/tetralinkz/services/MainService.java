@@ -125,19 +125,19 @@ public class MainService {
     }
     
     // User receive a new avatar from the gacha
-    public void gachaAvatar(User user, Avatar avatar) {
+    public UserAvatar gachaAvatar(User user, Avatar avatar) {
     	UserAvatar ua = new UserAvatar();
     	ua.setUser(user);
     	ua.setAvatar(avatar);
-    	uaRepo.save(ua);
+    	return uaRepo.save(ua);
     }
     
     // User receive a new token from the gacha
-    public void gachaToken(User user, Token token) {
+    public UserToken gachaToken(User user, Token token) {
     	UserToken ut = new UserToken();
     	ut.setUser(user);
     	ut.setToken(token);
-    	utRepo.save(ut);
+    	return utRepo.save(ut);
     }
     
     // Establish Default Avatar
