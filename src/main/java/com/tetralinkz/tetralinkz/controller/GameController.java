@@ -39,7 +39,8 @@ public class GameController {
 		System.out.println(message);
 		System.out.println(message.getContent());
         return  HtmlUtils.htmlEscape(message.messageOut());
+
+        
 		//return message;
 	}
-	
 }

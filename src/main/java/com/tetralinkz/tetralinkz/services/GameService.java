@@ -45,4 +45,10 @@ public class GameService {
 			return null;
 		}
 	}
+	
+	public Match clearBoard(Match m) {
+		m.setBoard("0000000000000000000000000000000000000000000000000");
+		matchRepo.save(m);
+		return m;
+	}
 }

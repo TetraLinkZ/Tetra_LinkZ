@@ -24,6 +24,7 @@ public class GameApi {
 	@PostMapping("/game/play")
 	public Match createBoard() {
 		Match m = new Match();
+		gameService.clearBoard(m);
 		System.out.println("match : " + m);
 		return gameService.newMatch(m);
 	}
@@ -78,6 +79,12 @@ public class GameApi {
 		match.setBoard(stringMatrix.toString());
 		gameService.newMatch(match);
 		return stringMatrix.toString();
+	}
+	
+	@PutMapping("/game/play/clear")
+	public String clearBoard(Match match) {
+		gameService.clearBoard(match);
+		return match.getBoard();
 	}
 
 }
