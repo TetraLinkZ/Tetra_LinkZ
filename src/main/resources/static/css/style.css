@@ -28,7 +28,7 @@ header {
 	display: flex;
 	align-items: center;
 	flex-direction: row;
-	height: 10vh;
+	height: 8vmax;
 	justify-content: flex-start;
 }
 
@@ -107,17 +107,75 @@ header div a {
 	background-color: #fff;
 }
 /*DASHBOARD.JSP*/
-#dash-main{
-	display:flex;
-	flex-direction:row;
-	align-items:flex-start;
-	width:100%;
-	justify-content:space-around;
+#dash-main {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	width: 100%;
+	justify-content: space-around;
 }
+
 #dash-gacha {
 	width: 100%;
 	display: flex;
 	justify-content: center;
+}
+
+#open-modal {
+	background-image:
+		url("https://www.buyerads.com/files/images/main/header-bkg-crop2-mobile3.gif");
+	background-size: cover;
+	background-position: center;
+	border-radius: 5px;
+	padding: 1em;
+	border: none;
+	margin: 1em auto;
+	font-family: 'Righteous', cursive;
+	padding: 1.2em;
+	font-size: 1.2em;
+	box-shadow: 2px 2px 2px grey;
+}
+
+#modal {
+	width: 50%;
+	height: 50%;
+	margin: auto;
+	background-color: #000;
+	position: absolute;
+	top: 20%;
+	left: 25%;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	border-radius: 5px;
+	display: none;
+}
+
+#modal button {
+	padding: .2em;
+	position: absolute;
+	top: 1%;
+	left: 95%;
+	position: absolute;
+	font-size: 1.5em;
+	border-radius:2px;
+	border:none;
+}
+
+#modal img {
+	height: 50%;
+}
+
+#modal h1 {
+	text-align: center;
+}
+
+#open-box {
+	font-size: 1.2em; padding : .8em;
+	border-radius: 5px;
+	font-family: 'Righteous', cursive;
+	border: solid black 2px;
+	padding: .8em;
 }
 
 #dash-gacha form {
@@ -132,17 +190,47 @@ header div a {
 	border: solid black 2px;
 	border-radius: 5px;
 }
-.bodypart{
-	border-radius:5px;
-	height:20vmax;
-	width:20vmax;
-	padding:2em;
-	background-color:#000;
+
+.dash-button {
+	margin: .2em 0; font-family : 'Righteous', cursive;
+	border-radius: 2px;
+	border: none;
+	padding: .5em .2em;
+	font-size: 1em;
+	font-family: 'Righteous', cursive;
 }
-#play{
-	display:flex;
-	flex-direction:row;
-	align-items:center;
-	justify-content:center;
-	width:100%;
+
+.bodypart {
+	border-radius: 5px;
+	height: 20vmax;
+	width: 20vmax;
+	padding: 2em;
+	background-color: #000;
+	height: 20vmax;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.search-container input[type=text] {
+	padding: .6em 0;
+}
+
+#play {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.play-button {
+	font-family: 'Righteous', cursive;
+	font-size: 1.2em; padding : 1em;
+	margin: 1em;
+	border: none; background-color : #fff;
+	border-radius: 5px;
+	background-color: #fff;
+	padding: 1em;
 }
