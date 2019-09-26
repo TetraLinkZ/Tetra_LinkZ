@@ -158,6 +158,13 @@ public class MainService {
     	utRepo.save(ut);
     }
     
+    //  Credit changes
+    public void updateCredit(User user, Integer credit) {
+    	Integer c = user.getCredits() + credit;
+    	user.setCredits(c);
+    	userRepo.save(user);
+    }
+    
     // Set the current Avatar
     public void setCurrentAvatar(User user, Avatar avatar) {
     	user.setAvatar(avatar);
