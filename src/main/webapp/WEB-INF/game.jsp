@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+ <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +17,9 @@
     <link rel="stylesheet" href="/css/style.css" />
 <title>Insert title here</title>
 </head>
-<body>
+<body id="game-jsp">
+<sec:csrfMetaTags />
+
 <header>
 	<div id="show-players"></div>
 <div id = "game-info">
@@ -27,6 +31,7 @@
 </div>
 </div>
 </header>
+<main>
 	<div id="game-board">
 	</div>
 	
@@ -39,6 +44,7 @@
 	</form>
 	<div id="chat-box"></div>
 	</div>
-	</main>
+</main>
+
 </body>
 </html>

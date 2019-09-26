@@ -57,7 +57,7 @@
 		<form action="">
 			<input type="submit" value="Ranked" class="play-button"/>
 		</form>
-		<form action="">
+		<form action="/game/play">
 			<input type="submit" value="Casual" class="play-button"/>
 		</form>
 	</div>

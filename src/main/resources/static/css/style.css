@@ -234,3 +234,38 @@ header div a {
 	background-color: #fff;
 	padding: 1em;
 }
+
+#game-jsp main{
+	margin-top: 20px;
+	display: flex;
+	justify-content: space-between;
+}
+
+#chat {
+	width: 25%;
+}
+
+#chat input {
+	color: black;
+}
+
+#game-board {
+	display: flex;
+	flex-direction: column;
+	width: 700px;
+	height: 700px;
+}
+
+#game-board .row {
+	display:flex;
+	flex-direction: row;
+	justify-content: center;
+	min-height: 90px;
+	background-color: #999;
+}
+#game-board .column {
+	/* min-height: 12.5%; */
+	min-width: 90px;
+	min-height: 90px;
+	border: 2px solid #333;
+}
