@@ -18,23 +18,7 @@
 <title>Tetra LinkZ</title>
 </head>
 <body>
-	<header class="container-fluid">
-		<div class="row">
-			<h1 class="col-sm-10">Tetra LinkZ</h1>
-			<form class="col-sm-2" action="/users/login" method="POST"
-				id="login-form">
-				<p>
-					<label for="email">Email: </label> <input type="email" name="email"
-						id="" />
-				</p>
-				<p>
-					<label for="password">Password: </label> <input type="password"
-						name="password" id="" />
-				</p>
-				<input type="submit" value="Login" class="btn" role="button"/>
-			</form>
-		</div>
-	</header>
+	
 	<main id="landing-main">
 	<div id="registration-box">
 		<h2>Join Now!</h2>
