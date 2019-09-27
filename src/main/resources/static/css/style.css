@@ -350,12 +350,27 @@ input[type=text] {
 }
 
 #chatting-as {
-	display: inline;
-}
+	padding-top: 10px;
+	display: flex;
+	align-items: flex-start;
+	}
 
 #creditz {
 	padding-left: 10px;
 	display: inline-block;
+}
+
+#game-coin {
+	background-image: url("https://tetralinkz.s3-us-west-1.amazonaws.com/assets/avatars/special/coin.gif");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	width: 100%;
+	height: 25px;
+	
+	position: relative;
+	top: -50px;
+	margin-bottom: -35px;
 }
 
 #blockCredit {

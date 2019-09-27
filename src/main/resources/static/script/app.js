@@ -88,6 +88,6 @@ $(function() {
 			}
 		})
 	});
-//	drawBoard();
+
 
 });

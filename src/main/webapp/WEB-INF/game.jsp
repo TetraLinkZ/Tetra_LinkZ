@@ -16,7 +16,8 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
-    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
     <script src="/script/app.js"></script>
@@ -52,12 +53,14 @@
 	<div id="game-board">
 	</div>
 	<div id="chat">
-	<p id="chatting-as">Chatting as: <c:out value="${user.name}" /> 
+	<div id="chatting-as">
+		<p>Chatting as: <c:out value="${user.name}" /></p>
 		<form id="creditz" action="" >
 			<input type="hidden" name="userId" value="${user.id}"/>	
 			<input type="submit" id="blockCredit" value=""/>
-		</form>
-	</p>
+			<div id="game-coin"></div>
+		</form>	
+	</div>
 	<form action="" class="creditz" id="message-box" autocomplete="off">
 	<input type="hidden" name="avatar" id="userAvatar" value="${user.avatar.url}"/>
 	<input type="hidden" name="username" id="username" value="${user.name}"/>
