@@ -76,6 +76,13 @@
 									<input type="submit" value="Set As Current" class="btn"/>
 							</form>
 							</td>
+							<td><form action ="/sellAvatar" method = "post">
+							    	<input type="hidden" name="_method" value="delete">
+								    <input type="hidden" name="userAvatarId" value = "${oA.id}">
+								    <input type="hidden" name="avatarId" value = "${oA.avatar.id}">							
+								    <td><input type="submit" value="Sell!"></td>
+								</form>
+							</td>
 						<tr>
 					</c:forEach>
 				</tbody>
@@ -106,6 +113,13 @@
 									<input type="hidden" name="tokenId" value = "${oT.token.id}">
 									<input type="submit" value="Set As Current" class="btn" />
 							</form>
+							</td>
+							<td><form action ="/sellToken" method = "post">
+							    	<input type="hidden" name="_method" value="delete">
+								    <input type="hidden" name="userTokenId" value = "${oT.id}">
+								    <input type="hidden" name="tokenId" value = "${oT.token.id}">							
+								    <td><input type="submit" value="Sell!"></td>
+								</form>
 							</td>
 						<tr>
 					</c:forEach>

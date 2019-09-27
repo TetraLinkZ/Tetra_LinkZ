@@ -103,6 +103,23 @@ public class MainService {
 		}
 	}
 	
+	// find user own avatar by id
+	public UserAvatar findUserAvatar(Long id) {
+		Optional<UserAvatar> opt = uaRepo.findById(id);
+		if (opt.isPresent()) {
+			return opt.get();
+		}
+		return null;
+	}
+	
+	// find user own token by id
+	public UserToken findUserToken(Long id) {
+		Optional<UserToken> opt = utRepo.findById(id);
+		if (opt.isPresent()) {
+			return opt.get();
+		}
+		return null;
+	}
 	// find a token by Id
 	public Token getTokenById(Long id) {
 		Optional<Token> optToken = tokenRepo.findById(id);
@@ -237,5 +254,15 @@ public class MainService {
     	Integer u = user.getBoxesBought() + 1;
     	user.setBoxesBought(u);
     	userRepo.save(user);
+    }
+    
+    // delete an Avatar
+    public void deleteAvatar(UserAvatar ua) {
+    	uaRepo.delete(ua);
+    }
+    
+    // delete an Token
+    public void deleteToken(UserToken ut) {
+    	utRepo.delete(ut);
     }
 }
