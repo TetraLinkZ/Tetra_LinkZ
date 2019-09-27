@@ -1,6 +1,5 @@
 package com.tetralinkz.tetralinkz.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -11,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -228,6 +228,7 @@ public class MainController {
 		List<Token> allToken = mainService.allTokens();
 		model.addAttribute("allAvatar", allAvatar);
 		model.addAttribute("allToken", allToken);
+		model.addAttribute("userInfo", user);
 		return "shop.jsp";
 	}
 	
@@ -251,6 +252,32 @@ public class MainController {
 		Token token = mainService.findToken(tid);
 		Integer cost = token.getCost()*-1;
 		mainService.gachaToken(user, token);
+		mainService.updateCredit(user, cost);
+		return "redirect:/items";
+	}
+	
+	// sell an Avatar
+	@DeleteMapping("/sellAvatar")
+	public String sellAvatar(@RequestParam("avatarId") Long aid, @RequestParam("userAvatarId") Long id, HttpSession session){
+		Long uid = (Long) session.getAttribute("user");
+		User user = mainService.findUserById(uid);
+		UserAvatar userAvatar = mainService.findUserAvatar(id);
+		Avatar avatar = mainService.findAvatar(aid);
+		Integer cost = avatar.getCost();
+		mainService.deleteAvatar(userAvatar);
+		mainService.updateCredit(user, cost);
+		return "redirect:/items";
+	}
+	
+	// sell an Token
+	@DeleteMapping("/sellToken")
+	public String sellToken(@RequestParam("tokenId") Long tid, @RequestParam("userTokenId") Long id, HttpSession session) {
+		Long uid = (Long) session.getAttribute("user");
+		User user = mainService.findUserById(uid);
+		UserToken userToken = mainService.findUserToken(id);
+		Token token = mainService.findToken(tid);
+		Integer cost = token.getCost();
+		mainService.deleteToken(userToken);
 		mainService.updateCredit(user, cost);
 		return "redirect:/items";
 	}
