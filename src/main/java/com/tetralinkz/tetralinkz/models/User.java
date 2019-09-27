@@ -28,6 +28,7 @@ public class User {
 	@Size(min = 2, max = 20)
 	private String name;
 	@Column(unique = true)
+	@Size(min=3, max=50)
 	private String email;
 	@Size(min = 8)
 	private String password;
