@@ -182,34 +182,20 @@ public class MainController {
 				Random randomAvatar = new Random();
 				int rA = randomAvatar.nextInt(avatarPool) + 1;
 				Avatar newAvatar = mainService.findAvatar(Long.valueOf(rA));
-				List<UserAvatar> ownedAvatar = mainService.userOwnedAvatar(user);
-				List<Avatar> oA = new ArrayList<Avatar>();
-				for(UserAvatar i : ownedAvatar) {
-					oA.add(i.getAvatar());
-				}
-				if(!oA.contains(newAvatar)) {
-					mainService.gachaAvatar(user, newAvatar);
-					mainService.updateCredit(user, -100);
-					mainService.boxBought(user);
-					newItem = newAvatar.getUrl();
-				}			
+				mainService.gachaAvatar(user, newAvatar);
+				mainService.updateCredit(user, -100);
+				mainService.boxBought(user);
+				newItem = newAvatar.getUrl();			
 			}else if(aot == 1) {			
 				List<Token> tl = mainService.allTokens();
 				int tokenPool = tl.size();		
 				Random randomToken = new Random();		
 				int rT = randomToken.nextInt(tokenPool) + 1;
 				Token newToken = mainService.findToken(Long.valueOf(rT));
-				List<UserToken> ownedToken = mainService.userOwnedToken(user);
-				List<Token> oT = new ArrayList<Token>();
-				for(UserToken i : ownedToken) {
-					oT.add(i.getToken());
-				}
-				if(!oT.contains(newToken)) {
-					mainService.gachaToken(user, newToken);
-					mainService.updateCredit(user, -100);
-					mainService.boxBought(user);
-					newItem = newToken.getUrl();
-				}
+				mainService.gachaToken(user, newToken);
+				mainService.updateCredit(user, -100);
+				mainService.boxBought(user);
+				newItem = newToken.getUrl();
 			}
 		}
 		return newItem;
