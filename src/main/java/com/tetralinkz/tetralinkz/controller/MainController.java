@@ -218,6 +218,24 @@ public class MainController {
 		mainService.addFriend(user, code);
 		return "redirect:/dashboard";
 	}
+	
+	// the shop
+	@GetMapping("/shop")
+	public String showShop(HttpSession session, Model model) {
+		Long uid = (Long) session.getAttribute("user");
+		User user = mainService.findUserById(uid);
+		List<Avatar> allAvatar = mainService.allAvatars();
+		List<Token> allToken = mainService.allTokens();
+		model.addAttribute("allAvatar", allAvatar);
+		model.addAttribute("allToken", allToken);
+		return "shop.jsp";
+	}
+	
+	// Buy an new item
+	@PostMapping("/buy")
+	public String buyAnItem(HttpSession session) {
+		return null;
+	}
 
 	// // // //
 	// ADMIN //
