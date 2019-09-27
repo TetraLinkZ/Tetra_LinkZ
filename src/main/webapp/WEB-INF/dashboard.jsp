@@ -146,5 +146,13 @@
 		</form>
 		<p id="error"></p>
 	</div>
+	<div id="modal-avatar">
+		
+		<div id="modal-avatar-bg"></div>
+
+		<img src="${userInfo.avatar.url}" alt="avatar" id="modal-avatar-pic"/>
+		<h2 id="modal-title"><c:out value="${userInfo.avatar.name}"/></h2>
+		<button>x</button>
+	</div>
 </body>
 </html>

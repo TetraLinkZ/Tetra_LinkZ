@@ -38,5 +38,20 @@ $(function() {
 		
 		});
 	});
+
+
+	$("#dash-avitar").click(function() {
+		console.log("clicked");
+		$("#modal-avatar").slideDown("slow", function() {
+		});
+		$("#modal-avatar").css("display", "flex");
+		$("#modal-avatar").css("z-index", "99999");
+	});
+	$("#modal-avatar button").click(function() {
+		$("#modal-avatar").slideUp("slow", function() {
+			$("#background-wrapper").css("opacity", "1");		
+
+		});
+	});
 });
 	
