@@ -91,18 +91,18 @@
           })
     };
     
-    $("#test").submit(function() {
+    $("#send").submit(function() {
     	console.log("hello from #test ajax")
     	
     	var body = $(this).serialize();
 
         $.ajax({
-			  url: "/post/test",
+			  url: "/api/credits",
 			  method: "POST",
 			  data: body,
 			  success: function(data) {
-				  console.log("success", data);
-				  alert("succc")
+          console.log(data);
+          console.log("clicked");
 			  },
 			  dataType: "json"
 		});

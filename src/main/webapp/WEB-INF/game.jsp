@@ -21,11 +21,11 @@
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
     <script src="/script/app.js"></script>
     
-    <!-- <script src="/script/game.js"></script> -->
+    <script src="/script/credits.js"></script>
     
     <link rel="stylesheet" href="/css/style.css" />
     <!-- TEMP STYLING -->
-   
+
 <title>TETRACHAT</title>
 </head>
 <header class="container-fluid">
@@ -51,14 +51,18 @@
 <main>
 	<div id="game-board">
 	</div>
-	
+	<form id="creditz" action="" >
+		<input type="hidden" name="userId" value="${user.id}"/>	
+		<input type="submit" value="gold?"/>
+	</form>
 	<div id="chat">
 	<p>Chatting as: <c:out value="${user.name}" /> </p>
-	<form action="" id="message-box" autocomplete="off">
+	<form action="" class="creditz" id="message-box" autocomplete="off">
 	<input type="hidden" name="avatar" id="userAvatar" value="${user.avatar.url}"/>
 	<input type="hidden" name="username" id="username" value="${user.name}"/>
 	<label for="message">Enter Message: </label>
 	<input type="text" name ="message" id="message"/>
+	<input type="hidden" name="userId id="${user.id}" value="${user.id}"/>
 	<input type="submit" value="Send" id ="send" class="btn text-left"/>
 	</form>
 	<div id="chat-box"></div>

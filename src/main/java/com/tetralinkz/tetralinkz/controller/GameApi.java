@@ -1,5 +1,6 @@
 package com.tetralinkz.tetralinkz.controller;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -91,6 +92,17 @@ public class GameApi {
 	public String postTest() {
 		System.out.println("TEST POST");
 		return "POST tEST!";
+	}
+	
+	@PostMapping("api/credits")
+	public void credits(@RequestParam("userId")Long id, Model model) {
+		User user = mainService.findUserById(id);
+		Integer credits = user.getCredits();
+		credits++;
+		System.out.println("credits: " + credits);
+		user.setCredits(credits++);
+		mainService.updateUser(user);
+		return;
 	}
 
 }

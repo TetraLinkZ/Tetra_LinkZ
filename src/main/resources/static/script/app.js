@@ -35,7 +35,7 @@ function getMessage() {
 }
 
 function showMessage(message) {
-	console.log("message");
+	// console.log("message");
 	$("form").trigger("reset");
 	$("#chat-box").prepend("<div class=\"message-box\ style:\"vertical-align:middle\"><p>" + message + "</p></div>");
 }
@@ -66,27 +66,9 @@ var sendSeperator = (function(){
 		}
 	}
 })();
-/*function drawBoard() {
-	let board = [];
-	let row = [];
-	for (let i = 0; i < 7; i++) {
-		row[i] = 6;
-		board[i] = [];
-		for (var j = 0; j < 7; j++) {
-			board[i][j] = 0;
-		}
-	}
 
-	let str = "";
-	for (let i = 0; i <= board.length; i++) {
-		for (let j = 0; j <= board.length - 1; j++) {
-			str += board[i][j];
-			console.log(str);
-		}
-	}
 
-	console.log("string" + str);
-}*/
+
 $(function() {
 	connect();
 	$("#message-box").on("submit", function(e) {
@@ -100,7 +82,7 @@ $(function() {
 				$.ajax({
 					url: getAvatar(),
 					success: ()=>{
-						console.log("yay")
+						// console.log("yay")
 					}
 				})
 			}
