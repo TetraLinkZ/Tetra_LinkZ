@@ -58,4 +58,18 @@ $(function() {
 									});
 						}
 					});
+	$("#avatar").click(function() {
+		$("#modal-avatar").slideDown("slow", function() {
+		});
+		$("#modal-avatar").css("display", "flex");
+		$("#modal-avatar").css("z-index", "99999");
+
+		$("#background-wrapper").css("opacity", ".2");
+	});
+	$("#modal-avatar button").click(function() {
+		$("#modal-avatar").slideUp("slow", function() {
+			$("#background-wrapper").css("opacity", "1");
+
+		});
+	});
 });
