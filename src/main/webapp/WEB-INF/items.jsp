@@ -57,11 +57,13 @@
 			<!-- obtained avatars -->
 			<table>
 				<thead>
+				<tr>
 					<th>Name</th>
 					<th>Picture</th>
 					<th>Rarity</th>
 					<th>Cost</th>
 					<th>Description</th>
+				</tr>
 				</thead>
 				<tbody>
 					<c:forEach items = "${ownedAvatar}" var = "oA">
@@ -80,9 +82,10 @@
 							    	<input type="hidden" name="_method" value="delete">
 								    <input type="hidden" name="userAvatarId" value = "${oA.id}">
 								    <input type="hidden" name="avatarId" value = "${oA.avatar.id}">							
-								    <td><input type="submit" value="Sell!"></td>
+								    <input type="submit" value="Sell!" class="btn">
 								</form>
-							</td>
+								    </td>
+						
 						<tr>
 					</c:forEach>
 				</tbody>
@@ -114,11 +117,13 @@
 									<input type="submit" value="Set As Current" class="btn" />
 							</form>
 							</td>
-							<td><form action ="/sellToken" method = "post">
+							<td>
+							<form action ="/sellToken" method = "post">
 							    	<input type="hidden" name="_method" value="delete">
 								    <input type="hidden" name="userTokenId" value = "${oT.id}">
 								    <input type="hidden" name="tokenId" value = "${oT.token.id}">							
-								    <td><input type="submit" value="Sell!"></td>
+								    <input type="submit" value="Sell!" class="btn">
+
 								</form>
 							</td>
 						<tr>
