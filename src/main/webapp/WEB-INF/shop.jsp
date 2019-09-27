@@ -74,13 +74,13 @@
 			<div class="col-sm-12">
 				<h1 class="text-center">Tokens</h1>
 				<table class="m-auto" style="width: 50%;">
-					<thead>
+					<thead >
 						<tr>
-							<th>Name</th>
-							<th>Picture</th>
-							<th>Rarity</th>
-							<th>Cost</th>
-							<th>Description</th>
+							<th class="text-center">Name</th>
+							<th class="text-center">Picture</th>
+							<th class="text-center">Rarity</th>
+							<th class="text-center">Cost</th>
+							<th class="text-center">Description</th>
 						</tr>
 					</thead>
 					<tbody>
