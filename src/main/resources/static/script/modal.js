@@ -29,7 +29,8 @@ $(function() {
 										success : function(data) {
 											let url = data;
 											if (url.length < 3) {
-												$("#error").html("Not Enough Credits!");
+												$("#error").html(
+														"Not Enough Credits!");
 											} else {
 												$("#modal-title").html(
 														"Congrats!");
@@ -44,6 +45,10 @@ $(function() {
 																location.href
 																		+ " #modal-credits*",
 																"");
+												$("#gacha-pic").css("display", "none");
+												$("#gacha-pic").slideDown("fast", function(){
+													
+												});
 											}
 
 										},
