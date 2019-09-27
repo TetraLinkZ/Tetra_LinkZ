@@ -36,7 +36,7 @@
 				<div class="col-sm-2">
 					<h2>
 						Welcome,
-						<c:out value="${userInfo.name}" />
+						<c:out value="${user.name}" />
 					</h2>
 					<a href="/dashboard" class="btn">Profile</a> <a href="/logout"
 						class="btn">Logout</a>
