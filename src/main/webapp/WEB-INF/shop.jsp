@@ -27,7 +27,7 @@
 					<td><c:out value = "${a.rarity}"/></td>
 					<td><c:out value = "${a.cost}"/></td>		
 					<td><c:out value = "${a.description}"/></td>	
-					<td><form action="" method = "Post">
+					<td><form action="/buyAvatar" method = "Post">
 							<input type="hidden" name="avatarId" value = "${a.id}">
 							<input type="submit" value="BUY!"/>
 					</form>
@@ -53,7 +53,7 @@
 					<td><c:out value = "${t.rarity}"/></td>
 					<td><c:out value = "${t.cost}"/></td>		
 					<td><c:out value = "${t.description}"/></td>	
-					<td><form action="" method = "Post">
+					<td><form action="/buyToken" method = "Post">
 							<input type="hidden" name="tokenId" value = "${t.id}">
 							<input type="submit" value="BUY!" />
 					</td></form>
