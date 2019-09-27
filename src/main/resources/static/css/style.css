@@ -345,3 +345,53 @@ input[type=text] {
 	/*Seperator div*/
 	
 }
+
+/* AVATAR MODAL */
+
+#modal-avatar {
+	font-family: 'Righteous', cursive;
+	display: flex;
+	width: 50%;
+	height: 70%;
+	margin: auto;
+	position: absolute;
+	top: 20%;
+	left: 25%;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	border-radius: 5px;
+	display: none;
+	font-weight:bold;
+}
+
+#modal-avatar h2 {
+	position: absolute;
+	background-color: #333;
+	border-radius: 2px;
+	padding: 20px;
+	opacity: 0.5;
+	top: 2%;
+}
+
+#modal-avatar button {
+	padding: .2em;
+	position: absolute;
+	top: -9%;
+	left: 48%;
+	width:2em;
+	height:2em;
+	background-color: #333;
+	position: absolute;
+	font-size: 1.2em;
+	border-radius: 2px;
+	border: none;
+}
+
+#modal-avatar-bg {
+	/* background-color: #333; */
+}
+
+#modal-avatar h1 {
+	text-align: center;
+}
