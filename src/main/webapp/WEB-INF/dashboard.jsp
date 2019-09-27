@@ -135,14 +135,16 @@
 	<!-- END OF BACKGROUND WRAPPER -->
 	<div id="modal">
 		<button>x</button>
-		<h2>Whats Inside?</h2>
+		<h2 id="modal-title">Whats Inside?</h2>
 		<img
 			src="https://media3.giphy.com/media/8TCWcOcocBO3UuxuDt/source.gif"
-			alt="treasure" />
+			alt="treasure" id="gacha-pic"/>
 		<p>Credits: ${userInfo.credits}</p>
 		<form action="/gacha" method="post" id="pull-gacha">
+			<input type="hidden" name="credits" value="${userInfo.credits}" />
 			<input id="open-box" type="submit" value="OPEN" />
 		</form>
+		<p id="error"></p>
 	</div>
 </body>
 </html>

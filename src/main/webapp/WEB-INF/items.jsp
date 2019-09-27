@@ -73,7 +73,8 @@
 							<td><form action="/setCurrentAvatar" method = "Post">
 									<input type="hidden" name="avatarId" value = "${oA.avatar.id}">
 									<input type="submit" value="Set As Current" class="btn"/>
-							</td></form>
+							</form>
+							</td>
 						<tr>
 					</c:forEach>
 				</tbody>

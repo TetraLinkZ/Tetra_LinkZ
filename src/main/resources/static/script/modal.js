@@ -15,11 +15,28 @@ $(function() {
 		});
 	});
 
+	
+	$("#pull-gacha").submit(function(e){
+		e.preventDefault();
+		$.ajax({
+			url:"/gacha",
+			method:"post",
+			success:function(data){
+			let url = data;
+			console.log(url);
+				if(url.length < 3){
+					$("#error").html("Try Again!");
+				}else{
+					$("#modal-title").html("Congrats!");
+					$("#gacha-pic").attr("src", url);
+					$("#stat").load();
+				}
+				
+			}, error:function(err){
+				console.log(err)
+			}
+		
+		});
+	});
 });
-$.ajax({
-	url:"/gacha",
-	method:"post",
-	success:function(){
-		console.log("test");
-	}
-});
+	

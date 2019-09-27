@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tetralinkz.tetralinkz.models.Avatar;
@@ -167,7 +168,9 @@ public class MainController {
 	
 	// The Gacha Function
 	@PostMapping("/gacha")
+	@ResponseBody
 	public String gacha(HttpSession session) {
+		String newItem = "";
 		Long uid = (Long) session.getAttribute("user");		
 		User user = mainService.findUserById(uid);
 		if(user.getCredits() >= 100) {
@@ -188,7 +191,7 @@ public class MainController {
 					mainService.gachaAvatar(user, newAvatar);
 					mainService.updateCredit(user, -100);
 					mainService.boxBought(user);
-					return "redirect:/items";
+					newItem = newAvatar.getUrl();
 				}			
 			}else if(aot == 1) {			
 				List<Token> tl = mainService.allTokens();
@@ -205,11 +208,11 @@ public class MainController {
 					mainService.gachaToken(user, newToken);
 					mainService.updateCredit(user, -100);
 					mainService.boxBought(user);
-					return "redirect:/items";
+					newItem = newToken.getUrl();
 				}
 			}
 		}
-		return "redirect:/items";
+		return newItem;
 	}
 	
 	// The Ranking page
