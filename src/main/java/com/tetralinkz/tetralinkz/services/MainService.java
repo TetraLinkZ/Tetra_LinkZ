@@ -237,11 +237,18 @@ public class MainService {
     
     // add friend
     public void addFriend(User user, int friendCode) {
-    	User friend = this.findFriend(friendCode);
-    	List<User> currentFriends = user.getFriends();
-    	currentFriends.add(friend);
-    	user.setFriends(currentFriends);
-    	userRepo.save(user);
+    	Integer i = user.getFriendCode();
+    	if(i != friendCode) {
+	    	User friend = this.findFriend(friendCode);
+	    	List<User> currentFriends = user.getFriends();
+	    	List<User> friendsFriend = friend.getFriends();
+	    	friendsFriend.add(user);
+	    	currentFriends.add(friend);
+	    	user.setFriends(currentFriends);
+	    	friend.setFriends(friendsFriend);
+	    	userRepo.save(user);
+	    	userRepo.save(friend);
+    	}
     }
     
     // all of user's friend
