@@ -241,13 +241,15 @@ public class MainService {
     	if(i != friendCode) {
 	    	User friend = this.findFriend(friendCode);
 	    	List<User> currentFriends = user.getFriends();
-	    	List<User> friendsFriend = friend.getFriends();
-	    	friendsFriend.add(user);
-	    	currentFriends.add(friend);
-	    	user.setFriends(currentFriends);
-	    	friend.setFriends(friendsFriend);
-	    	userRepo.save(user);
-	    	userRepo.save(friend);
+	    	if(!currentFriends.contains(friend)) {	    		
+		    	List<User> friendsFriend = friend.getFriends();
+		    	friendsFriend.add(user);
+		    	currentFriends.add(friend);
+		    	user.setFriends(currentFriends);
+		    	friend.setFriends(friendsFriend);
+		    	userRepo.save(user);
+		    	userRepo.save(friend);
+	    	}
     	}
     }
     
