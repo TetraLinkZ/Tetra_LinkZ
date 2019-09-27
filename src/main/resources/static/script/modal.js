@@ -58,7 +58,7 @@ $(function() {
 									});
 						}
 					});
-	$("#avatar").click(function() {
+	$("#dash-avitar").click(function() {
 		$("#modal-avatar").slideDown("slow", function() {
 		});
 		$("#modal-avatar").css("display", "flex");
