@@ -51,12 +51,13 @@
 <main>
 	<div id="game-board">
 	</div>
-	<form id="creditz" action="" >
-		<input type="hidden" name="userId" value="${user.id}"/>	
-		<input type="submit" value="gold?"/>
-	</form>
 	<div id="chat">
-	<p>Chatting as: <c:out value="${user.name}" /> </p>
+	<p id="chatting-as">Chatting as: <c:out value="${user.name}" /> 
+		<form id="creditz" action="" >
+			<input type="hidden" name="userId" value="${user.id}"/>	
+			<input type="submit" id="blockCredit" value=""/>
+		</form>
+	</p>
 	<form action="" class="creditz" id="message-box" autocomplete="off">
 	<input type="hidden" name="avatar" id="userAvatar" value="${user.avatar.url}"/>
 	<input type="hidden" name="username" id="username" value="${user.name}"/>

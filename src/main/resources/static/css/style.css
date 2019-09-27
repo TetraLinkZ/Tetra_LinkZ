@@ -346,6 +346,23 @@ input[type=text] {
 	
 }
 
+#chatting-as {
+	display: inline;
+}
+
+#creditz {
+	padding-left: 10px;
+	display: inline-block;
+}
+
+#blockCredit {
+	border: none;
+	background-image: url("https://tetralinkz.s3-us-west-1.amazonaws.com/assets/avatars/special/block.png");
+	background-size: contain;
+	width: 30px;
+	height:30px;
+}
+
 /* AVATAR MODAL */
 
 #modal-avatar {
