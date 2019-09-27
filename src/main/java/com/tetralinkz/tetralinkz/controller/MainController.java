@@ -218,6 +218,42 @@ public class MainController {
 		mainService.addFriend(user, code);
 		return "redirect:/dashboard";
 	}
+	
+	// the shop
+	@GetMapping("/shop")
+	public String showShop(HttpSession session, Model model) {
+		Long uid = (Long) session.getAttribute("user");
+		User user = mainService.findUserById(uid);
+		List<Avatar> allAvatar = mainService.allAvatars();
+		List<Token> allToken = mainService.allTokens();
+		model.addAttribute("allAvatar", allAvatar);
+		model.addAttribute("allToken", allToken);
+		return "shop.jsp";
+	}
+	
+	// Buy an new Avatar
+	@PostMapping("/buyAvatar")
+	public String buyAnAvatar(@RequestParam("avatarId") Long aid, HttpSession session) {
+		Long uid = (Long) session.getAttribute("user");
+		User user = mainService.findUserById(uid);
+		Avatar avatar = mainService.findAvatar(aid);
+		Integer cost = avatar.getCost()*-1;
+		mainService.gachaAvatar(user, avatar);
+		mainService.updateCredit(user, cost);
+		return "redirect:/items";
+	}
+	
+	// Buy an new Token
+	@PostMapping("/buyToken")
+	public String buyAnToken(@RequestParam("tokenId") Long tid, HttpSession session) {
+		Long uid = (Long) session.getAttribute("user");
+		User user = mainService.findUserById(uid);
+		Token token = mainService.findToken(tid);
+		Integer cost = token.getCost()*-1;
+		mainService.gachaToken(user, token);
+		mainService.updateCredit(user, cost);
+		return "redirect:/items";
+	}
 
 	// // // //
 	// ADMIN //

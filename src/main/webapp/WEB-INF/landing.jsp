@@ -43,9 +43,9 @@
 		</div>
 	</header>
 	<div id="container">
-
+	</div>
 		<div id="registration-box" class="col-sm-3">
-			<h2>Join Now!</h2>
+			<h2>LinkZ Up Today!</h2>
 			<form:form action="/users/register" modelAttribute="newUser"
 				id="registration-form">
 				<form:label path="name">Username: </form:label>

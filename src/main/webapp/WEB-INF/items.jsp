@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Tetra LinkZ</title>
+
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -103,8 +104,9 @@
 							<td><c:out value = "${oT.token.description}"/></td>	
 							<td><form action="/setCurrentToken" method = "Post">
 									<input type="hidden" name="tokenId" value = "${oT.token.id}">
-									<input type="submit" value="Set As Current" />
-							</td></form>
+									<input type="submit" value="Set As Current" class="btn" />
+							</form>
+							</td>
 						<tr>
 					</c:forEach>
 				</tbody>
