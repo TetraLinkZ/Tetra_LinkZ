@@ -61,7 +61,7 @@
 			<div id="game-coin"></div>
 		</form>	
 	</div>
-	<form action="" class="creditz" id="message-box" autocomplete="off">
+	<form action="" id="message-box" autocomplete="off">
 	<input type="hidden" name="avatar" id="userAvatar" value="${user.avatar.url}"/>
 	<input type="hidden" name="username" id="username" value="${user.name}"/>
 	<label for="message">Enter Message: </label>
