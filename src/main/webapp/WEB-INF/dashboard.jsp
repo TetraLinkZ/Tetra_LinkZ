@@ -20,7 +20,7 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
 <title>Dashboard</title>
 </head>
@@ -61,7 +61,9 @@
 					<img class="col-sm-4" id="dash-token" src="${userInfo.token.url}"
 						alt="" />
 				</div>
-				<a href="/items" class="btn">Change</a>
+				<div class="row profile-btns m-auto">
+					<a href="/items" class="btn">Change</a> <a href="/shop" class="btn">Shop</a>
+				</div>
 			</div>
 			<div id="stat" class="bodypart col-sm-3 text-center">
 				<h2>Stats</h2>
@@ -113,6 +115,9 @@
 							<c:out value="${friend.name}" />
 						<p>
 					</c:forEach>
+					<form action="/game/play" class="col-sm-12 text-center enter-chat">
+						<input type="submit" value="Enter Chat" class="btn" id="chat-btn" />
+					</form>
 				</div>
 
 			</div>
@@ -123,9 +128,9 @@
 				<form action="/game/play" class="col-sm-3 text-right">
 					<input type="submit" value="Ranked" class="btn" />
 				</form> --%>
-				<form action="/game/play" class="col-sm-12 text-center">
-					<input type="submit" value="Chat" class="btn" />
-				</form>
+				<%-- 			<form action="/game/play" class="col-sm-12 text-center">
+					<input type="submit" value="Enter Chat" class="btn" id="chat-btn" />
+				</form> --%>
 			</div>
 
 		</div>
@@ -138,20 +143,21 @@
 		<h2 id="modal-title">Whats Inside?</h2>
 		<img
 			src="https://media3.giphy.com/media/8TCWcOcocBO3UuxuDt/source.gif"
-			alt="treasure" id="gacha-pic"/>
+			alt="treasure" id="gacha-pic" />
 		<p id="modal-credits">Credits: ${userInfo.credits}</p>
 		<form action="/gacha" method="post" id="pull-gacha">
-			<input type="hidden" name="credits" value="${userInfo.credits}" />
-			<input id="open-box" type="submit" value="OPEN" />
+			<input type="hidden" name="credits" value="${userInfo.credits}" /> <input
+				id="open-box" type="submit" value="OPEN" />
 		</form>
 		<p id="error"></p>
 	</div>
 	<div id="modal-avatar">
-		
-		<div id="modal-avatar-bg"></div>
 
-		<img src="${userInfo.avatar.url}" alt="avatar" id="modal-avatar-pic"/>
-		<h2 id="modal-title"><c:out value="${userInfo.avatar.name}"/></h2>
+		<div id="modal-avatar-bg"></div>
+		<img src="${userInfo.avatar.url}" alt="avatar" id="modal-avatar-pic" />
+		<h2 id="modal-title">
+			<c:out value="${userInfo.avatar.name}" />
+		</h2>
 		<button>x</button>
 	</div>
 </body>

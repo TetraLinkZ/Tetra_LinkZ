@@ -275,17 +275,20 @@ input[type=text] {
 	justify-content: center;
 	width: 100%;
 }
-
-.play-button {
-	font-family: 'Righteous', cursive;
-	font-size: 1.2em;
-	padding: 1em;
-	margin: 1em;
-	border: none;
-	background-color: #fff;
-	border-radius: 5px;
-	background-color: #fff;
-	padding: 1em;
+#chat-btn{
+	padding:1.2em 2.2em;
+	font-size:1.1em;
+}
+.profile-btns{
+	width:80%;
+}
+.profile-btns a{
+	width:40%;
+	margin:auto;
+}
+.enter-chat{
+	position:absolute !important;
+	bottom:1em;
 }
 /* GAME.JSP */
 #chat p {
