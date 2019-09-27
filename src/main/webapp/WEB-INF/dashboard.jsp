@@ -139,7 +139,7 @@
 		<img
 			src="https://media3.giphy.com/media/8TCWcOcocBO3UuxuDt/source.gif"
 			alt="treasure" id="gacha-pic"/>
-		<p id="">Credits: ${userInfo.credits}</p>
+		<p id="modal-credits">Credits: ${userInfo.credits}</p>
 		<form action="/gacha" method="post" id="pull-gacha">
 			<input type="hidden" name="credits" value="${userInfo.credits}" />
 			<input id="open-box" type="submit" value="OPEN" />
