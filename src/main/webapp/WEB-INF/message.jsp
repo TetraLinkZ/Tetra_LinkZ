@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="/css/style.css" />
 <script src="/webjars/jquery/jquery.min.js"></script>
 <script src="/script/modal.js"></script>
+<script src="/script/chat.js"></script>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -18,7 +19,6 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
-
 <meta charset="UTF-8">
 <title>Tetra LinkZ</title>
 </head>
@@ -33,7 +33,7 @@
 						Welcome,
 						<c:out value="${user.name}" />
 					</h2>
-					<a href="/dashboard" class="btn">Profile</a> <a href="/logout"
+					<a href="/dashboard" class="btn" >Profile</a> <a href="/logout"
 						class="btn">Logout</a>
 					<div></div>
 				</div>
@@ -44,10 +44,10 @@
 		Chat With
 		<c:out value="${friend.name}" />
 	</h1>
-		<form action="/chat/${friend.id}" method="post">
+		<form action="/chat/${friend.id}" method="post" id="send-msg">
 		<input type="text" name="message" />
 		<input type="hidden" name="user_id" value="${user.id}"/>
-		<input type="hidden" name="friend_id" value="${friend.id}"/>
+		<input type="hidden" id="friend_id" name="friend_id" value="${friend.id}"/>
 		<input type="submit" value="Send" class="btn" />
 		</form>
 	<div id="chat">
@@ -55,6 +55,7 @@
 	<p>
 	<c:out value="${message.user.name}:"/>
 	<c:out value="${message.message}"/>
+	<fmt:formatDate type="time" value="${message.createdAt}"/>
 	</p>
 	</c:forEach>
 	</div>

@@ -13,21 +13,7 @@ import com.tetralinkz.tetralinkz.models.User;
 @Repository
 public interface PrivateMessageRepository extends CrudRepository<PrivateMessage, Long> {
 
-	//public List<PrivateMessage> getMessage(Long uid, Long fid){
-		
-	/*	@Query(
-				value="SELECT m from PrivateMessage m WHERE m.user ='"uid"' "
-						+ "AND m.friend ='"+fid+"'"
-				)*/
-		//List<PrivateMessage> findMessage();
-	}
+	@Query("select m from PrivateMessage m where m.user = :user AND m.friend = :friend OR m.user = :friend AND m.friend = :user order by createdAt desc")
+	List<PrivateMessage> getAllMessages(@Param("user") User uid, @Param("friend") User fid);
 
-//}
-
-// @Query("select m from PrivateMessage where m.user = u AND m.friend = f") 
-//List<PrivateMessage> getAllMessages(@Param("u") User u, @Param("f") User f );
-/*
- * //public default List<PrivateMessage> getMessages( User u, User f){
- * 
- * @Query("") //} }
- */
+}
