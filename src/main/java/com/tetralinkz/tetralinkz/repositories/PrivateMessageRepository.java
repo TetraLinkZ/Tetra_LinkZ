@@ -15,14 +15,14 @@ public interface PrivateMessageRepository extends CrudRepository<PrivateMessage,
 
 	//public List<PrivateMessage> getMessage(Long uid, Long fid){
 		
-		@Query(
+	/*	@Query(
 				value="SELECT m from PrivateMessage m WHERE m.user ='"uid"' "
 						+ "AND m.friend ='"+fid+"'"
-				)
+				)*/
 		//List<PrivateMessage> findMessage();
 	}
 
-}
+//}
 
 // @Query("select m from PrivateMessage where m.user = u AND m.friend = f") 
 //List<PrivateMessage> getAllMessages(@Param("u") User u, @Param("f") User f );

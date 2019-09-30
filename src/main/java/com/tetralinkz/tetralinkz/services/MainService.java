@@ -283,7 +283,7 @@ public class MainService {
 
 	// CREATE PRIVATE MESSAGE
 	public void createPrivateMessage(User user, User friend, String message) {
-		//PrivateMessage m = newetr PrivateMessage();
+		PrivateMessage m = new PrivateMessage();
 		m.setUser(user);
 		m.setFriend(friend);
 		m.setMessage(message);
