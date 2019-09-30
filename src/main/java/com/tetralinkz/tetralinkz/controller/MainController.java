@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tetralinkz.tetralinkz.models.Avatar;
+import com.tetralinkz.tetralinkz.models.PrivateMessage;
 import com.tetralinkz.tetralinkz.models.Token;
 import com.tetralinkz.tetralinkz.models.User;
 import com.tetralinkz.tetralinkz.models.UserAvatar;
@@ -62,12 +63,12 @@ public class MainController {
 	public String dashboard(HttpSession session, Model model) {
 		Long id = (Long) session.getAttribute("user");
 		User user = mainService.findUserById(id);
-		List<User> friendList= mainService.allfriend(user);
-    	model.addAttribute("userInfo", user);
-    	model.addAttribute("friendList", friendList);
+		List<User> friendList = mainService.allfriend(user);
+		model.addAttribute("userInfo", user);
+		model.addAttribute("friendList", friendList);
 		return "dashboard.jsp";
 	}
-	
+
 	// Show friend's profile
 	@PostMapping("/showProfile")
 	public String showProfile(@RequestParam("friendId") Long fid, Model model) {
@@ -93,7 +94,7 @@ public class MainController {
 			} else {
 				System.out.println("pw true");
 				mainService.registerUser(user);
-				Avatar defaultAvatar =  mainService.findAvatar(Long.valueOf(1));
+				Avatar defaultAvatar = mainService.findAvatar(Long.valueOf(1));
 				Token defaultToken = mainService.findToken(Long.valueOf(1));
 				mainService.defaultAvatar(user, defaultAvatar);
 				mainService.defaultToken(user, defaultToken);
@@ -153,38 +154,38 @@ public class MainController {
 		model.addAttribute("ownedToken", ownedToken);
 		return "items.jsp";
 	}
-	
+
 	// Change the current Avatar
 	@PostMapping("/setCurrentAvatar")
 	public String setCurrentAvatar(@RequestParam("avatarId") Long aid, HttpSession session) {
-		Long uid = (Long) session.getAttribute("user");		
+		Long uid = (Long) session.getAttribute("user");
 		User user = mainService.findUserById(uid);
 		Avatar avatar = mainService.getAvatarById(aid);
 		mainService.setCurrentAvatar(user, avatar);
 		return "redirect:/dashboard";
 	}
-	
+
 	// Change the current Token
 	@PostMapping("/setCurrentToken")
 	public String setCurrentToken(@RequestParam("tokenId") Long tid, HttpSession session) {
-		Long uid = (Long) session.getAttribute("user");		
+		Long uid = (Long) session.getAttribute("user");
 		User user = mainService.findUserById(uid);
 		Token token = mainService.getTokenById(tid);
 		mainService.setCurrentToken(user, token);
 		return "redirect:/dashboard";
 	}
-	
+
 	// The Gacha Function
 	@PostMapping("/gacha")
 	@ResponseBody
 	public String gacha(HttpSession session) {
 		String newItem = "";
-		Long uid = (Long) session.getAttribute("user");		
+		Long uid = (Long) session.getAttribute("user");
 		User user = mainService.findUserById(uid);
-		if(user.getCredits() >= 100) {
+		if (user.getCredits() >= 100) {
 			Random avatarOrToken = new Random();
 			int aot = avatarOrToken.nextInt(2);
-			if(aot == 0) {
+			if (aot == 0) {
 				List<Avatar> al = mainService.allAvatars();
 				int avatarPool = al.size();
 				Random randomAvatar = new Random();
@@ -193,11 +194,11 @@ public class MainController {
 				mainService.gachaAvatar(user, newAvatar);
 				mainService.updateCredit(user, -100);
 				mainService.boxBought(user);
-				newItem = newAvatar.getUrl();			
-			}else if(aot == 1) {			
+				newItem = newAvatar.getUrl();
+			} else if (aot == 1) {
 				List<Token> tl = mainService.allTokens();
-				int tokenPool = tl.size();		
-				Random randomToken = new Random();		
+				int tokenPool = tl.size();
+				Random randomToken = new Random();
 				int rT = randomToken.nextInt(tokenPool) + 1;
 				Token newToken = mainService.findToken(Long.valueOf(rT));
 				mainService.gachaToken(user, newToken);
@@ -208,7 +209,7 @@ public class MainController {
 		}
 		return newItem;
 	}
-	
+
 	// The Ranking page
 	@GetMapping("/ranking")
 	public String showRanking(Model model, HttpSession session) {
@@ -217,7 +218,7 @@ public class MainController {
 		model.addAttribute("userInfo", user);
 		return "ranking.jsp";
 	}
-	
+
 	// Add Friends
 	@PostMapping("/addFriend")
 	public String addFriend(@RequestParam("add") int code, Model model, HttpSession session) {
@@ -226,7 +227,7 @@ public class MainController {
 		mainService.addFriend(user, code);
 		return "redirect:/dashboard";
 	}
-	
+
 	// the shop
 	@GetMapping("/shop")
 	public String showShop(HttpSession session, Model model) {
@@ -239,34 +240,35 @@ public class MainController {
 		model.addAttribute("userInfo", user);
 		return "shop.jsp";
 	}
-	
+
 	// Buy an new Avatar
 	@PostMapping("/buyAvatar")
 	public String buyAnAvatar(@RequestParam("avatarId") Long aid, HttpSession session) {
 		Long uid = (Long) session.getAttribute("user");
 		User user = mainService.findUserById(uid);
 		Avatar avatar = mainService.findAvatar(aid);
-		Integer cost = avatar.getCost()*-1;
+		Integer cost = avatar.getCost() * -1;
 		mainService.gachaAvatar(user, avatar);
 		mainService.updateCredit(user, cost);
 		return "redirect:/items";
 	}
-	
+
 	// Buy an new Token
 	@PostMapping("/buyToken")
 	public String buyAnToken(@RequestParam("tokenId") Long tid, HttpSession session) {
 		Long uid = (Long) session.getAttribute("user");
 		User user = mainService.findUserById(uid);
 		Token token = mainService.findToken(tid);
-		Integer cost = token.getCost()*-1;
+		Integer cost = token.getCost() * -1;
 		mainService.gachaToken(user, token);
 		mainService.updateCredit(user, cost);
 		return "redirect:/items";
 	}
-	
+
 	// sell an Avatar
 	@DeleteMapping("/sellAvatar")
-	public String sellAvatar(@RequestParam("avatarId") Long aid, @RequestParam("userAvatarId") Long id, HttpSession session){
+	public String sellAvatar(@RequestParam("avatarId") Long aid, @RequestParam("userAvatarId") Long id,
+			HttpSession session) {
 		Long uid = (Long) session.getAttribute("user");
 		User user = mainService.findUserById(uid);
 		UserAvatar userAvatar = mainService.findUserAvatar(id);
@@ -276,10 +278,11 @@ public class MainController {
 		mainService.updateCredit(user, cost);
 		return "redirect:/items";
 	}
-	
+
 	// sell an Token
 	@DeleteMapping("/sellToken")
-	public String sellToken(@RequestParam("tokenId") Long tid, @RequestParam("userTokenId") Long id, HttpSession session) {
+	public String sellToken(@RequestParam("tokenId") Long tid, @RequestParam("userTokenId") Long id,
+			HttpSession session) {
 		Long uid = (Long) session.getAttribute("user");
 		User user = mainService.findUserById(uid);
 		UserToken userToken = mainService.findUserToken(id);
@@ -288,6 +291,30 @@ public class MainController {
 		mainService.deleteToken(userToken);
 		mainService.updateCredit(user, cost);
 		return "redirect:/items";
+	}
+
+	// PRIVATE MESSAGING
+	@RequestMapping("/chat/{friendId}")
+	public String privateChat(@PathVariable("friendId") Long id, Model model, HttpSession session) {
+		Long uid = (Long) session.getAttribute("user");
+		User user = mainService.findUserById(uid);
+		User friend = mainService.findUserById(id);
+		List<PrivateMessage> messages = mainService.findMessages(user, friend);
+		model.addAttribute("messages", messages);
+		model.addAttribute("friend", friend);
+		model.addAttribute("user", user);
+
+		return "message.jsp";
+	}
+
+	@PostMapping("/chat/{friendId}")
+	public String sendPrivateMessage(@PathVariable("friendId") Long id, HttpSession session,
+			@RequestParam("user_id") Long uId, @RequestParam("friend_id") Long fId,
+			@RequestParam("message") String message) {
+		User user = mainService.findUserById(uId);
+		User friend = mainService.findUserById(fId);
+		mainService.createPrivateMessage(user, friend, message);
+		return "redirect:/chat/{friendId}";
 	}
 
 	// // // //

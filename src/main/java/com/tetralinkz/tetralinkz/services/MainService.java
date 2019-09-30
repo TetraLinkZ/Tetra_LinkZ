@@ -1,5 +1,7 @@
 package com.tetralinkz.tetralinkz.services;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,12 +9,14 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import com.tetralinkz.tetralinkz.models.Avatar;
+import com.tetralinkz.tetralinkz.models.PrivateMessage;
 import com.tetralinkz.tetralinkz.models.Token;
 import com.tetralinkz.tetralinkz.models.User;
 import com.tetralinkz.tetralinkz.models.UserAvatar;
 import com.tetralinkz.tetralinkz.models.UserToken;
 import com.tetralinkz.tetralinkz.repositories.AvatarRepository;
 import com.tetralinkz.tetralinkz.repositories.MatchHistoryRepository;
+import com.tetralinkz.tetralinkz.repositories.PrivateMessageRepository;
 import com.tetralinkz.tetralinkz.repositories.TokenRepository;
 import com.tetralinkz.tetralinkz.repositories.UserAvatarRepository;
 import com.tetralinkz.tetralinkz.repositories.UserRepository;
@@ -26,15 +30,18 @@ public class MainService {
 	private final MatchHistoryRepository historyRepo;
 	private final UserAvatarRepository uaRepo;
 	private final UserTokenRepository utRepo;
+	private final PrivateMessageRepository pmRepo;
 
 	public MainService(UserRepository userRepo, TokenRepository tokenRepo, AvatarRepository avatarRepo,
-			MatchHistoryRepository historyRepo, UserAvatarRepository uaRepo, UserTokenRepository utRepo) {
+			MatchHistoryRepository historyRepo, UserAvatarRepository uaRepo, UserTokenRepository utRepo,
+			PrivateMessageRepository pmRepo) {
 		this.userRepo = userRepo;
 		this.tokenRepo = tokenRepo;
 		this.avatarRepo = avatarRepo;
 		this.historyRepo = historyRepo;
 		this.uaRepo = uaRepo;
 		this.utRepo = utRepo;
+		this.pmRepo = pmRepo;
 	}
 
 	public User registerUser(User user) {
@@ -42,10 +49,10 @@ public class MainService {
 		user.setPassword(hashed);
 		return userRepo.save(user);
 	}
+
 	public User updateUser(User user) {
 		return userRepo.save(user);
 	}
-	
 
 	// find user by email
 	public User findByEmail(String email) {
@@ -102,7 +109,7 @@ public class MainService {
 			return null;
 		}
 	}
-	
+
 	// find user own avatar by id
 	public UserAvatar findUserAvatar(Long id) {
 		Optional<UserAvatar> opt = uaRepo.findById(id);
@@ -111,7 +118,7 @@ public class MainService {
 		}
 		return null;
 	}
-	
+
 	// find user own token by id
 	public UserToken findUserToken(Long id) {
 		Optional<UserToken> opt = utRepo.findById(id);
@@ -120,6 +127,7 @@ public class MainService {
 		}
 		return null;
 	}
+
 	// find a token by Id
 	public Token getTokenById(Long id) {
 		Optional<Token> optToken = tokenRepo.findById(id);
@@ -130,148 +138,165 @@ public class MainService {
 		}
 	}
 
-	
-    
-    // CREATE && UPDATE
-    public Avatar createOrUpdateAvatar(Avatar avatar) {
-    	return avatarRepo.save(avatar);
-    }
-    
-    public Token createOrUpdateToken(Token token) {
-    	return tokenRepo.save(token);
-    }
-    
-    // User receive a new avatar from the gacha
-    public UserAvatar gachaAvatar(User user, Avatar avatar) {
-    	UserAvatar ua = new UserAvatar();
-    	ua.setUser(user);
-    	ua.setAvatar(avatar);
-    	return uaRepo.save(ua);
-    }
-    
-    // User receive a new token from the gacha
-    public UserToken gachaToken(User user, Token token) {
-    	UserToken ut = new UserToken();
-    	ut.setUser(user);
-    	ut.setToken(token);
-    	return utRepo.save(ut);
-    }
-    
-    // Establish Default Avatar
-    public void defaultAvatar(User user, Avatar avatar) {
-    	UserAvatar ua = new UserAvatar();
-    	ua.setUser(user);
-    	ua.setAvatar(avatar);
-    	this.setCurrentAvatar(user, avatar);
-    	uaRepo.save(ua);
-    }
-    
-    // Establish Default Token
-    public void defaultToken(User user, Token token) {
-    	UserToken ut = new UserToken();
-    	ut.setUser(user);
-    	ut.setToken(token);
-    	this.setCurrentToken(user, token);
-    	utRepo.save(ut);
-    }
-    
-    //  Credit changes
-    public void updateCredit(User user, Integer credit) {
-    	Integer c = user.getCredits() + credit;
-    	user.setCredits(c);
-    	userRepo.save(user);
-    }
-    
-    // Set the current Avatar
-    public void setCurrentAvatar(User user, Avatar avatar) {
-    	user.setAvatar(avatar);
-    	userRepo.save(user);
-    }
-    
-    // Set the current Token
-    public void setCurrentToken(User user, Token token) {
-    	user.setToken(token);
-    	userRepo.save(user);
-    }
-    
-    // Find Avatar by Id
-    public Avatar findAvatar(Long id) {
-    	Optional<Avatar> o = avatarRepo.findById(id);
-    	if(o.isPresent()) {
-    		return o.get();
-    	}
-    	return null;
-    }
-    
-    // Find Token by Id
-    public Token findToken(Long id) {
-    	Optional<Token> o = tokenRepo.findById(id);
-    	if(o.isPresent()) {
-    		return o.get();
-    	}
-    	return null;
-    }
-    
-    // Find all Avatar the User owns
-    public List<UserAvatar> userOwnedAvatar(User user){
-    	List<UserAvatar> ua = uaRepo.findByUser(user);
-    	return ua;
-    }
-    
-    //Find all Token the User owns
-    public List<UserToken> userOwnedToken(User user){
-    	List<UserToken> ut = utRepo.findByUser(user);
-    	return ut;
-    }
-    
-    // Generate friend code
-    public void generateCode(User user, int code) {
-    	user.setFriendCode(code);
-    	userRepo.save(user);
-    }
-    
-    // find a friend via friend code
-    public User findFriend(int friendCode) {
-    	return userRepo.findByfriendCode(friendCode);
-    }
-    
-    // add friend
-    public void addFriend(User user, int friendCode) {
-    	Integer i = user.getFriendCode();
-    	if(i != friendCode) {
-	    	User friend = this.findFriend(friendCode);
-	    	List<User> currentFriends = user.getFriends();
-	    	if(!currentFriends.contains(friend)) {	    		
-		    	List<User> friendsFriend = friend.getFriends();
-		    	friendsFriend.add(user);
-		    	currentFriends.add(friend);
-		    	user.setFriends(currentFriends);
-		    	friend.setFriends(friendsFriend);
-		    	userRepo.save(user);
-		    	userRepo.save(friend);
-	    	}
-    	}
-    }
-    
-    // all of user's friend
-    public List<User> allfriend(User user){
-    	return user.getFriends();
-    }
-    
-    // update boxes bought
-    public void boxBought(User user) {
-    	Integer u = user.getBoxesBought() + 1;
-    	user.setBoxesBought(u);
-    	userRepo.save(user);
-    }
-    
-    // delete an Avatar
-    public void deleteAvatar(UserAvatar ua) {
-    	uaRepo.delete(ua);
-    }
-    
-    // delete an Token
-    public void deleteToken(UserToken ut) {
-    	utRepo.delete(ut);
+	// CREATE && UPDATE
+	public Avatar createOrUpdateAvatar(Avatar avatar) {
+		return avatarRepo.save(avatar);
+	}
+
+	public Token createOrUpdateToken(Token token) {
+		return tokenRepo.save(token);
+	}
+
+	// User receive a new avatar from the gacha
+	public UserAvatar gachaAvatar(User user, Avatar avatar) {
+		UserAvatar ua = new UserAvatar();
+		ua.setUser(user);
+		ua.setAvatar(avatar);
+		return uaRepo.save(ua);
+	}
+
+	// User receive a new token from the gacha
+	public UserToken gachaToken(User user, Token token) {
+		UserToken ut = new UserToken();
+		ut.setUser(user);
+		ut.setToken(token);
+		return utRepo.save(ut);
+	}
+
+	// Establish Default Avatar
+	public void defaultAvatar(User user, Avatar avatar) {
+		UserAvatar ua = new UserAvatar();
+		ua.setUser(user);
+		ua.setAvatar(avatar);
+		this.setCurrentAvatar(user, avatar);
+		uaRepo.save(ua);
+	}
+
+	// Establish Default Token
+	public void defaultToken(User user, Token token) {
+		UserToken ut = new UserToken();
+		ut.setUser(user);
+		ut.setToken(token);
+		this.setCurrentToken(user, token);
+		utRepo.save(ut);
+	}
+
+	// Credit changes
+	public void updateCredit(User user, Integer credit) {
+		Integer c = user.getCredits() + credit;
+		user.setCredits(c);
+		userRepo.save(user);
+	}
+
+	// Set the current Avatar
+	public void setCurrentAvatar(User user, Avatar avatar) {
+		user.setAvatar(avatar);
+		userRepo.save(user);
+	}
+
+	// Set the current Token
+	public void setCurrentToken(User user, Token token) {
+		user.setToken(token);
+		userRepo.save(user);
+	}
+
+	// Find Avatar by Id
+	public Avatar findAvatar(Long id) {
+		Optional<Avatar> o = avatarRepo.findById(id);
+		if (o.isPresent()) {
+			return o.get();
+		}
+		return null;
+	}
+
+	// Find Token by Id
+	public Token findToken(Long id) {
+		Optional<Token> o = tokenRepo.findById(id);
+		if (o.isPresent()) {
+			return o.get();
+		}
+		return null;
+	}
+
+	// Find all Avatar the User owns
+	public List<UserAvatar> userOwnedAvatar(User user) {
+		List<UserAvatar> ua = uaRepo.findByUser(user);
+		return ua;
+	}
+
+	// Find all Token the User owns
+	public List<UserToken> userOwnedToken(User user) {
+		List<UserToken> ut = utRepo.findByUser(user);
+		return ut;
+	}
+
+	// Generate friend code
+	public void generateCode(User user, int code) {
+		user.setFriendCode(code);
+		userRepo.save(user);
+	}
+
+	// find a friend via friend code
+	public User findFriend(int friendCode) {
+		return userRepo.findByfriendCode(friendCode);
+	}
+
+	// add friend
+	public void addFriend(User user, int friendCode) {
+		Integer i = user.getFriendCode();
+		if (i != friendCode) {
+			User friend = this.findFriend(friendCode);
+			List<User> currentFriends = user.getFriends();
+			if (!currentFriends.contains(friend)) {
+				List<User> friendsFriend = friend.getFriends();
+				friendsFriend.add(user);
+				currentFriends.add(friend);
+				user.setFriends(currentFriends);
+				friend.setFriends(friendsFriend);
+				userRepo.save(user);
+				userRepo.save(friend);
+			}
+		}
+	}
+
+	// all of user's friend
+	public List<User> allfriend(User user) {
+		return user.getFriends();
+	}
+
+	// update boxes bought
+	public void boxBought(User user) {
+		Integer u = user.getBoxesBought() + 1;
+		user.setBoxesBought(u);
+		userRepo.save(user);
+	}
+
+	// delete an Avatar
+	public void deleteAvatar(UserAvatar ua) {
+		uaRepo.delete(ua);
+	}
+
+	// delete an Token
+	public void deleteToken(UserToken ut) {
+		utRepo.delete(ut);
+	}
+
+	// CREATE PRIVATE MESSAGE
+	public void createPrivateMessage(User user, User friend, String message) {
+		//PrivateMessage m = newetr PrivateMessage();
+		m.setUser(user);
+		m.setFriend(friend);
+		m.setMessage(message);
+		pmRepo.save(m);
+		return;
+	}
+
+
+	public List<PrivateMessage> findMessages(User u, User f){
+		  //List<PrivateMessage> all = pmRepo.getAllMessages(u, f);
+		  //return all;
+
+		List<PrivateMessage> all = u.getMessages();
+		return all;
     }
 }
