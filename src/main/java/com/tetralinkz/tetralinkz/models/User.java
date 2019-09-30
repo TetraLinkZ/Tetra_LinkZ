@@ -64,11 +64,14 @@ public class User {
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "friends", joinColumns = @JoinColumn(name = "friend_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> userFriends;
-	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="match_id")
 	private Match currentMatch;
-
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "private_message", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "friend_id"))
+	private List<PrivateMessage> messages;
+	
 	public Match getCurrentMatch() {
 		return currentMatch;
 	}
@@ -81,6 +84,16 @@ public class User {
 
 	public User() {
 
+	}
+
+
+	public List<PrivateMessage> getMessages() {
+		return messages;
+	}
+
+
+	public void setMessages(List<PrivateMessage> messages) {
+		this.messages = messages;
 	}
 
 

@@ -113,13 +113,15 @@
 					<c:forEach items="${friendList}" var="friend">
 						<p class="friend">
 							<c:out value="${friend.name}" />
-						<p>
-						<p>
-							<form action = "/showProfile" method = "post">
-								<input type="hidden" name="friendId" value="${friend.id}" /> 
-								<input type="submit" value="View Profile" class="btn"/>
-							</form>
 						</p>
+
+
+						<form action="/showProfile" method="post">
+							<input type="hidden" name="friendId" value="${friend.id}" /> <input
+								type="submit" value="View Profile" class="btn" />
+						</form>
+			<a href="/chat/${friend.id}" class="btn">Send Message</a>
+
 					</c:forEach>
 					<form action="/game/play" class="col-sm-12 text-center enter-chat">
 						<input type="submit" value="Enter Chat" class="btn" id="chat-btn" />
