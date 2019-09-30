@@ -221,11 +221,17 @@ public class MainController {
 
 	// Add Friends
 	@PostMapping("/addFriend")
-	public String addFriend(@RequestParam("add") int code, Model model, HttpSession session) {
+	public String addFriend(@RequestParam("add") String code, Model model, HttpSession session) {
 		Long uid = (Long) session.getAttribute("user");
 		User user = mainService.findUserById(uid);
-		mainService.addFriend(user, code);
-		return "redirect:/dashboard";
+		try {
+	        int theCode = Integer.parseInt(code);
+	        mainService.addFriend(user, theCode);
+	        return "redirect:/dashboard";
+	    }
+	    catch(NumberFormatException e) {
+	        return "redirect:/dashboard";
+	    }
 	}
 
 	// the shop
