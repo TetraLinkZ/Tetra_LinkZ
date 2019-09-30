@@ -62,12 +62,12 @@
 		</form>	
 	</div>
 	<form action="" id="message-box" autocomplete="off">
-	<input type="hidden" name="avatar" id="userAvatar" value="${user.avatar.url}"/>
-	<input type="hidden" name="username" id="username" value="${user.name}"/>
-	<label for="message">Enter Message: </label>
-	<input type="text" name ="message" id="message"/>
-	<input type="hidden" name="userId id="${user.id}" value="${user.id}"/>
-	<input type="submit" value="Send" id ="send" class="btn text-left"/>
+		<input type="hidden" name="avatar" id="userAvatar" value="${user.avatar.url}"/>
+		<input type="hidden" name="username" id="username" value="${user.name}"/>
+		<label for="message">Enter Message: </label>
+		<input type="text" name ="message" id="message"/>
+		<input type="hidden" name="userId id="${user.id}" value="${user.id}"/>
+		<input type="submit" value="Send" id ="send" class="btn text-left"/>
 	</form>
 	<div id="chat-box"></div>
 	</div>

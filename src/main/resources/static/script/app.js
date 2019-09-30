@@ -36,7 +36,7 @@ function getMessage() {
 
 function showMessage(message) {
 	// console.log("message");
-	$("form").trigger("reset");
+	//$("form").trigger("reset");
 	$("#chat-box").prepend("<div class=\"message-box\ style:\"vertical-align:middle\"><p>" + message + "</p></div>");
 }
 
