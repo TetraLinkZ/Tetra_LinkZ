@@ -23,10 +23,21 @@
     <script src="/script/app.js"></script>
     
     <script src="/script/credits.js"></script>
+    <script src="/script/game.js" ></script>
     
     <link rel="stylesheet" href="/css/style.css" />
     <!-- TEMP STYLING -->
+<style>
+	.row: {
 
+	}
+	.column {
+		height: 50px;
+		min-width: 25px;
+		padding: 2.5px;
+		background-color: grey;
+	}
+</style>
 <title>TETRACHAT</title>
 </head>
 <header class="container-fluid">

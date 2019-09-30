@@ -180,7 +180,6 @@ $(document).ready(function() {
         console.log("hello from POST ajax")
         return false;
       })
-};
 	
 	// END SCRIPT
 })
