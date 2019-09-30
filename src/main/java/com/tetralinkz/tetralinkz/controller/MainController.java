@@ -67,6 +67,14 @@ public class MainController {
     	model.addAttribute("friendList", friendList);
 		return "dashboard.jsp";
 	}
+	
+	// Show friend's profile
+	@PostMapping("/showProfile")
+	public String showProfile(@RequestParam("friendId") Long fid, Model model) {
+		User user = mainService.findUserById(fid);
+		model.addAttribute("userInfo", user);
+		return "showProfile.jsp";
+	}
 
 	// CREATE NEW USER //
 	@PostMapping("/users/register")

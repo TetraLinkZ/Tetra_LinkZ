@@ -33,20 +33,13 @@
 				</div>
 				<div class="col-sm-2">
 					<h2>
-						Welcome,
-						<c:out value="${userInfo.name}" />
+						<c:out value="${userInfo.name}" /> 's Profile
 					</h2>
-					<a href="/dashboard" class="btn">Profile</a> <a href="/logout"
-						class="btn">Logout</a>
+					<a href="/dashboard" class="btn">Back to Dashboard</a> 
 					<div></div>
 				</div>
-
 			</div>
 		</header>
-		<div id="dash-gacha" class="row">
-			<button id="open-modal">Open Box</button>
-		</div>
-
 		<div id="dash-main" class="row">
 			<div id="avatar" class="bodypart col-sm-3 text-center">
 				<h2 class="text-center">Current Items</h2>
@@ -60,9 +53,6 @@
 				<div class="row">
 					<img class="col-sm-4" id="dash-token" src="${userInfo.token.url}"
 						alt="" />
-				</div>
-				<div class="row profile-btns m-auto">
-					<a href="/items" class="btn">Change</a> <a href="/shop" class="btn">Shop</a>
 				</div>
 			</div>
 			<div id="stat" class="bodypart col-sm-3 text-center">
@@ -94,36 +84,16 @@
 					User Since:
 					<fmt:formatDate type="date" value="${userInfo.createdAt}" />
 				</p>
-
-				<%-- 	<form action="/ranking">
-						<input type="submit" value="View Rank" class="btn" role="button" />
-					</form>  --%>
 			</div>
 			<div id="friends" class="bodypart col-sm-3 text-center">
 				<h2>Friends</h2>
 				<hr />
 				<div class="row">
-
-					<form action="/addFriend" class="search-container" method="post">
-						<input type="text" placeholder="Enter Friend Code" name="add" />
-						<button type="submit" class="btn">Add</button>
-					</form>
-				</div>
-				<div class="row">
 					<c:forEach items="${friendList}" var="friend">
 						<p class="friend">
 							<c:out value="${friend.name}" />
 						<p>
-						<p>
-							<form action = "/showProfile" method = "post">
-								<input type="hidden" name="friendId" value="${friend.id}" /> 
-								<input type="submit" value="View Profile" />
-							</form>
-						</p>
 					</c:forEach>
-					<form action="/game/play" class="col-sm-12 text-center enter-chat">
-						<input type="submit" value="Enter Chat" class="btn" id="chat-btn" />
-					</form>
 				</div>
 
 			</div>
@@ -144,27 +114,5 @@
 		<footer> </footer>
 	</div>
 	<!-- END OF BACKGROUND WRAPPER -->
-	<div id="modal">
-		<button>x</button>
-		<h2 id="modal-title">Whats Inside?</h2>
-		<img
-			src="https://media3.giphy.com/media/8TCWcOcocBO3UuxuDt/source.gif"
-			alt="treasure" id="gacha-pic" />
-		<p id="modal-credits">Credits: ${userInfo.credits}</p>
-		<form action="/gacha" method="post" id="pull-gacha">
-			<input type="hidden" name="credits" value="${userInfo.credits}" /> <input
-				id="open-box" type="submit" value="OPEN" />
-		</form>
-		<p id="error"></p>
-	</div>
-	<div id="modal-avatar">
-
-		<div id="modal-avatar-bg"></div>
-		<img src="${userInfo.avatar.url}" alt="avatar" id="modal-avatar-pic" />
-		<h2 id="modal-title">
-			<c:out value="${userInfo.avatar.name}" />
-		</h2>
-		<button>x</button>
-	</div>
 </body>
 </html>
