@@ -117,7 +117,7 @@
 						<p>
 							<form action = "/showProfile" method = "post">
 								<input type="hidden" name="friendId" value="${friend.id}" /> 
-								<input type="submit" value="View Profile" />
+								<input type="submit" value="View Profile" class="btn"/>
 							</form>
 						</p>
 					</c:forEach>
