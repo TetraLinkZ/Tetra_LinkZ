@@ -281,7 +281,7 @@ public class MainController {
 		Avatar avatar = mainService.findAvatar(aid);
 		Integer cost = avatar.getCost();
 		mainService.deleteAvatar(userAvatar);
-		mainService.updateCredit(user, cost);
+		mainService.updateCredit(user, cost/2);
 		return "redirect:/items";
 	}
 
@@ -295,7 +295,7 @@ public class MainController {
 		Token token = mainService.findToken(tid);
 		Integer cost = token.getCost();
 		mainService.deleteToken(userToken);
-		mainService.updateCredit(user, cost);
+		mainService.updateCredit(user, cost/2);
 		return "redirect:/items";
 	}
 
