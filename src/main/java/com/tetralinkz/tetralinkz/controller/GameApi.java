@@ -1,6 +1,7 @@
 package com.tetralinkz.tetralinkz.controller;
 
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -108,4 +109,9 @@ public class GameApi {
 		return;
 	}
 
+	@GetMapping("/game/play/board")
+	public String gameBoardGet() {
+		Match match = gameService.findMatchById(Long.valueOf(2));
+		return match.getBoard();
+	}
 }

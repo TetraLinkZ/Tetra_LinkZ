@@ -31,6 +31,8 @@
 	#game-board {
 		display: flex;
 		flex-direction: column;
+		background-size: 200px 200px;
+		background-color: #999;
 	}
 	.row: {
 		display: flex;
@@ -40,18 +42,24 @@
 		height: 50px;
 		min-width: 50px;
 		margin: 0 8px;
-		background-color: grey;
+		background-color: #777;
 		
 		dsiplay: flex;
 		flex-direction: row;
+		
+		border-radius: 50%;
+		box-shadow: inset 0px -3px #888;
 	}
 	
 	.p_one_token {
 		background-color: red;
+		box-shadow: inset 0px -1px 1px #888;
 	}
 	
 	.p_two_token {
-		background-color: yellow;
+		background-image: url(${user.token.url});
+		background-size: contain;
+		box-shadow: inset 0px -1px 1px #888;
 	}
 	
 	
@@ -75,12 +83,15 @@
 
 			</div>
 		</header>
-<body id="game-jsp">
+<body id="game-jsp"> 
 <c:set var="userId" value="${user.id}" />  
 
 <main>
-	<div id="game-board" data-current-board="${match.getBoard()}">
+	<div id="game-div">
+		<div id="game-board" data-current-board="${match.getBoard()}">
+		</div>
 	</div>
+
 	<div>
 		<form action="/game/play/clear" method="POST">
 			<input type="hidden" name="_method" value="PUT"/>

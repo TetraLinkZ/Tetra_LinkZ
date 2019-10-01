@@ -1,5 +1,7 @@
 package com.tetralinkz.tetralinkz.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -34,6 +36,12 @@ public class GameController {
 		Match currentMatch = gameService.findMatchById(Long.valueOf(2));
 		// END TEMP //
 		model.addAttribute("match", currentMatch);
+		List<User> players = currentMatch.getPlayers();
+		System.out.println(players.toString());
+//		User playerOne = players.get(0);
+//		User playerTwo = players.get(1);
+//		model.addAttribute("playerOne", playerOne);
+//		model.addAttribute("playerTwo", playerTwo);
 		System.out.println("Your current match board: " + currentMatch.getBoard());
 		return "game.jsp";
 	}
