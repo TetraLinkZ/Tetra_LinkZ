@@ -21,7 +21,7 @@ public class PrivateMessage {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Size(min = 1, max = 144)
+	@Size(min = 1, max = 500)
 	String message;
 	@Column(updatable = false)
 	private Date createdAt;

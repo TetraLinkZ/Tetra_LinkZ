@@ -45,10 +45,12 @@ $(function() {
 																location.href
 																		+ " #modal-credits*",
 																"");
-												$("#gacha-pic").css("display", "none");
-												$("#gacha-pic").slideDown("fast", function(){
-													
-												});
+												$("#gacha-pic").css("display",
+														"none");
+												$("#gacha-pic").slideDown(
+														"fast", function() {
+
+														});
 											}
 
 										},
