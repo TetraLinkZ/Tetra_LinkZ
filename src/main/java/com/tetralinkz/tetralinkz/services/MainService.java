@@ -291,12 +291,10 @@ public class MainService {
 		return;
 	}
 
-
-	public List<PrivateMessage> findMessages(User u, User f){
-		  //List<PrivateMessage> all = pmRepo.getAllMessages(u, f);
-		  //return all;
-
-		List<PrivateMessage> all = u.getMessages();
+	public List<PrivateMessage> findMessages(User u, User f) {
+		List<PrivateMessage> all = pmRepo.getAllMessages(u, f);
 		return all;
-    }
+
+	}
+
 }
