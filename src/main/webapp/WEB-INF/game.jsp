@@ -28,15 +28,33 @@
     <link rel="stylesheet" href="/css/style.css" />
     <!-- TEMP STYLING -->
 <style>
+	#game-board {
+		display: flex;
+		flex-direction: column;
+	}
 	.row: {
-
+		display: flex;
+		flex-direction: row;
 	}
 	.column {
 		height: 50px;
-		min-width: 25px;
-		padding: 2.5px;
+		min-width: 50px;
+		margin: 0 8px;
 		background-color: grey;
+		
+		dsiplay: flex;
+		flex-direction: row;
 	}
+	
+	.p_one_token {
+		background-color: red;
+	}
+	
+	.p_two_token {
+		background-color: yellow;
+	}
+	
+	
 </style>
 <title>TETRACHAT</title>
 </head>
@@ -61,7 +79,14 @@
 <c:set var="userId" value="${user.id}" />  
 
 <main>
-	<div id="game-board">
+	<div id="game-board" data-current-board="${match.getBoard()}">
+	</div>
+	<div>
+		<form action="/game/play/clear" method="POST">
+			<input type="hidden" name="_method" value="PUT"/>
+			<input type="hidden" name="match" value="2"/>
+			<input type="submit" value="Clear Board"/>
+		</form>
 	</div>
 	<div id="chat">
 	<div id="chatting-as">

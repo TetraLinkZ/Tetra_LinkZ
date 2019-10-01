@@ -1,108 +1,27 @@
-//(function() {
-//    // Load the script
-//    var script = document.createElement("SCRIPT");
-//    script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js';
-//    script.type = 'text/javascript';
-//    script.onload = function() {
-//        var $ = window.jQuery;
-//        const drawGame = () => {
-//            let output = '';
-//            
-//            for (let row = 0; row < 7; row++) {
-//              output += '<div class="row row'+row+' empty">';
-//              for (col = 0; col < 7; col++) {
-//                output += "<div class='column column" + col + " empty'></div>";
-//              }
-//              output += '</div>';
-//            }
-//            $("#game-board").append(output);
-//          }
-//
-//          drawGame();
-//          console.log("hello, welcome to the game!");
-//
-//          // TEST CONTROLS
-//
-////          $("#test").click(function() {
-//    	  $(".column").click(function() {
-//            // ".column"
-//            let payload = {
-//              board_data: "0002000001102000222100012220002111000122100012110",
-//              player: 2,
-//              i: 3,
-//              j: 3
-//            }
-//
-//            $.ajax({
-//                url: "http://kevinalbs.com/connect4/back-end/index.php/hasWon",
-//                method: "GET",
-//                data: payload,
-//                success: function(data) {
-//                  console.log("player win with the move? :" + data);
-//                  payload.win = data;
-//                  $.ajax({
-//                    url: "/game/play/move",
-//                    method: "POST",
-//                    headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
-//                    data: {
-//                      match: 2,
-//                      row: payload.i, 
-//                      column: payload.j,
-//                      user: 2,
-//                      player: payload.player,
-//                      // win: payload.win
-//                      win: false
-//                    },
-//                    success: function(data) {
-//                      console.log("current board: " + data);
-//                    },
-//                    dataType: "json"
-//                  });
-//                },
-//                dataType: "json"
-//            });
-//            
-//            $.ajax({
-//                url: "/game/play/move",
-//                method: "POST",
-//                headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
-//                data: {
-//                  match: 2,
-//                  row: payload.i,
-//                  column: payload.j,
-//                  user: 2,
-//                  player: payload.player,
-//                  // win: payload.win
-//                  win: false
-//                },
-//                success: function(data) {
-//                  console.log("current board: " + data);
-//                },
-//                dataType: "json",
-//                success: (data)=>{
-//                	console.log("success: ", data)
-//                },
-//                error: (err)=>{
-//                	console.log("error log: ", err);
-//                }
-//              });
-//            console.log("hello from POST ajax")
-//            return false;
-//          })
-//    };
-//    
-////    END SCRIPT
-//    document.getElementsByTagName("head")[0].appendChild(script);
-//})();
-
 $(document).ready(function() {
+	let currentBoardString = $("#game-board").data('current-board');
+	
+	let occupyCheck = function(boardIdx){
+    	if(currentBoardString.charAt(boardIdx) == "1") {
+    		return "p_one_token";
+    	} else if (currentBoardString.charAt(boardIdx) == "2") {
+    		return "p_two_token";
+    	} else {
+    		return "empty";
+    	}
+    }
+	
 	const drawGame = () => {
         let output = '';
+        let boardIdx = 0;
+        let occupy = occupyCheck(boardIdx);
+        
         
         for (let row = 0; row < 7; row++) {
-          output += '<div class="row row'+row+' empty">';
+          output += '<div class="row row'+ row +' empty">';
           for (col = 0; col < 7; col++) {
-            output += "<div class='column column" + col + " empty'></div>";
+            output += "<div class='column column" + col + " " + occupyCheck(boardIdx) + "' data-column='" + col + "' data-occupy='" + currentBoardString.charAt(boardIdx) + "'></div>";
+            boardIdx++;
           }
           output += '</div>';
         }
@@ -113,73 +32,67 @@ $(document).ready(function() {
       console.log("hello, welcome to the game!");
 
       // TEST CONTROLS
+      
+      const board = $("#game-board");
+            
+	  board.find(".column").click(function() {
 
-//      $("#test").click(function() {
-	  $(".column").click(function() {
-        // ".column"
+		let column = $(this).data('column');
         let payload = {
-          board_data: "0002000001102000222100012220002111000122100012110",
+//          board_data: "0002000001102000222100012220002111000122100012110", //example
+          board_data: currentBoardString, //forrealzies
           player: 2,
-          i: 3,
-          j: 3
+          i: 6,
+          j: column
         }
 
-        $.ajax({
-            url: "http://kevinalbs.com/connect4/back-end/index.php/hasWon",
-            method: "GET",
-            data: payload,
-            success: function(data) {
-              console.log("player win with the move? :" + data);
-              payload.win = data;
-              $.ajax({
-                url: "/game/play/move",
-                method: "POST",
-                headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
-                data: {
-                  match: 2,
-                  row: payload.i, 
-                  column: payload.j,
-                  user: 2,
-                  player: payload.player,
-                  // win: payload.win
-                  win: false
-                },
-                success: function(data) {
-                  console.log("current board: " + data);
-                },
-                dataType: "json"
-              });
-            },
-            dataType: "json"
-        });
+        // PROMISE utilization:
+        let connectFourWinCheck = $.ajax({
+      	  url: "http://kevinalbs.com/connect4/back-end/index.php/hasWon",
+  	      method: "GET",
+  	      data: payload
+        })
         
-        $.ajax({
-            url: "/game/play/move",
-            method: "POST",
-            headers: {"X-CSRF-TOKEN": $("meta[name='_csrf']").attr("content")},
-            data: {
-              match: 2,
-              row: payload.i,
-              column: payload.j,
-              user: 2,
-              player: payload.player,
-              // win: payload.win
-              win: false
-            },
-            success: function(data) {
-              console.log("current board: " + data);
-            },
-            dataType: "json",
-            success: (data)=>{
-            	console.log("success: ", data)
-            },
-            error: (err)=>{
-            	console.log("error log: ", err);
-            }
-          });
+        let gameAPImove;
+        let movePayload = {
+          match: 2,
+          row: payload.i, 
+          column: payload.j,
+          user: 2,
+          player: payload.player,
+        }
+
+        connectFourWinCheck.done((checkResult)=>{
+        	console.log("COLUMN: " + column);
+        	console.log("game board", currentBoardString);
+        	console.log("win check API call result: ", checkResult);
+        	movePayload.win = checkResult;
+      	  	gameAPImove = $.ajax({
+      		  url: "/game/play/move",
+      		  method: "POST",
+      		  data: movePayload
+      	  });
+          gameAPImove.done((result)=>{
+        	  console.log(movePayload);
+        	  $("#game-board").attr("data-current-board", result);
+        	  $("#game-board").empty();
+        	  drawGame();
+        	  $("#game-board").load("#game-board");
+          }).fail((err)=>{
+        	  console.log(movePayload);
+        	  console.error(err);
+        	  console.log(err.responseJSON.error + " : " + err.responseJSON.message);
+          })
+          
+        })
+  	
+        
+        
+         // END OF SCOPE
         console.log("hello from POST ajax")
         return false;
       })
-	
+      
+
 	// END SCRIPT
 })

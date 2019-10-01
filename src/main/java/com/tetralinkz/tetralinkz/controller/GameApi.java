@@ -22,13 +22,13 @@ public class GameApi {
 		this.mainService = mainService;
 	}
 
-	@PostMapping("/game/play")
-	public Match createBoard() {
-		Match m = new Match();
-		gameService.clearBoard(m);
-		System.out.println("match : " + m);
-		return gameService.newMatch(m);
-	}
+//	@PostMapping("/game/play")
+//	public Match createBoard() {
+//		Match m = new Match();
+//		gameService.clearBoard(m);
+//		System.out.println("match : " + m);
+//		return gameService.newMatch(m);
+//	}
 
 	@PutMapping("/game/play")
 	public void setCurrentMatch(User u) {
@@ -79,13 +79,16 @@ public class GameApi {
 		}
 		match.setBoard(stringMatrix.toString());
 		gameService.newMatch(match);
+		
+		
+		System.out.println("board after move:" + stringMatrix.toString());
 		return stringMatrix.toString();
 	}
 	
 	@PutMapping("/game/play/clear")
 	public String clearBoard(Match match) {
 		gameService.clearBoard(match);
-		return match.getBoard();
+		return "BOARD CLEARED";
 	}
 	
 	@PostMapping("/post/test")

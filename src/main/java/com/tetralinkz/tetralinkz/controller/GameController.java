@@ -7,9 +7,9 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.HtmlUtils;
 
+import com.tetralinkz.tetralinkz.models.Match;
 import com.tetralinkz.tetralinkz.models.Message;
 import com.tetralinkz.tetralinkz.models.User;
 import com.tetralinkz.tetralinkz.services.GameService;
@@ -30,6 +30,11 @@ public class GameController {
 		Long currentUserId = (Long) session.getAttribute("user");
 		User user = mainService.findUserById(currentUserId);
 		model.addAttribute("user", user);
+		// TEMP //
+		Match currentMatch = gameService.findMatchById(Long.valueOf(2));
+		// END TEMP //
+		model.addAttribute("match", currentMatch);
+		System.out.println("Your current match board: " + currentMatch.getBoard());
 		return "game.jsp";
 	}
 	
