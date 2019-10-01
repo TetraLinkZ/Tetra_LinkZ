@@ -1,7 +1,5 @@
 package com.tetralinkz.tetralinkz.services;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +7,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import com.tetralinkz.tetralinkz.models.Avatar;
+import com.tetralinkz.tetralinkz.models.Message;
 import com.tetralinkz.tetralinkz.models.PrivateMessage;
 import com.tetralinkz.tetralinkz.models.Token;
 import com.tetralinkz.tetralinkz.models.User;
@@ -282,13 +281,13 @@ public class MainService {
 	}
 
 	// CREATE PRIVATE MESSAGE
-	public void createPrivateMessage(User user, User friend, String message) {
+	public PrivateMessage createPrivateMessage(User user, User friend, String message) {
 		PrivateMessage m = new PrivateMessage();
 		m.setUser(user);
 		m.setFriend(friend);
 		m.setMessage(message);
 		pmRepo.save(m);
-		return;
+		return m;
 	}
 
 	public List<PrivateMessage> findMessages(User u, User f) {
