@@ -1,6 +1,7 @@
 package com.tetralinkz.tetralinkz.controller;
 
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,13 +23,13 @@ public class GameApi {
 		this.mainService = mainService;
 	}
 
-	@PostMapping("/game/play")
-	public Match createBoard() {
-		Match m = new Match();
-		gameService.clearBoard(m);
-		System.out.println("match : " + m);
-		return gameService.newMatch(m);
-	}
+//	@PostMapping("/game/play")
+//	public Match createBoard() {
+//		Match m = new Match();
+//		gameService.clearBoard(m);
+//		System.out.println("match : " + m);
+//		return gameService.newMatch(m);
+//	}
 
 	@PutMapping("/game/play")
 	public void setCurrentMatch(User u) {
@@ -51,8 +52,6 @@ public class GameApi {
 			@RequestParam("player")int oneOrTwo,
 			@RequestParam("win") boolean win
 			) {
-		
-		//current player token is player one or two;
 		
 		// Retrieve the match's current board
 		String board = match.getBoard();
@@ -77,15 +76,19 @@ public class GameApi {
 				stringMatrix.append(matrix[x][y]);
 			}
 		}
+
 		match.setBoard(stringMatrix.toString());
-		gameService.newMatch(match);
+		gameService.newMatch(match); //save the new match info
+		
+		
+		System.out.println("board after move:" + stringMatrix.toString());
 		return stringMatrix.toString();
 	}
 	
 	@PutMapping("/game/play/clear")
 	public String clearBoard(Match match) {
 		gameService.clearBoard(match);
-		return match.getBoard();
+		return "BOARD CLEARED";
 	}
 	
 	@PostMapping("/post/test")
@@ -105,4 +108,21 @@ public class GameApi {
 		return;
 	}
 
+	@GetMapping("/game/play/board")
+	public String gameBoardGet() {
+		Match match = gameService.findMatchById(Long.valueOf(2));
+		return match.getBoard();
+	}
+	
+	@GetMapping("/game/play/playerTurn")
+	public Integer playerTurnSet(Long id) {
+		Match match = gameService.findMatchById(Long.valueOf(2));
+		if(match.getCurrentPlayer() == 1) {
+			match.setCurrentPlayer(2);
+		} else {
+			match.setCurrentPlayer(1);
+		}
+		gameService.newMatch(match);
+		return match.getCurrentPlayer();
+	}
 }

@@ -17,6 +17,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -29,6 +30,7 @@ public class User {
 	private String name;
 	@Column(unique = true)
 	@Size(min=3, max=50)
+	@Email
 	private String email;
 	@Size(min = 8)
 	private String password;
