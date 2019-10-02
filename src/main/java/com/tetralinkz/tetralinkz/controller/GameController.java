@@ -35,13 +35,21 @@ public class GameController {
 		// TEMP //
 		Match currentMatch = gameService.findMatchById(Long.valueOf(2));
 		// END TEMP //
-		model.addAttribute("match", currentMatch);
+		
 		List<User> players = currentMatch.getPlayers();
-		System.out.println(players.toString());
+		System.out.println(players.get(0).getName());
+		
+		user.setCurrentMatch(currentMatch);
 //		User playerOne = players.get(0);
 //		User playerTwo = players.get(1);
-//		model.addAttribute("playerOne", playerOne);
-//		model.addAttribute("playerTwo", playerTwo);
+		if(players.size()<1) {
+			model.addAttribute("playerOne", user);	
+			mainService.updateUser(user);
+		} else if(players.size() == 1) {
+			model.addAttribute("playerTwo", user);	
+			mainService.updateUser(user);
+		}
+		model.addAttribute("match", currentMatch);
 		System.out.println("Your current match board: " + currentMatch.getBoard());
 		return "game.jsp";
 	}

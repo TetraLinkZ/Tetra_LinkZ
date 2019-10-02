@@ -27,6 +27,7 @@
     
     <link rel="stylesheet" href="/css/style.css" />
     <!-- TEMP STYLING -->
+    
 <style>
 	#game-board {
 		display: flex;
@@ -52,24 +53,39 @@
 	}
 	
 	.p_one_token {
-		background-color: red;
+	/* background-color: red; */
+		
+		background-image: url(${match.players.get(0).token.url});
+		background-size: contain;
 		box-shadow: inset 0px -1px 1px #888;
 	}
 	
 	.p_two_token {
-		background-image: url(${user.token.url});
+	/* background-color: yellow; */
+		background-image: url(${match.players.get(1).token.url});
 		background-size: contain;
 		box-shadow: inset 0px -1px 1px #888;
 	}
 	
 	
 </style>
+
+<script>
+	console.log("hello, ${match.players.get(1).token.url}");
+	console.log("hello, ${match.players.get(0).token.url}");
+
+	console.log("hello, ${playerOne.name}");
+</script>
 <title>TETRACHAT</title>
 </head>
 <header class="container-fluid">
 			<div class="row">
 				<div class="col-sm-8">
 					<h1 class="header-title">Tetra LinkZ</h1>
+					<h2>${playerOne.name}</h2>
+					
+
+					
 				</div>
 				<div class="col-sm-2">
 					<h2>
@@ -88,7 +104,7 @@
 
 <main>
 	<div id="game-div">
-		<div id="game-board" data-current-board="${match.getBoard()}">
+		<div id="game-board" data-current-board="${match.getBoard()}" data-current-player="${match.getCurrentPlayer()}">
 		</div>
 	</div>
 

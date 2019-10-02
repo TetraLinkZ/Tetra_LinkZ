@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	
 	let currentBoardString = $("#game-board").data('current-board');
 	
 	
@@ -36,20 +37,20 @@ $(document).ready(function() {
       // TEST CONTROLS
       
       const board = $("#game-board");
+      let playerTurn = $("#game-board").data("current-player");
             
 	  $("#game-board").on("click", ".column", function(e) {
-//      $("#game-board").click(function() {
-//		e.preventDefault();
-		  console.log("clicked")
-		  console.log($(this));
-		let column = $(this).data('column');
-        let payload = {
-//          board_data: "0002000001102000222100012220002111000122100012110", //example
+
+      console.log("clicked board")
+      console.log("Current player is...", playerTurn)
+      let column = $(this).data('column');
+      let payload = {
           board_data: $("#game-board").attr("data-current-board"), //forrealzies
-          player: 2,
+          player: playerTurn,
           i: 6,
           j: column
         }
+        console.log("KEVINLABS PAYLOAD: " + payload.player);
 
         // PROMISE utilization:
         let connectFourWinCheck = $.ajax({
@@ -79,90 +80,53 @@ $(document).ready(function() {
           data: movePayload
       	  });
           gameAPImove.done((result)=>{
-        	  console.log(movePayload);
-        	  $("#game-board").attr("data-current-board", result);
-        	  
-//        	  $("#game-board").load(window.location.href + " #game-board");
-//        	  $("#game-board").load(" #game-board > *");
-//        	  $.ajax({
-//        		  url: drawGame(),
-//        		  success: ()=>{
-//        			  console.log('yay')
-//        		  }
-//        	  })
-        	  
-              
-//        	  let currentBoardStringFxn = result;
-////        	  $("#game-board").innerHTML = newBoard;
-//        	  let occupyCheckFxn = function(boardIdx){
-//        	    	if(currentBoardString.charAt(boardIdx) == "1") {
-//        	    		return "p_one_token";
-//        	    	} else if (currentBoardString.charAt(boardIdx) == "2") {
-//        	    		console.log("player two token inserted")
-//        	    		return "p_two_token";
-//        	    	} else {
-//        	    		return "empty";
-//        	    	}
-//        	    }
-        	  
-//        	  var fxn = () =>{
-        	  	  currentBoardString = result;
-        		  $("#game-board").empty();
-        		  let output = '';
-                  let boardIdx = 0;
-                  
-              	let occupyCheck = function(boardIdx, newBoard){
-            		let currentBoardString = newBoard;
+            console.log(movePayload);
+            
+            currentBoardString = result;
+            
+            $("#game-board").attr("data-current-board", result);
 
-                	if(currentBoardString.charAt(boardIdx) == "1") {
-                		return "p_one_token";
-                	} else if (currentBoardString.charAt(boardIdx) == "2") {
-                		return "p_two_token";
-                	} else {
-                		return "empty";
-                	}
+            $.ajax({
+              url: "/game/play/playerTurn",
+              method: "GET"
+            })
+            .done((playerChange)=>{
+            	console.log("AJAX response is..." + playerChange);
+            	console.log("before:", $("#game-board").data("current-player"))
+              $("#game-board").attr("data-current-player", playerChange);
+            	console.log($("#game-board").data("current-player"))
+              $("#game-board").empty();
+              let output = '';
+              let boardIdx = 0;
+                  
+              let occupyCheck = function(boardIdx, newBoard){
+              let currentBoardString = newBoard;
+
+                  if(currentBoardString.charAt(boardIdx) == "1") {
+                    return "p_one_token";
+                  } else if (currentBoardString.charAt(boardIdx) == "2") {
+                    return "p_two_token";
+                  } else {
+                    return "empty";
+                  }
                 }
                   
-                  for (let row = 0; row < 7; row++) {
-                    output += '<div class="row row'+ row +' empty">';
-                    for (col = 0; col < 7; col++) {
-                      output += "<div class='column column" + col + " " + occupyCheck(boardIdx, result) + "' data-column='" + col + "' data-occupy='" + currentBoardString.charAt(boardIdx) + "'></div>";
-                      boardIdx++;
-                    }
-                    output += '</div>';
+                for (let row = 0; row < 7; row++) {
+                  output += '<div class="row row'+ row +' empty">';
+                  for (col = 0; col < 7; col++) {
+                    output += "<div class='column column" + col + " " + occupyCheck(boardIdx, result) + "' data-column='" + col + "' data-occupy='" + currentBoardString.charAt(boardIdx) + "'></div>";
+                    boardIdx++;
                   }
-//                  console.log("output: within fxn: " + output);
-                  $("#game-board").append(output);
-//                  $("#game-div").load("#game-board");
-//                  console.log(output)
-//                  return output;
-//                  return;
-                  
-                  
-//        	  }
-//        	  fxn();
-//        	  $("#game-board").load(location.href + " #game-board>*", "")
-//    		  $("#game-board").empty();
-//        	  $.ajax({
-//        		  url: fxn(),
-//        	  	  success: ()=>{
-//        	  		  console.log('ayy!')
-//        	  	  }
-//        	  }).done((output)=>{
-//        		  
-//        		  console.log(output)
-////        		  $("#game-board").append(output);
-//        	  })
-//        	  fxn();
-//        	  .done(()=>{
-//        		  var newBoard = $("#game-board");
-//        		  $.ajax({
-//        			  url: fxn(),
-//        			  success: ()=>{
-//        				  console.log('replaced board');
-//        			  }
-//        		  })
-//        	  })
+                  output += '</div>';
+                }
+                $("#game-board").append(output);
+            })
+
+            
+
+              
+              
+
         	  
         	  
           }).fail((err)=>{
@@ -181,6 +145,8 @@ $(document).ready(function() {
       })
       
       setInterval(function(){
+    	  
+    	
 
         $.ajax({
           url: "/game/play/board",

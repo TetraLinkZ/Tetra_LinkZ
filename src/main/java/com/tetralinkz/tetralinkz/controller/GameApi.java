@@ -53,8 +53,6 @@ public class GameApi {
 			@RequestParam("win") boolean win
 			) {
 		
-		//current player token is player one or two;
-		
 		// Retrieve the match's current board
 		String board = match.getBoard();
 		// Start board index at 0 for iteration
@@ -78,8 +76,9 @@ public class GameApi {
 				stringMatrix.append(matrix[x][y]);
 			}
 		}
+
 		match.setBoard(stringMatrix.toString());
-		gameService.newMatch(match);
+		gameService.newMatch(match); //save the new match info
 		
 		
 		System.out.println("board after move:" + stringMatrix.toString());
@@ -113,5 +112,17 @@ public class GameApi {
 	public String gameBoardGet() {
 		Match match = gameService.findMatchById(Long.valueOf(2));
 		return match.getBoard();
+	}
+	
+	@GetMapping("/game/play/playerTurn")
+	public Integer playerTurnSet(Long id) {
+		Match match = gameService.findMatchById(Long.valueOf(2));
+		if(match.getCurrentPlayer() == 1) {
+			match.setCurrentPlayer(2);
+		} else {
+			match.setCurrentPlayer(1);
+		}
+		gameService.newMatch(match);
+		return match.getCurrentPlayer();
 	}
 }
