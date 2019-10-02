@@ -286,10 +286,7 @@ input[type=text] {
 	width:40%;
 	margin:auto;
 }
-.enter-chat{
-	position:absolute !important;
-	bottom:1em;
-}
+
 /* GAME.JSP */
 #chat p {
 	font-family: 'Righteous', cursive;

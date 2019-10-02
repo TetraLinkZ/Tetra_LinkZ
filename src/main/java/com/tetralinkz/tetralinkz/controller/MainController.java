@@ -315,25 +315,14 @@ public class MainController {
 
 	@PostMapping("/chat/{friendId}")
 	@ResponseBody
-	//@SuppressWarnings("MethodArgumentTypeMismatchException")
 	public void sendPrivateMessage(@PathVariable("friendId") Long id, HttpSession session,
 			@RequestParam("user_id")String uId, @RequestParam("friend_id") Long fId,
 			@RequestParam("message") String message) {
 		User user = mainService.findUserById(Long.valueOf(uId));
 		User friend = mainService.findUserById(Long.valueOf(fId));
-		PrivateMessage finalMessage  = mainService.createPrivateMessage(user, friend, message);
-		List<PrivateMessage> messages = mainService.findMessages(user, friend);
+		//PrivateMessage finalMessage  = mainService.createPrivateMessage(user, friend, message);
+		//List<PrivateMessage> messages = mainService.findMessages(user, friend);
 		return;
-	}
-	//@GetMapping("/chat/{friendId}")
-	@ResponseBody
-	public Model getChat(@PathVariable("friendId") Long id, Model model, HttpSession session) {
-		Long uid = (Long) session.getAttribute("user");
-		User user = mainService.findUserById(uid);
-		User friend = mainService.findUserById(id);
-		List<PrivateMessage> messages = mainService.findMessages(user, friend);
-		model.addAttribute("messages", messages);
-		return model;
 	}
 
 
