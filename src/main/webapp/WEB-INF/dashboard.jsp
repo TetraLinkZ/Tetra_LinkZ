@@ -25,8 +25,8 @@
 <title>Dashboard</title>
 </head>
 <body>
-	<div id="background-wrapper">
-		<header class="container-fluid">
+	<div id="background-wrapper" >
+		<header class="container-fluid" >
 			<div class="row">
 				<div class="col-sm-8">
 					<h1 class="header-title">Tetra LinkZ</h1>
@@ -43,21 +43,21 @@
 
 			</div>
 		</header>
-		<div id="dash-gacha" class="row">
+		<div id="dash-gacha" class="row m-auto">
 			<button id="open-modal">Open Box</button>
 		</div>
 
-		<div id="dash-main" class="row">
+		<div id="dash-main" class="row m-auto">
 			<div id="avatar" class="bodypart col-sm-3 text-center">
 				<h2 class="text-center">Current Items</h2>
 				<hr />
 				<h3>Avatar</h3>
-				<div class="row">
+				<div class="row m-auto">
 					<img id="dash-avitar" class="col-sm-6" src="${userInfo.avatar.url}"
 						alt="" />
 				</div>
 				<h3>Token</h3>
-				<div class="row">
+				<div class="row m-auto">
 					<img class="col-sm-4" id="dash-token" src="${userInfo.token.url}"
 						alt="" />
 				</div>
@@ -99,9 +99,10 @@
 						<input type="submit" value="View Rank" class="btn" role="button" />
 					</form>  --%>
 			</div>
-			<div id="friends" class="bodypart col-sm-3 text-center">
+			<div id="friends" class="bodypart col-sm-3 text-center ">
 				<h2>Friends</h2>
 				<hr />
+				<div class="container-fluid">
 				<div class="row">
 
 					<form action="/addFriend" class="search-container" method="post">
@@ -110,24 +111,27 @@
 					</form>
 				</div>
 				<c:forEach items="${friendList}" var="friend">
-					<div class="row">
-						<p class="friend col-sm-3">
+					<div class="row w-80 m-auto">
+						<p class="friend col-sm-3 p-0">
 							<c:out value="${friend.name}" />
 						</p>
 
 
-						<form action="/showProfile" method="post" class="col-sm-4">
+						<form action="/showProfile" method="post" class="col-sm-4 p-0">
 							<input type="hidden" name="friendId" value="${friend.id}" /> <input
-								type="submit" value="View Profile" class="btn" />
+								type="submit" value="View" class="btn w-100" />
 						</form>
-						<a href="/chat/${friend.id}" class="btn col-sm-4">Send Message</a>
+						<a href="/chat/${friend.id}" class="btn col-sm-4">Chat</a>
 					</div>
 				</c:forEach>
-				<form action="/game/play" class="col-sm-12 text-center enter-chat">
+				<div class="row">
+				<form action="/game/play" class="col-sm-12 text-center enter-chat m-auto">
 					<input type="submit" value="Enter Chat" class="btn" id="chat-btn" />
 				</form>
-			</div>
+				</div>
+		
 
+				</div>
 		</div>
 		<div class="container-fluid">
 			<div id="play" class="row">
