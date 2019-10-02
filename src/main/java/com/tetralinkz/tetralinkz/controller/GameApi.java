@@ -76,6 +76,12 @@ public class GameApi {
 				stringMatrix.append(matrix[x][y]);
 			}
 		}
+		
+		if(match.getCurrentPlayer() == 1) {
+			match.setCurrentPlayer(2);
+		} else {
+			match.setCurrentPlayer(1);
+		}
 
 		match.setBoard(stringMatrix.toString());
 		gameService.newMatch(match); //save the new match info
@@ -117,12 +123,8 @@ public class GameApi {
 	@GetMapping("/game/play/playerTurn")
 	public Integer playerTurnSet(Long id) {
 		Match match = gameService.findMatchById(Long.valueOf(2));
-		if(match.getCurrentPlayer() == 1) {
-			match.setCurrentPlayer(2);
-		} else {
-			match.setCurrentPlayer(1);
-		}
-		gameService.newMatch(match);
+
+//		gameService.newMatch(match);
 		return match.getCurrentPlayer();
 	}
 }
