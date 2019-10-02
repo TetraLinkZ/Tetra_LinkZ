@@ -109,26 +109,25 @@
 						<button type="submit" class="btn">Add</button>
 					</form>
 				</div>
-				<div class="row">
-					<c:forEach items="${friendList}" var="friend">
-						<p class="friend">
+				<c:forEach items="${friendList}" var="friend">
+					<div class="row">
+						<p class="friend col-sm-3">
 							<c:out value="${friend.name}" />
 						</p>
 
 
-						<form action="/showProfile" method="post">
+						<form action="/showProfile" method="post" class="col-sm-4">
 							<input type="hidden" name="friendId" value="${friend.id}" /> <input
 								type="submit" value="View Profile" class="btn" />
 						</form>
-			<a href="/chat/${friend.id}" class="btn">Send Message</a>
-
-					</c:forEach>
-					<form action="/game/play" class="col-sm-12 text-center enter-chat">
-						<input type="submit" value="Enter Chat" class="btn" id="chat-btn" />
-					</form>
-				</div>
-
+						<a href="/chat/${friend.id}" class="btn col-sm-4">Send Message</a>
+					</div>
+				</c:forEach>
+				<form action="/game/play" class="col-sm-12 text-center enter-chat">
+					<input type="submit" value="Enter Chat" class="btn" id="chat-btn" />
+				</form>
 			</div>
+
 		</div>
 		<div class="container-fluid">
 			<div id="play" class="row">
