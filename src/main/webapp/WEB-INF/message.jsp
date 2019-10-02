@@ -66,12 +66,17 @@ padding:1em 2em !important;
 	<div id="chat-container" class="w-100 m-0">
 	<div id="chat" class="m-auto">
 		<c:forEach items="${messages}" var="message">
+	<hr />
+		<div class="message">
 			<p>
 				<c:out value="${message.user.name}:" />
 				<c:out value="${message.message}" />
-				<fmt:formatDate type="time" value="${message.createdAt}" />
-			</p>
-		</c:forEach>
+				</p>
+				Sent At:
+<fmt:formatDate type="time" value="${message.createdAt}" />
+
+		</div>
+			</c:forEach>
 	</div>
 	</div>
 
