@@ -61,12 +61,16 @@ public class MainController {
 	// Show Dashboard
 	@GetMapping("/dashboard")
 	public String dashboard(HttpSession session, Model model) {
-		Long id = (Long) session.getAttribute("user");
+	    Long id = (Long) session.getAttribute("user");
+	    if(id!= null) {
 		User user = mainService.findUserById(id);
 		List<User> friendList = mainService.allfriend(user);
 		model.addAttribute("userInfo", user);
 		model.addAttribute("friendList", friendList);
-		return "dashboard.jsp";
+			return "dashboard.jsp"; 
+		} else {
+		    return "redirect:/landing";
+		}		
 	}
 
 	// Show friend's profile
@@ -146,33 +150,45 @@ public class MainController {
 	@GetMapping("/items")
 	public String showItems(Model model, HttpSession session) {
 		Long uid = (Long) session.getAttribute("user");
-		User user = mainService.findUserById(uid);
-		List<UserAvatar> ownedAvatar = mainService.userOwnedAvatar(user);
-		List<UserToken> ownedToken = mainService.userOwnedToken(user);
-		model.addAttribute("userInfo", user);
-		model.addAttribute("ownedAvatar", ownedAvatar);
-		model.addAttribute("ownedToken", ownedToken);
-		return "items.jsp";
+		if(uid != null) {
+			User user = mainService.findUserById(uid);
+			List<UserAvatar> ownedAvatar = mainService.userOwnedAvatar(user);
+			List<UserToken> ownedToken = mainService.userOwnedToken(user);
+			model.addAttribute("userInfo", user);
+			model.addAttribute("ownedAvatar", ownedAvatar);
+			model.addAttribute("ownedToken", ownedToken);
+			return "items.jsp";
+		} else {
+		    return "redirect:/landing";
+		}		
 	}
 
 	// Change the current Avatar
 	@PostMapping("/setCurrentAvatar")
 	public String setCurrentAvatar(@RequestParam("avatarId") Long aid, HttpSession session) {
 		Long uid = (Long) session.getAttribute("user");
-		User user = mainService.findUserById(uid);
-		Avatar avatar = mainService.getAvatarById(aid);
-		mainService.setCurrentAvatar(user, avatar);
-		return "redirect:/dashboard";
+		if(uid != null) {			
+			User user = mainService.findUserById(uid);
+			Avatar avatar = mainService.getAvatarById(aid);
+			mainService.setCurrentAvatar(user, avatar);
+			return "redirect:/dashboard";
+		} else {
+		    return "redirect:/landing";
+		}		
 	}
 
 	// Change the current Token
 	@PostMapping("/setCurrentToken")
 	public String setCurrentToken(@RequestParam("tokenId") Long tid, HttpSession session) {
 		Long uid = (Long) session.getAttribute("user");
-		User user = mainService.findUserById(uid);
-		Token token = mainService.getTokenById(tid);
-		mainService.setCurrentToken(user, token);
-		return "redirect:/dashboard";
+		if(uid != null) {
+			User user = mainService.findUserById(uid);
+			Token token = mainService.getTokenById(tid);
+			mainService.setCurrentToken(user, token);
+			return "redirect:/dashboard";
+		} else {
+		    return "redirect:/landing";
+		}		
 	}
 
 	// The Gacha Function
@@ -181,94 +197,118 @@ public class MainController {
 	public String gacha(HttpSession session) {
 		String newItem = "";
 		Long uid = (Long) session.getAttribute("user");
-		User user = mainService.findUserById(uid);
-		if (user.getCredits() >= 100) {
-			Random avatarOrToken = new Random();
-			int aot = avatarOrToken.nextInt(2);
-			if (aot == 0) {
-				List<Avatar> al = mainService.allAvatars();
-				int avatarPool = al.size();
-				Random randomAvatar = new Random();
-				int rA = randomAvatar.nextInt(avatarPool) + 1;
-				Avatar newAvatar = mainService.findAvatar(Long.valueOf(rA));
-				mainService.gachaAvatar(user, newAvatar);
-				mainService.updateCredit(user, -100);
-				mainService.boxBought(user);
-				newItem = newAvatar.getUrl();
-			} else if (aot == 1) {
-				List<Token> tl = mainService.allTokens();
-				int tokenPool = tl.size();
-				Random randomToken = new Random();
-				int rT = randomToken.nextInt(tokenPool) + 1;
-				Token newToken = mainService.findToken(Long.valueOf(rT));
-				mainService.gachaToken(user, newToken);
-				mainService.updateCredit(user, -100);
-				mainService.boxBought(user);
-				newItem = newToken.getUrl();
+		if(uid != null) {
+			User user = mainService.findUserById(uid);
+			if (user.getCredits() >= 100) {
+				Random avatarOrToken = new Random();
+				int aot = avatarOrToken.nextInt(2);
+				if (aot == 0) {
+					List<Avatar> al = mainService.allAvatars();
+					int avatarPool = al.size();
+					Random randomAvatar = new Random();
+					int rA = randomAvatar.nextInt(avatarPool) + 1;
+					Avatar newAvatar = mainService.findAvatar(Long.valueOf(rA));
+					mainService.gachaAvatar(user, newAvatar);
+					mainService.updateCredit(user, -100);
+					mainService.boxBought(user);
+					newItem = newAvatar.getUrl();
+				} else if (aot == 1) {
+					List<Token> tl = mainService.allTokens();
+					int tokenPool = tl.size();
+					Random randomToken = new Random();
+					int rT = randomToken.nextInt(tokenPool) + 1;
+					Token newToken = mainService.findToken(Long.valueOf(rT));
+					mainService.gachaToken(user, newToken);
+					mainService.updateCredit(user, -100);
+					mainService.boxBought(user);
+					newItem = newToken.getUrl();
+				}
 			}
-		}
-		return newItem;
+			return newItem;
+		} else {
+		    return "redirect:/landing";
+		}		
 	}
 
 	// The Ranking page
 	@GetMapping("/ranking")
 	public String showRanking(Model model, HttpSession session) {
 		Long uid = (Long) session.getAttribute("user");
-		User user = mainService.findUserById(uid);
-		model.addAttribute("userInfo", user);
-		return "ranking.jsp";
+		if(uid != null) {
+			User user = mainService.findUserById(uid);
+			model.addAttribute("userInfo", user);
+			return "ranking.jsp";
+		} else {
+		    return "redirect:/landing";
+		}		
 	}
 
 	// Add Friends
 	@PostMapping("/addFriend")
 	public String addFriend(@RequestParam("add") String code, Model model, HttpSession session) {
 		Long uid = (Long) session.getAttribute("user");
-		User user = mainService.findUserById(uid);
-		try {
-	        int theCode = Integer.parseInt(code);
-	        mainService.addFriend(user, theCode);
-	        return "redirect:/dashboard";
-	    }
-	    catch(NumberFormatException e) {
-	        return "redirect:/dashboard";
-	    }
+		if(uid != null) {
+			User user = mainService.findUserById(uid);
+			try {
+		        int theCode = Integer.parseInt(code);
+		        mainService.addFriend(user, theCode);
+		        return "redirect:/dashboard";
+		    }
+		    catch(NumberFormatException e) {
+		        return "redirect:/dashboard";
+		    }
+		} else {
+		    return "redirect:/landing";
+		}
 	}
 
 	// the shop
 	@GetMapping("/shop")
 	public String showShop(HttpSession session, Model model) {
 		Long uid = (Long) session.getAttribute("user");
-		User user = mainService.findUserById(uid);
-		List<Avatar> allAvatar = mainService.allAvatars();
-		List<Token> allToken = mainService.allTokens();
-		model.addAttribute("allAvatar", allAvatar);
-		model.addAttribute("allToken", allToken);
-		model.addAttribute("userInfo", user);
-		return "shop.jsp";
+		if(uid != null) {
+			User user = mainService.findUserById(uid);
+			List<Avatar> allAvatar = mainService.allAvatars();
+			List<Token> allToken = mainService.allTokens();
+			model.addAttribute("allAvatar", allAvatar);
+			model.addAttribute("allToken", allToken);
+			model.addAttribute("userInfo", user);
+			return "shop.jsp";
+		} else {
+		    return "redirect:/landing";
+		}		
 	}
 
 	// Buy an new Avatar
 	@PostMapping("/buyAvatar")
 	public String buyAnAvatar(@RequestParam("avatarId") Long aid, HttpSession session) {
 		Long uid = (Long) session.getAttribute("user");
-		User user = mainService.findUserById(uid);
-		Avatar avatar = mainService.findAvatar(aid);
-		Integer cost = avatar.getCost() * -1;
-		mainService.gachaAvatar(user, avatar);
-		mainService.updateCredit(user, cost);
-		return "redirect:/items";
+		if(uid != null) {
+			User user = mainService.findUserById(uid);
+			Avatar avatar = mainService.findAvatar(aid);
+			Integer cost = avatar.getCost() * -1;
+			mainService.gachaAvatar(user, avatar);
+			mainService.updateCredit(user, cost);
+			return "redirect:/items";
+		} else {
+		    return "redirect:/landing";
+		}	
 	}
 
 	// Buy an new Token
 	@PostMapping("/buyToken")
 	public String buyAnToken(@RequestParam("tokenId") Long tid, HttpSession session) {
 		Long uid = (Long) session.getAttribute("user");
-		User user = mainService.findUserById(uid);
-		Token token = mainService.findToken(tid);
-		Integer cost = token.getCost() * -1;
-		mainService.gachaToken(user, token);
-		mainService.updateCredit(user, cost);
-		return "redirect:/items";
+		if(uid != null) {
+			User user = mainService.findUserById(uid);
+			Token token = mainService.findToken(tid);
+			Integer cost = token.getCost() * -1;
+			mainService.gachaToken(user, token);
+			mainService.updateCredit(user, cost);
+			return "redirect:/items";
+		} else {
+		    return "redirect:/landing";
+		}		
 	}
 
 	// sell an Avatar
@@ -276,13 +316,17 @@ public class MainController {
 	public String sellAvatar(@RequestParam("avatarId") Long aid, @RequestParam("userAvatarId") Long id,
 			HttpSession session) {
 		Long uid = (Long) session.getAttribute("user");
-		User user = mainService.findUserById(uid);
-		UserAvatar userAvatar = mainService.findUserAvatar(id);
-		Avatar avatar = mainService.findAvatar(aid);
-		Integer cost = avatar.getCost();
-		mainService.deleteAvatar(userAvatar);
-		mainService.updateCredit(user, cost/2);
-		return "redirect:/items";
+		if(uid != null) {
+			User user = mainService.findUserById(uid);
+			UserAvatar userAvatar = mainService.findUserAvatar(id);
+			Avatar avatar = mainService.findAvatar(aid);
+			Integer cost = avatar.getCost();
+			mainService.deleteAvatar(userAvatar);
+			mainService.updateCredit(user, cost/2);
+			return "redirect:/items";
+		} else {
+		    return "redirect:/landing";
+		}		
 	}
 
 	// sell an Token
@@ -290,27 +334,34 @@ public class MainController {
 	public String sellToken(@RequestParam("tokenId") Long tid, @RequestParam("userTokenId") Long id,
 			HttpSession session) {
 		Long uid = (Long) session.getAttribute("user");
-		User user = mainService.findUserById(uid);
-		UserToken userToken = mainService.findUserToken(id);
-		Token token = mainService.findToken(tid);
-		Integer cost = token.getCost();
-		mainService.deleteToken(userToken);
-		mainService.updateCredit(user, cost/2);
-		return "redirect:/items";
+		if(uid != null) {
+			User user = mainService.findUserById(uid);
+			UserToken userToken = mainService.findUserToken(id);
+			Token token = mainService.findToken(tid);
+			Integer cost = token.getCost();
+			mainService.deleteToken(userToken);
+			mainService.updateCredit(user, cost/2);
+			return "redirect:/items";
+		} else {
+		    return "redirect:/landing";
+		}		
 	}
 
 	// PRIVATE MESSAGING
 	@GetMapping("/chat/{friendId}")
 	public String privateChat(@PathVariable("friendId") Long id, Model model, HttpSession session) {
 		Long uid = (Long) session.getAttribute("user");
-		User user = mainService.findUserById(uid);
-		User friend = mainService.findUserById(id);
-		List<PrivateMessage> messages = mainService.findMessages(user, friend);
-		model.addAttribute("messages", messages);
-		model.addAttribute("friend", friend);
-		model.addAttribute("user", user);
-
-		return "message.jsp";
+		if(uid != null) {
+			User user = mainService.findUserById(uid);
+			User friend = mainService.findUserById(id);
+			List<PrivateMessage> messages = mainService.findMessages(user, friend);
+			model.addAttribute("messages", messages);
+			model.addAttribute("friend", friend);
+			model.addAttribute("user", user);	
+			return "message.jsp";
+		} else {
+		    return "redirect:/landing";
+		}
 	}
 
 	@PostMapping("/chat/{friendId}")
