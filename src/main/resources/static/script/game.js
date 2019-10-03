@@ -25,9 +25,6 @@ const makeBoardMatrix = (boardString) =>{
 }
 
 const occupyCheck = (boardString, boardIdx) => {
-//	console.log("boardString", boardString);
-//	console.log("boardIdx", boardIdx)
-//	boardString[0];
 	if(boardString.charAt(boardIdx) == "1") {
 		return "p_one_token";
 	} else if (boardString.charAt(boardIdx) == "2") {
@@ -65,10 +62,6 @@ $(document).ready(function() {
 	let currentBoardString;
 	let currentBoardMatrix = [];
 
-
-	
-//	let currentBoardString = $("#game-board").data('current-board');
-	
 	$.ajax({
 		url: "/game/play/board",
         method: "GET"
@@ -155,29 +148,9 @@ $(document).ready(function() {
 //              	console.log("before:", $("#game-board").data("current-player"))
                 $("#game-board").attr("data-current-player", playerChange);
                 $("#game-board").empty();
-//                let output = '';
-//                let boardIdx = 0;
-//                    
-//                  for (let row = 0; row < 7; row++) {
-//                    output += '<div class="row row'+ row +' empty">';
-//                    for (col = 0; col < 7; col++) {
-//                      output += "<div class='column column" + col + " " + occupyCheck(result, boardIdx) + "' data-column='" + col + "' data-occupy='" + currentBoardString.charAt(boardIdx) + "'></div>";
-//                      boardIdx++;
-//                    }
-//                    output += '</div>';
-//                  }
-//                  $("#game-board").append(output);
               drawGame(result);
               })
-              
 
-              
-
-                
-                
-
-          	  
-          	  
                   console.log($("#game-board").data("current-player"))
             }).fail((err)=>{
           	  console.log(movePayload);
@@ -188,12 +161,7 @@ $(document).ready(function() {
           })
   		
   	})
-      
-      
-      
-  	
-        
-        
+
          // END OF SCOPE
         console.log("hello from POST ajax")
         return false;
@@ -215,41 +183,12 @@ $(document).ready(function() {
                     $("#game-board").attr("data-current-board", result);
                     console.log("Hello from AJAX interval", result);
                     $("#game-board").empty();
-                      let output = '';
-                      let boardIdx = 0;
-                      
-                    let occupyCheck = function(boardIdx, newBoard){
-                    let currentBoardString = newBoard;
-            
-                      if(currentBoardString.charAt(boardIdx) == "1") {
-                        return "p_one_token";
-                      } else if (currentBoardString.charAt(boardIdx) == "2") {
-                        return "p_two_token";
-                      } else {
-                        return "empty";
-                      }
-                    }
-                      
-                      for (let row = 0; row < 7; row++) {
-                        output += '<div class="row row'+ row +' empty">';
-                        for (col = 0; col < 7; col++) {
-                          output += "<div class='column column" + col + " " + occupyCheck(boardIdx, result) + "' data-column='" + col + "' data-occupy='" + currentBoardString.charAt(boardIdx) + "'></div>";
-                          boardIdx++;
-                        }
-                        output += '</div>';
-                      }
-            //          console.log("output: within fxn: " + output);
 
-                      // console.log($("#game-board").data("current-board"));
-                      $("#game-board").append(output);
+                    drawGame(result);
                   })
             }).done(()=>{
             	console.log("interval")
-            })
-
-        
-
-    	  
+            }) 
       }, 3000);
 	// END SCRIPT
 })
