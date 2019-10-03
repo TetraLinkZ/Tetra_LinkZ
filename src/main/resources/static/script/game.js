@@ -10,59 +10,62 @@ const columnStack = (boardMatrix, colIdx) => {
 	}
 }
 
+const occupyCheck = (boardString, boardIdx) => {
+//	console.log("boardString", boardString);
+//	console.log("boardIdx", boardIdx)
+//	boardString[0];
+	if(boardString.charAt(boardIdx) == "1") {
+		return "p_one_token";
+	} else if (boardString.charAt(boardIdx) == "2") {
+		return "p_two_token";
+	} else {
+		return "empty";
+	}
+}
+
+const drawGame = (boardString, boardMatrix = []) => {
+    let output = '';
+    let boardIdx = 0;
+
+    console.log("boardString in fxn",boardString)
+    console.log("current Board: \n");
+    
+    for (let row = 0; row < 7; row++) {
+      output += '<div class="row row'+ row +' empty">';
+      boardMatrix.push([]);
+      for (col = 0; col < 7; col++) {
+        output += "<div class='column column" + col + " " + occupyCheck(boardString, boardIdx) + "' data-column='" + col + "' data-occupy='" + boardString.charAt(boardIdx) + "'></div>";
+        boardMatrix[row].push(boardString.charAt(boardIdx));
+        boardIdx++;
+      }
+      console.log(`${boardMatrix[row]}`);
+      output += '</div>';
+    }
+    $("#game-board").append(output);
+    return boardMatrix;
+}	
+
 
 $(document).ready(function() {
 
+	let currentBoardString;
 	let currentBoardMatrix = [];
-	let currentBoardString = $("#game-board").data('current-board');
-	
-	let occupyCheck = function(boardIdx){
 
-    	if(currentBoardString.charAt(boardIdx) == "1") {
-    		return "p_one_token";
-    	} else if (currentBoardString.charAt(boardIdx) == "2") {
-    		return "p_two_token";
-    	} else {
-    		return "empty";
-    	}
-    }
-	const drawGame = (boardMatrix) => {
-        let output = '';
-        let boardIdx = 0;
 
-        console.log("current Board: \n");
-        
-        for (let row = 0; row < 7; row++) {
-          output += '<div class="row row'+ row +' empty">';
-          currentBoardMatrix.push([]);
-          for (col = 0; col < 7; col++) {
-            output += "<div class='column column" + col + " " + occupyCheck(boardIdx) + "' data-column='" + col + "' data-occupy='" + currentBoardString.charAt(boardIdx) + "'></div>";
-            currentBoardMatrix[row].push(currentBoardString.charAt(boardIdx));
-            boardIdx++;
-          }
-          console.log(`${currentBoardMatrix[row]}`);
-          output += '</div>';
-        }
-        $("#game-board").append(output);
-	}	
 	
 //	let currentBoardString = $("#game-board").data('current-board');
 	
-//	$.ajax({
-//		url: "/game/play/board",
-//        method: "GET"
-//	}).done((boardRes)=>{
-//		currentBoardString = boardRes;
-//	})
-//	
-	drawGame(currentBoardMatrix);
-	
-	
-	
+	$.ajax({
+		url: "/game/play/board",
+        method: "GET"
+	}).done((boardRes)=>{
+		currentBoardString = boardRes;
+		console.log("boardString is",boardRes);
+		currentBoardMatrix = drawGame(boardRes, currentBoardMatrix);
 
-
-      drawGame();
-      console.log("hello, welcome to the game!");
+		console.log("hello, welcome to the game!");	
+	})
+	
 
       // TEST CONTROLS
       
