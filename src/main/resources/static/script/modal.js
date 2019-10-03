@@ -1,18 +1,28 @@
 $(function() {
+	isOpen = false;
 	$("#open-modal").click(function() {
-		$("#modal").slideDown("slow", function() {
-		});
+		isOpen = true;
+		$("#modal-container").fadeIn("fast");
+		$("modal-container").css("display", "block");
+		$("#modal").slideDown("slow");
 		$("#modal").css("display", "flex");
 		$("#modal").css("z-index", "99999");
-
-		$("#background-wrapper").css("opacity", ".2");
 	});
+
 	$("#modal button").click(function() {
-		$("#modal").slideUp("slow", function() {
-			$("#background-wrapper").css("opacity", "1");
-
-		});
+		isOpen = false;
+		$("#modal-container").fadeOut("fast");
+		$("#modal").slideUp("slow");
 	});
+	$("body").keydown(function(e) {
+		if (e.keyCode == 27 && isOpen == true) {
+			isOpen = false;
+			$("#modal-container").fadeOut("fast");
+			$("#modal").slideUp("slow");
+			$("#modal-avatar-container").fadeOut("fast");
+			$("#modal-avatar").slideUp("slow");
+		}
+	})
 
 	$("#pull-gacha")
 			.submit(
@@ -61,17 +71,16 @@ $(function() {
 						}
 					});
 	$("#dash-avitar").click(function() {
-		$("#modal-avatar").slideDown("slow", function() {
-		});
+		console.log("clicked");
+		isOpen = true;
+		$("#modal-avatar-container").fadeIn("fast");
+		$("modal-avatar-container").css("display", "block");
+		$("#modal-avatar").slideDown("slow");
 		$("#modal-avatar").css("display", "flex");
-		$("#modal-avatar").css("z-index", "99999");
-
-		$("#background-wrapper").css("opacity", ".2");
+		$("#moda-avatarl").css("z-index", "99999");
 	});
 	$("#modal-avatar button").click(function() {
-		$("#modal-avatar").slideUp("slow", function() {
-			$("#background-wrapper").css("opacity", "1");
-
-		});
+		isOpen = false;
+		$("#modal-avatar-container").fadeOut("fast");
 	});
 });

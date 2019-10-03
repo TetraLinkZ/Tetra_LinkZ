@@ -25,7 +25,6 @@
 <title>Dashboard</title>
 </head>
 <body>
-	<div id="background-wrapper" >
 		<header class="container-fluid" >
 			<div class="row">
 				<div class="col-sm-8">
@@ -121,7 +120,7 @@
 							<input type="hidden" name="friendId" value="${friend.id}" /> <input
 								type="submit" value="View" class="btn w-100" />
 						</form>
-						<a href="/chat/${friend.id}" class="btn col-sm-4">Chat</a>
+						<a href="/chat/${friend.id}" class="btn col-sm-4 chat-link">Chat</a>
 					</div>
 				</c:forEach>
 				<div class="row">
@@ -149,7 +148,8 @@
 		<footer> </footer>
 	</div>
 	<!-- END OF BACKGROUND WRAPPER -->
-	<div id="modal">
+	<div id="modal-container" class="container-fluid m-0 p-0">
+	<div id="modal" class=" m-auto">
 		<button>x</button>
 		<h2 id="modal-title">Whats Inside?</h2>
 		<img
@@ -162,14 +162,16 @@
 		</form>
 		<p id="error"></p>
 	</div>
-	<div id="modal-avatar">
 
-		<div id="modal-avatar-bg"></div>
-		<img src="${userInfo.avatar.url}" alt="avatar" id="modal-avatar-pic" />
-		<h2 id="modal-title">
-			<c:out value="${userInfo.avatar.name}" />
-		</h2>
-		<button>x</button>
 	</div>
+		<div id="modal-avatar-container" class="p-0 m-0 container-fluid">
+			<div id="modal-avatar">
+				<img src="${userInfo.avatar.url}" alt="avatar" id="modal-avatar-pic" />
+				<h2 id="modal-title">
+					<c:out value="${userInfo.avatar.name}" />
+				</h2>
+				<button>x</button>
+			</div>
+		</div>
 </body>
 </html>
