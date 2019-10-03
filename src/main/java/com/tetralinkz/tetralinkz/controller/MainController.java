@@ -371,8 +371,8 @@ public class MainController {
 			@RequestParam("message") String message) {
 		User user = mainService.findUserById(Long.valueOf(uId));
 		User friend = mainService.findUserById(Long.valueOf(fId));
-		//PrivateMessage finalMessage  = mainService.createPrivateMessage(user, friend, message);
-		//List<PrivateMessage> messages = mainService.findMessages(user, friend);
+		PrivateMessage finalMessage  = mainService.createPrivateMessage(user, friend, message);
+		List<PrivateMessage> messages = mainService.findMessages(user, friend);
 		return;
 	}
 
